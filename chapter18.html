@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 18: Polymorphism in Python</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 18: Polymorphism in Python</h1>
+
+<h2>Introduction</h2>
+
+<p><strong>Polymorphism</strong> is a core concept in object-oriented programming (OOP) that refers to the ability of a single entity (such as a method, operator, or object) to take on multiple forms. The term originates from the Greek words <em>poly</em> (meaning "many") and <em>morph</em> (meaning "form"). In Python, polymorphism allows us to define methods in a child class that have the same name as the methods in the parent class. It also allows operators to have different meanings based on the context.</p>
+
+<h2>Examples of Polymorphism</h2>
+
+<h3>Operator Overloading</h3>
+
+<p>Operator overloading is a form of polymorphism where the same operator behaves differently based on the operands. In Python, operators like <code>+</code> can be used with different data types and perform different operations.</p>
+
+<pre><code># Adding integers
+result = 10 + 20
+print(result)  # Output: 30
+
+# Concatenating strings
+result = 'durga' + 'soft'
+print(result)  # Output: durgasoft
+</code></pre>
+
+<p>In the above example, the <code>+</code> operator adds two integers when both operands are numbers and concatenates two strings when both operands are strings. This is an example of polymorphism in action.</p>
+
+<h3>Method Overriding</h3>
+
+<p>Method overriding allows a child class to provide a specific implementation of a method that is already defined in its parent class. This is another form of polymorphism.</p>
+
+<pre><code>class Parent:
+    def marry(self):
+        print('Subbalakshmi or Appalamma')
+
+class Child(Parent):
+    def marry(self):
+        print('Katrina Kaif')
+
+c = Child()
+c.marry()
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Katrina Kaif
+</code></pre>
+
+<p>In this example, the <code>Child</code> class overrides the <code>marry</code> method of the <code>Parent</code> class to provide its own implementation.</p>
+
+<h2>Operator Overloading in Python</h2>
+
+<p>Python allows us to change the default behavior of operators depending on the operands. This is known as operator overloading. You can overload operators by defining special methods in your class.</p>
+
+<h3>Example: Overloading the <code>+</code> Operator</h3>
+
+<p>Suppose we have a <code>Book</code> class, and we want to add two <code>Book</code> objects to get the total number of pages.</p>
+
+<pre><code>class Book:
+    def __init__(self, pages):
+        self.pages = pages
+
+    def __add__(self, other):
+        total_pages = self.pages + other.pages
+        return total_pages
+
+b1 = Book(100)
+b2 = Book(200)
+print(b1 + b2)  # Output: 300
+
+b3 = Book(500)
+print(b1 + b3)  # Output: 600
+</code></pre>
+
+<p>In this example, we overloaded the <code>+</code> operator by defining the <code>__add__()</code> method. When we use <code>b1 + b2</code>, it calls <code>b1.__add__(b2)</code>, which returns the sum of pages.</p>
+
+<h3>Common Operator Overloading Methods</h3>
+
+<p>Here are some common operators and their corresponding special methods:</p>
+
+<table>
+    <tr>
+        <th>Operator</th>
+        <th>Method</th>
+    </tr>
+    <tr><td><code>+</code></td><td><code>__add__(self, other)</code></td></tr>
+    <tr><td><code>-</code></td><td><code>__sub__(self, other)</code></td></tr>
+    <tr><td><code>*</code></td><td><code>__mul__(self, other)</code></td></tr>
+    <tr><td><code>/</code></td><td><code>__truediv__(self, other)</code></td></tr>
+    <tr><td><code>//</code></td><td><code>__floordiv__(self, other)</code></td></tr>
+    <tr><td><code>%</code></td><td><code>__mod__(self, other)</code></td></tr>
+    <tr><td><code>**</code></td><td><code>__pow__(self, other)</code></td></tr>
+    <tr><td><code>+=</code></td><td><code>__iadd__(self, other)</code></td></tr>
+    <tr><td><code>- =</code></td><td><code>__isub__(self, other)</code></td></tr>
+    <tr><td><code>&lt;</code></td><td><code>__lt__(self, other)</code></td></tr>
+    <tr><td><code>&lt;=</code></td><td><code>__le__(self, other)</code></td></tr>
+    <tr><td><code>&gt;</code></td><td><code>__gt__(self, other)</code></td></tr>
+    <tr><td><code>&gt;=</code></td><td><code>__ge__(self, other)</code></td></tr>
+    <tr><td><code>==</code></td><td><code>__eq__(self, other)</code></td></tr>
+</table>
+
+<h2>The <code>__str__()</code> Method</h2>
+
+<p>The <code>__str__()</code> method is a special method in Python that returns a string representation of an object. It is called by the built-in <code>str()</code> function and by the <code>print()</code> function.</p>
+
+<h3>Example</h3>
+
+<pre><code>class Student:
+    def __init__(self, name, rollno, marks):
+        self.name = name
+        self.rollno = rollno
+        self.marks = marks
+
+    def __str__(self):
+        return 'Name: {}, Roll No: {}, Marks: {}'.format(self.name, self.rollno, self.marks)
+
+s1 = Student('Ram', 102, 239)
+s2 = Student('Roman', 101, 348)
+
+print(s1)
+print(s2)
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Name: Ram, Roll No: 102, Marks: 239
+Name: Roman, Roll No: 101, Marks: 348
+</code></pre>
+
+<p>By overriding the <code>__str__()</code> method, we provide a meaningful string representation of the object when it is printed.</p>
+
+<h3>Example: Overloading <code>+</code> and <code>__str__()</code> in <code>Book</code> Class</h3>
+
+<pre><code>class Book:
+    def __init__(self, pages):
+        self.pages = pages
+
+    def __add__(self, other):
+        return Book(self.pages + other.pages)
+
+    def __mul__(self, other):
+        return Book(self.pages * other.pages)
+
+    def __str__(self):
+        return 'Total number of pages: {}'.format(self.pages)
+
+b1 = Book(100)
+b2 = Book(200)
+b3 = Book(500)
+
+print(b1 + b2 + b3)  # Output: Total number of pages: 800
+print(b1 + b2 * b3)  # Output: Total number of pages: 100100
+</code></pre>
+
+<p>In this example, we overloaded the <code>__add__()</code> and <code>__mul__()</code> methods to allow addition and multiplication of <code>Book</code> objects. We also overrode the <code>__str__()</code> method to provide a meaningful string when printing the object.</p>
+
+<h2>Method Overloading in Python</h2>
+
+<p><strong>Method overloading</strong> refers to the ability to have multiple methods with the same name but different parameters. While some programming languages like Java support method overloading, Python does not support it in the same way.</p>
+
+<h3>Why Python Doesn't Support Method Overloading</h3>
+
+<p>In Python, you cannot have multiple methods with the same name in a class. If you try to define methods with the same name, the last method defined will overwrite the previous ones.</p>
+
+<h3>Example</h3>
+
+<pre><code>class Test:
+    def m1(self):
+        print('No-argument method')
+
+    def m1(self, x):
+        print('One-argument method')
+
+    def m1(self, x, y):
+        print('Two-argument method')
+
+t = Test()
+t.m1()  # TypeError: m1() missing 2 required positional arguments: 'x' and 'y'
+</code></pre>
+
+<p>In the above code, the last method <code>m1(self, x, y)</code> overwrites the previous definitions of <code>m1</code>. Therefore, when we try to call <code>t.m1()</code>, it raises a <code>TypeError</code> because it expects two arguments.</p>
+
+<h3>Alternative Approaches</h3>
+
+<p>Although Python doesn't support method overloading, you can achieve similar functionality by using default arguments or variable-length arguments.</p>
+
+<h4>Using Default Arguments</h4>
+
+<pre><code>class Test:
+    def m1(self, x=None, y=None):
+        if x is not None and y is not None:
+            print('Two-argument method')
+        elif x is not None:
+            print('One-argument method')
+        else:
+            print('No-argument method')
+
+t = Test()
+t.m1()            # Output: No-argument method
+t.m1(10)          # Output: One-argument method
+t.m1(10, 20)      # Output: Two-argument method
+</code></pre>
+
+<h4>Using Variable-Length Arguments</h4>
+
+<pre><code>class Test:
+    def m1(self, *args):
+        if len(args) == 0:
+            print('No-argument method')
+        elif len(args) == 1:
+            print('One-argument method')
+        elif len(args) == 2:
+            print('Two-argument method')
+        else:
+            print('Method with {} arguments'.format(len(args)))
+
+t = Test()
+t.m1()                  # Output: No-argument method
+t.m1(10)                # Output: One-argument method
+t.m1(10, 20)            # Output: Two-argument method
+t.m1(10, 20, 30)        # Output: Method with 3 arguments
+</code></pre>
+
+<h2>Constructor Overloading in Python</h2>
+
+<p>Similar to method overloading, Python does not support constructor overloading. If you define multiple constructors (i.e., multiple <code>__init__</code> methods) in a class, the last one defined will overwrite the previous ones.</p>
+
+<h3>Example</h3>
+
+<pre><code>class Test:
+    def __init__(self):
+        print('No-argument constructor')
+
+    def __init__(self, x):
+        print('One-argument constructor')
+
+    def __init__(self, x, y):
+        print('Two-argument constructor')
+
+# t = Test()        # TypeError: __init__() missing 2 required positional arguments: 'x' and 'y'
+# t = Test(10)      # TypeError: __init__() missing 1 required positional argument: 'y'
+t = Test(10, 20)    # Output: Two-argument constructor
+</code></pre>
+
+<p>In the above code, only the last <code>__init__</code> method is considered, and the previous ones are ignored.</p>
+
+<h3>Alternative Approaches</h3>
+
+<p>You can use default arguments or variable-length arguments in the constructor to simulate constructor overloading.</p>
+
+<h4>Using Default Arguments</h4>
+
+<pre><code>class Test:
+    def __init__(self, x=None, y=None):
+        if x is not None and y is not None:
+            print('Two-argument constructor')
+        elif x is not None:
+            print('One-argument constructor')
+        else:
+            print('No-argument constructor')
+
+t1 = Test()           # Output: No-argument constructor
+t2 = Test(10)         # Output: One-argument constructor
+t3 = Test(10, 20)     # Output: Two-argument constructor
+</code></pre>
+
+<h4>Using Variable-Length Arguments</h4>
+
+<pre><code>class Test:
+    def __init__(self, *args):
+        if len(args) == 0:
+            print('No-argument constructor')
+        elif len(args) == 1:
+            print('One-argument constructor')
+        elif len(args) == 2:
+            print('Two-argument constructor')
+        else:
+            print('Constructor with {} arguments'.format(len(args)))
+
+t1 = Test()                  # Output: No-argument constructor
+t2 = Test(10)                # Output: One-argument constructor
+t3 = Test(10, 20)            # Output: Two-argument constructor
+t4 = Test(10, 20, 30)        # Output: Constructor with 3 arguments
+</code></pre>
+
+<h2>Method Overriding</h2>
+
+<p><strong>Method overriding</strong> allows a child class to provide a specific implementation of a method that is already defined in its parent class. The child's method overrides the parent's method.</p>
+
+<h3>Example</h3>
+
+<pre><code>class Parent:
+    def property(self):
+        print('Cash + Gold + Land')
+
+    def marry(self):
+        print('Subbalakshmi')
+
+class Child(Parent):
+    def marry(self):
+        print('Katrina Kaif')
+
+c = Child()
+c.property()  # Output: Cash + Gold + Land
+c.marry()     # Output: Katrina Kaif
+</code></pre>
+
+<p>In this example, the <code>Child</code> class overrides the <code>marry</code> method of the <code>Parent</code> class.</p>
+
+<h3>Constructor Overriding</h3>
+
+<p>Similar to methods, constructors can also be overridden. If a child class defines its own constructor, it will override the constructor of the parent class.</p>
+
+<h3>Example</h3>
+
+<pre><code>class Parent:
+    def __init__(self):
+        print('Parent Constructor')
+
+class Child(Parent):
+    def __init__(self):
+        print('Child Constructor')
+
+c = Child()  # Output: Child Constructor
+</code></pre>
+
+<p>In this example, the <code>Child</code> class constructor overrides the <code>Parent</code> class constructor.</p>
+
+<h3>Accessing Parent Class Methods</h3>
+
+<p>You can call the parent class method from the child class using the <code>super()</code> function.</p>
+
+<pre><code>class Parent:
+    def property(self):
+        print('Cash + Gold + Land')
+
+    def marry(self):
+        print('Subbalakshmi')
+
+class Child(Parent):
+    def marry(self):
+        super().marry()
+        print('Katrina Kaif')
+
+c = Child()
+c.marry()
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Subbalakshmi
+Katrina Kaif
+</code></pre>
+
+<p>In this example, the <code>Child</code> class's <code>marry</code> method calls the parent's <code>marry</code> method using <code>super()</code> before executing its own implementation.</p>
+
+<h2>Conclusion</h2>
+
+<p>Polymorphism is a fundamental concept in object-oriented programming that allows objects and methods to take on multiple forms. In Python, polymorphism is achieved through operator overloading, method overriding, and by utilizing the dynamic nature of the language.</p>
+
+<p>While Python does not support method and constructor overloading in the traditional sense, you can achieve similar functionality using default arguments and variable-length arguments.</p>
+
+<p>Understanding polymorphism in Python enables you to write more flexible and reusable code, leveraging the language's capabilities to handle different data types and class hierarchies effectively.</p>
+
+</body>
+</html>

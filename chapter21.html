@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 21: Assertions in Python</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 21: Assertions in Python</h1>
+
+<h2>Introduction</h2>
+
+<p>In software development, ensuring that a program behaves as expected is crucial. During the development and testing phases, developers often need to verify that certain conditions hold true at specific points in the code. Python provides the <code>assert</code> statement as a debugging aid that tests a condition as an internal self-check.</p>
+
+<h2>Understanding Bugs and Debugging</h2>
+
+<h3>What is a Bug?</h3>
+
+<p>A <strong>bug</strong> is a deviation between the expected output and the actual output of a program. Bugs can occur due to logical errors, incorrect assumptions, or unexpected input data.</p>
+
+<h3>What is Debugging?</h3>
+
+<p><strong>Debugging</strong> is the process of identifying, isolating, and fixing bugs in a software program. It is an essential part of the software development lifecycle.</p>
+
+<h3>Common Debugging Techniques</h3>
+
+<p>The most common way of debugging is by using <code>print()</code> statements to display variable values and program flow at runtime. However, this approach has some drawbacks:</p>
+
+<ul>
+    <li>After fixing the bug, developers need to remove the extra <code>print()</code> statements manually.</li>
+    <li>Leaving unnecessary <code>print()</code> statements can clutter the console output and impact performance.</li>
+    <li>Extra <code>print()</code> statements can interfere with server logs and make it harder to read important information.</li>
+</ul>
+
+<h2>The <code>assert</code> Statement</h2>
+
+<p>To overcome the limitations of using <code>print()</code> statements for debugging, Python provides the <code>assert</code> statement. Assertions are a convenient way to insert debugging checks into a program.</p>
+
+<h3>Advantages of Using <code>assert</code></h3>
+
+<ul>
+    <li><strong>Conditional Checks:</strong> Assertions allow you to check if a condition holds true at a specific point in the code.</li>
+    <li><strong>Optional Execution:</strong> Assertions can be enabled or disabled globally, allowing you to turn them off in production environments without changing the code.</li>
+    <li><strong>No Manual Cleanup:</strong> You don't need to remove assertion statements after debugging; they can remain in the codebase.</li>
+    <li><strong>Error Reporting:</strong> Assertions provide informative error messages that help identify the source of a problem.</li>
+</ul>
+
+<h3>Main Purpose of Assertions</h3>
+
+<p>The main purpose of the <code>assert</code> statement is to aid in debugging by testing conditions that should logically hold true. Assertions are used to catch and report programming errors during development and testing.</p>
+
+<h2>Environments in Software Development</h2>
+
+<p>In a typical software project, there are usually three types of environments:</p>
+
+<ol>
+    <li><strong>Development Environment (Dev):</strong> Where developers write and test code.</li>
+    <li><strong>Test Environment:</strong> Where the software is tested by a QA team or automated tests.</li>
+    <li><strong>Production Environment (Live):</strong> Where the software is deployed for end-users.</li>
+</ol>
+
+<p>Assertions are primarily used in the development and testing environments and are generally disabled in the production environment to avoid performance overhead and exposure of internal logic.</p>
+
+<h2>Types of <code>assert</code> Statements</h2>
+
+<p>Python provides two types of <code>assert</code> statements:</p>
+
+<h3>1. Simple Assertion</h3>
+
+<p>The simple assertion tests a condition and raises an <code>AssertionError</code> if the condition evaluates to <code>False</code>.</p>
+
+<h4>Syntax</h4>
+
+<pre><code>assert &lt;condition&gt;
+</code></pre>
+
+<h4>Example</h4>
+
+<pre><code>def divide(a, b):
+    assert b != 0
+    return a / b
+
+result = divide(10, 0)
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Traceback (most recent call last):
+  File "example.py", line 5, in &lt;module&gt;
+    result = divide(10, 0)
+  File "example.py", line 2, in divide
+    assert b != 0
+AssertionError
+</code></pre>
+
+<h3>2. Augmented Assertion (with Message)</h3>
+
+<p>The augmented assertion allows you to include an error message that provides additional information when the assertion fails.</p>
+
+<h4>Syntax</h4>
+
+<pre><code>assert &lt;condition&gt;, &lt;error_message&gt;
+</code></pre>
+
+<h4>Example</h4>
+
+<pre><code>def divide(a, b):
+    assert b != 0, 'Denominator cannot be zero'
+    return a / b
+
+result = divide(10, 0)
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Traceback (most recent call last):
+  File "example.py", line 5, in &lt;module&gt;
+    result = divide(10, 0)
+  File "example.py", line 2, in divide
+    assert b != 0, 'Denominator cannot be zero'
+AssertionError: Denominator cannot be zero
+</code></pre>
+
+<h3>How Assertions Work</h3>
+
+<p>When an <code>assert</code> statement is executed, Python evaluates the condition:</p>
+
+<ul>
+    <li>If the condition is <code>True</code>, the program continues execution.</li>
+    <li>If the condition is <code>False</code>, an <code>AssertionError</code> is raised, and the program terminates unless the exception is caught.</li>
+</ul>
+
+<h2>Examples of Using Assertions</h2>
+
+<h3>Example 1: Validating Function Arguments</h3>
+
+<pre><code>def square_root(x):
+    assert x &gt;= 0, 'Input must be non-negative'
+    return x ** 0.5
+
+print(square_root(9))   # Output: 3.0
+print(square_root(-4))  # Raises AssertionError
+</code></pre>
+
+<h3>Example 2: Checking Data Integrity</h3>
+
+<pre><code>def process_data(data):
+    assert isinstance(data, list), 'Data must be a list'
+    assert len(data) &gt; 0, 'Data list cannot be empty'
+    # Process the data
+    print('Processing data:', data)
+
+process_data([1, 2, 3])     # Works fine
+process_data([])            # Raises AssertionError
+process_data('not a list')  # Raises AssertionError
+</code></pre>
+
+<h3>Example 3: Debugging Complex Conditions</h3>
+
+<pre><code>def compute_average(numbers):
+    assert numbers, 'The numbers list should not be empty'
+    average = sum(numbers) / len(numbers)
+    assert 0 &lt;= average &lt;= 100, 'Average should be between 0 and 100'
+    return average
+
+print(compute_average([70, 80, 90]))  # Output: 80.0
+print(compute_average([]))            # Raises AssertionError
+</code></pre>
+
+<h2>Enabling and Disabling Assertions</h2>
+
+<p>By default, assertions are enabled and will be evaluated during program execution. However, you can disable assertions globally when running the Python interpreter to prevent the overhead of evaluating them in production.</p>
+
+<h3>Disabling Assertions</h3>
+
+<p>To disable assertions, use the <code>-O</code> (capital letter O) option when running the Python script:</p>
+
+<pre><code>python -O script.py
+</code></pre>
+
+<p>When assertions are disabled:</p>
+
+<ul>
+    <li>All <code>assert</code> statements are ignored, and their conditions are not evaluated.</li>
+    <li>The bytecode generated does not include the <code>assert</code> statements.</li>
+</ul>
+
+<h3>Example</h3>
+
+<p>Consider the following script <code>test.py</code>:</p>
+
+<pre><code># test.py
+def func(x):
+    assert x &gt; 0, 'x must be positive'
+    return x * 2
+
+print(func(10))
+print(func(-5))
+</code></pre>
+
+<h4>Running with Assertions Enabled</h4>
+
+<pre><code>python test.py
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>20
+Traceback (most recent call last):
+  File "test.py", line 7, in &lt;module&gt;
+    print(func(-5))
+  File "test.py", line 2, in func
+    assert x &gt; 0, 'x must be positive'
+AssertionError: x must be positive
+</code></pre>
+
+<h4>Running with Assertions Disabled</h4>
+
+<pre><code>python -O test.py
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>20
+-10
+</code></pre>
+
+<p>When assertions are disabled, the condition <code>x &gt; 0</code> is not evaluated, and the function proceeds to return <code>x * 2</code>, resulting in incorrect behavior.</p>
+
+<h2>Exception Handling vs. Assertions</h2>
+
+<h3>Exception Handling</h3>
+
+<p>Exception handling is a mechanism to handle runtime errors gracefully, allowing the program to continue execution or terminate without crashing. It is primarily used in production environments to manage unforeseen errors that may occur during program execution.</p>
+
+<h3>Assertions</h3>
+
+<p>Assertions are primarily used to catch programming errors and assumptions made during development. They are not intended to handle runtime errors caused by external factors (e.g., user input, network failures).</p>
+
+<h3>Key Differences</h3>
+
+<table>
+    <tr>
+        <th>Aspect</th>
+        <th>Exception Handling</th>
+        <th>Assertions</th>
+    </tr>
+    <tr>
+        <td>Purpose</td>
+        <td>Handle unexpected runtime errors</td>
+        <td>Detect programming errors during development</td>
+    </tr>
+    <tr>
+        <td>Usage Environment</td>
+        <td>Production</td>
+        <td>Development and Testing</td>
+    </tr>
+    <tr>
+        <td>Enable/Disable</td>
+        <td>Cannot be disabled</td>
+        <td>Can be globally disabled</td>
+    </tr>
+    <tr>
+        <td>When to Use</td>
+        <td>For errors that can occur during normal operation</td>
+        <td>To check for conditions that should never happen</td>
+    </tr>
+</table>
+
+<h3>Example</h3>
+
+<p>Using exception handling to manage user input errors:</p>
+
+<pre><code>def get_integer():
+    try:
+        value = int(input('Enter an integer: '))
+    except ValueError:
+        print('Invalid input. Please enter a valid integer.')
+        return None
+    else:
+        return value
+
+number = get_integer()
+if number is not None:
+    print('You entered:', number)
+</code></pre>
+
+<p>In contrast, using assertions to check internal assumptions:</p>
+
+<pre><code>def compute_factorial(n):
+    assert n &gt;= 0, 'n must be non-negative'
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * compute_factorial(n - 1)
+
+print(compute_factorial(5))   # Output: 120
+print(compute_factorial(-3))  # Raises AssertionError
+</code></pre>
+
+<h2>Best Practices for Using Assertions</h2>
+
+<ul>
+    <li>Use assertions to check for conditions that should never occur if the code is correct.</li>
+    <li>Do not use assertions to validate external input data; use exception handling instead.</li>
+    <li>Include informative error messages in assertions to aid in debugging.</li>
+    <li>Do not rely on assertions for program logic, as they can be disabled.</li>
+    <li>Use assertions during development and testing, but ensure that disabling them does not affect program correctness.</li>
+</ul>
+
+<h2>Limitations of Assertions</h2>
+
+<ul>
+    <li>Assertions can be globally disabled, so they should not be used to enforce essential program logic.</li>
+    <li>They should not replace proper error handling and validation for user input or external resources.</li>
+    <li>Overuse of assertions can lead to cluttered code and may impact performance if not disabled in production.</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>The <code>assert</code> statement is a powerful tool for debugging and verifying the correctness of code during development and testing. By using assertions wisely, developers can catch programming errors early and ensure that the code behaves as expected under various conditions.</p>
+
+<p>Key takeaways:</p>
+
+<ul>
+    <li><strong>Assertions</strong> are used to check for internal errors and assumptions during development.</li>
+    <li><strong>Exception Handling</strong> is used to manage unexpected errors during program execution in production.</li>
+    <li>Assertions can be enabled or disabled using the <code>-O</code> option when running Python scripts.</li>
+    <li>Use assertions to document and enforce conditions that should logically always be true.</li>
+    <li>Avoid using assertions for input validation or handling external errors.</li>
+</ul>
+
+<p>By incorporating assertions into your development process, you can improve code reliability and reduce the likelihood of bugs making it into production.</p>
+
+</body>
+</html>

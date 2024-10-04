@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 7: Sets</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 7: Sets</h1>
+
+<h2>Introduction to Sets</h2>
+
+<p>A <strong>set</strong> in Python is an unordered collection of unique and immutable objects. Sets are mutable, meaning you can add or remove elements after creation. They are defined using curly braces <code>{}</code> or the <code>set()</code> function.</p>
+
+<p>Key characteristics of sets:</p>
+
+<ol>
+    <li><strong>Duplicates are not allowed</strong>: Each element must be unique.</li>
+    <li><strong>Order is not preserved</strong>: Sets are unordered collections; the order of elements is undefined.</li>
+    <li><strong>No Indexing or Slicing</strong>: Since sets are unordered, you cannot access elements by index.</li>
+    <li><strong>Heterogeneous Objects</strong>: Elements can be of different data types.</li>
+    <li><strong>Mutable</strong>: You can add or remove elements after creation.</li>
+    <li><strong>Mathematical Set Operations</strong>: Supports union, intersection, difference, and symmetric difference.</li>
+</ol>
+
+<p><strong>Note:</strong> An empty pair of curly braces <code>{}</code> creates an empty dictionary, not a set. To create an empty set, use <code>set()</code>.</p>
+
+<h2>Creating Set Objects</h2>
+
+<h3>1. Empty Set</h3>
+
+<pre><code>s = set()
+print(s)        # Output: set()
+print(type(s))  # Output: &lt;class 'set'&gt;
+</code></pre>
+
+<h3>2. With Known Data</h3>
+
+<pre><code>s = {10, 20, 30, 'hello'}
+print(s)  # Output: {10, 20, 'hello', 30} (Order may vary)
+</code></pre>
+
+<h3>3. Using the <code>set()</code> Function</h3>
+
+<p>You can create a set from any iterable object.</p>
+
+<pre><code>l = [10, 20, 30, 40, 50]
+s = set(l)
+print(s)  # Output: {40, 10, 50, 20, 30} (Order may vary)
+</code></pre>
+
+<pre><code>s = set(range(0, 101, 10))
+print(s)  # Output: {0, 40, 70, 10, 80, 50, 20, 90, 60, 100, 30} (Order may vary)
+</code></pre>
+
+<pre><code>s = set('apple')
+print(s)  # Output: {'a', 'p', 'l', 'e'} (Order may vary)
+</code></pre>
+
+<h2>Operators with Sets</h2>
+
+<h3>Mathematical Operators</h3>
+
+<p>Standard mathematical operators like <code>+</code> and <code>*</code> are not applicable to sets and will result in a <code>TypeError</code>.</p>
+
+<pre><code>s1 = {10, 20, 30}
+s2 = {30, 40, 50}
+
+# Invalid operations:
+# s3 = s1 + s2  # TypeError
+# s4 = s1 * 3   # TypeError
+</code></pre>
+
+<h3>Equality Operators</h3>
+
+<p>Using <code>==</code> and <code>!=</code> operators. Since sets are unordered, two sets are equal if they contain the same elements.</p>
+
+<pre><code>s1 = {10, 20, 30}
+s2 = {30, 10, 20}
+
+print(s1 == s2)  # Output: True
+print(s1 != s2)  # Output: False
+</code></pre>
+
+<h3>Relational Operators</h3>
+
+<p>Relational operators like <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> are defined for sets but represent subset and superset relationships.</p>
+
+<pre><code>s1 = {10, 20}
+s2 = {10, 20, 30}
+
+print(s1 &lt; s2)   # Output: True  (s1 is a proper subset of s2)
+print(s1 &gt; s2)   # Output: False
+print(s1 &lt;= s2)  # Output: True  (s1 is a subset of s2)
+print(s1 &gt;= s2)  # Output: False
+</code></pre>
+
+<h3>Membership Operators</h3>
+
+<p>Using <code>in</code> and <code>not in</code> operators:</p>
+
+<pre><code>s = {10, 20, 30, 40, 50}
+print(10 in s)        # Output: True
+print(90 not in s)    # Output: True
+</code></pre>
+
+<h2>Important Methods and Functions for Sets</h2>
+
+<h3>1. <code>len()</code> Function</h3>
+
+<p>Returns the number of elements in the set.</p>
+
+<pre><code>s = {10, 20, 30, 40}
+print(len(s))  # Output: 4
+</code></pre>
+
+<h3>2. <code>add()</code> Method</h3>
+
+<p>Adds a single element to the set.</p>
+
+<pre><code>s = {10, 20, 30}
+s.add(40)
+print(s)  # Output: {40, 10, 20, 30} (Order may vary)
+</code></pre>
+
+<h3>3. <code>update()</code> Method</h3>
+
+<p>Adds multiple elements to the set. Accepts any iterable as an argument.</p>
+
+<pre><code>s = {10, 20}
+l = [30, 40, 50]
+s.update(l)
+print(s)  # Output: {40, 10, 50, 20, 30} (Order may vary)
+</code></pre>
+
+<p>You can also pass multiple iterables:</p>
+
+<pre><code>s.update(range(1, 6), 'durga')
+print(s)
+# Output may include numbers 1-5 and characters 'd', 'u', 'r', 'g', 'a'
+</code></pre>
+
+<h3>4. <code>remove()</code> Method</h3>
+
+<p>Removes a specified element from the set. Raises a <code>KeyError</code> if the element is not found.</p>
+
+<pre><code>s = {10, 20, 30}
+s.remove(20)
+print(s)  # Output: {10, 30}
+
+# s.remove(40)  # KeyError: 40
+</code></pre>
+
+<h3>5. <code>discard()</code> Method</h3>
+
+<p>Removes a specified element from the set. Does nothing if the element is not found.</p>
+
+<pre><code>s = {10, 20, 30, 40}
+s.discard(30)
+print(s)  # Output: {40, 10, 20}
+
+s.discard(50)  # No error
+print(s)       # Output: {40, 10, 20}
+</code></pre>
+
+<h3>6. <code>pop()</code> Method</h3>
+
+<p>Removes and returns an arbitrary element from the set. Raises a <code>KeyError</code> if the set is empty.</p>
+
+<pre><code>s = {10, 20, 30, 40}
+item = s.pop()
+print('Removed:', item)
+print('Remaining set:', s)
+</code></pre>
+
+<p><strong>Note:</strong> Since sets are unordered, you cannot predict which element will be removed.</p>
+
+<h3>7. <code>clear()</code> Method</h3>
+
+<p>Removes all elements from the set.</p>
+
+<pre><code>s = {10, 20, 30, 40}
+s.clear()
+print(s)  # Output: set()
+</code></pre>
+
+<h2>Set Operations (Mathematical Set Operations)</h2>
+
+<h3>1. Union</h3>
+
+<p>Combines elements from both sets, excluding duplicates.</p>
+
+<pre><code>s1 = {10, 20, 30, 40}
+s2 = {30, 40, 50, 60}
+
+s3 = s1.union(s2)
+print(s3)  # Output: {40, 10, 50, 20, 60, 30} (Order may vary)
+
+# Alternative syntax using '|' operator:
+s3 = s1 | s2
+print(s3)
+</code></pre>
+
+<h3>2. Intersection</h3>
+
+<p>Includes only elements present in both sets.</p>
+
+<pre><code>s3 = s1.intersection(s2)
+print(s3)  # Output: {40, 30}
+
+# Alternative syntax using '&' operator:
+s3 = s1 & s2
+print(s3)
+</code></pre>
+
+<h3>3. Difference</h3>
+
+<p>Elements present in the first set but not in the second set.</p>
+
+<pre><code>s3 = s1.difference(s2)
+print(s3)  # Output: {10, 20}
+
+# Alternative syntax using '-' operator:
+s3 = s1 - s2
+print(s3)
+</code></pre>
+
+<h3>4. Symmetric Difference</h3>
+
+<p>Elements present in either set but not in both (i.e., excludes the intersection).</p>
+
+<pre><code>s3 = s1.symmetric_difference(s2)
+print(s3)  # Output: {50, 20, 10, 60}
+
+# Alternative syntax using '^' operator:
+s3 = s1 ^ s2
+print(s3)
+</code></pre>
+
+<h2>Aliasing and Cloning of Sets</h2>
+
+<h3>Aliasing</h3>
+
+<p>Assigning one set to another variable creates an alias; both variables reference the same set object.</p>
+
+<pre><code>s1 = {10, 20, 30, 40}
+s2 = s1  # Aliasing
+
+s1.add(50)
+print(s1)  # Output: {40, 10, 50, 20, 30}
+print(s2)  # Output: {40, 10, 50, 20, 30}
+</code></pre>
+
+<h3>Cloning</h3>
+
+<p>Creating an exact copy of a set that is independent of the original set.</p>
+
+<pre><code>s1 = {10, 20, 30, 40}
+s2 = s1.copy()  # Cloning
+
+s1.add(50)
+print(s1)  # Output: {40, 10, 50, 20, 30}
+print(s2)  # Output: {40, 10, 20, 30}
+</code></pre>
+
+<h2>Set Comprehension</h2>
+
+<p>Set comprehension offers a concise way to create sets.</p>
+
+<pre><code>s = {x ** 2 for x in range(1, 6)}
+print(s)  # Output: {1, 4, 9, 16, 25}
+</code></pre>
+
+<h2>Practical Examples with Sets</h2>
+
+<h3>Example 1: Eliminating Duplicates from a List</h3>
+
+<h4>Approach 1</h4>
+
+<pre><code>l = [10, 20, 10, 20, 10, 30, 30]
+s = set(l)
+l_unique = list(s)
+print(l_unique)  # Output: [10, 20, 30] (Order may vary)
+</code></pre>
+
+<h4>Approach 2</h4>
+
+<pre><code>l = [10, 20, 10, 20, 10, 30]
+l_unique = []
+for x in l:
+    if x not in l_unique:
+        l_unique.append(x)
+print(l_unique)  # Output: [10, 20, 30]
+</code></pre>
+
+<h3>Example 2: Finding Vowels in a Word</h3>
+
+<p>Write a program to print different vowels present in the given word.</p>
+
+<pre><code>word = input('Enter any word to search for vowels: ').lower()
+s = set(word)
+vowels = {'a', 'e', 'i', 'o', 'u'}
+result = s & vowels
+print('Vowels present in the word:', result)
+</code></pre>
+
+<h2>Summary</h2>
+
+<p>Sets in Python are powerful data structures that allow you to store unique elements and perform efficient mathematical set operations. Remember that sets are unordered and mutable, and they cannot contain duplicate elements. Use sets when you need to eliminate duplicates or perform set-based mathematical operations.</p>
+
+</body>
+</html>

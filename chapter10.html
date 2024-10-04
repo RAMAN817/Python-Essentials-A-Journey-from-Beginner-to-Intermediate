@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 10: Modules in Python</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 10: Modules in Python</h1>
+
+<h2>Introduction to Modules</h2>
+
+<p>A <strong>module</strong> in Python is a file containing Python definitions and statements. The file name is the module name with the suffix <code>.py</code> added. Modules can define functions, classes, and variables. They can also include runnable code.</p>
+
+<p>Example module <code>roman.py</code>:</p>
+
+<pre><code># roman.py
+x = 1234
+y = 5678
+
+def add(a, b):
+    return a + b
+
+class A:
+    pass
+</code></pre>
+
+<p>To use this module in another script:</p>
+
+<pre><code>import roman
+
+print(roman.x)         # Output: 1234
+print(roman.y)         # Output: 5678
+print(roman.add(10, 20))  # Output: 30
+</code></pre>
+
+<h2>Advantages of Modules</h2>
+
+<ul>
+    <li><strong>Code Reusability</strong>: Write once, use multiple times.</li>
+    <li><strong>Maintainability</strong>: Easier to manage and update code.</li>
+    <li><strong>Namespace Separation</strong>: Avoid naming conflicts by encapsulating variables and functions within modules.</li>
+    <li><strong>Performance Improvement</strong>: Compiled modules are cached, reducing load times.</li>
+</ul>
+
+<p>When a module is imported for the first time, Python compiles it to bytecode and saves it as a <code>.pyc</code> file in the <code>__pycache__</code> directory. This compiled version is used in subsequent imports, improving performance.</p>
+
+<h2>Module Aliasing</h2>
+
+<p>You can assign an alias to a module to make it easier to reference in your code:</p>
+
+<pre><code>import roman as r
+
+print(r.x)          # Output: 1234
+print(r.add(200, 300))  # Output: 500
+
+# Once an alias is assigned, you must use it
+# roman.add(10, 20)  # NameError: name 'roman' is not defined
+</code></pre>
+
+<h2>Importing Specific Members</h2>
+
+<p>You can import specific attributes from a module:</p>
+
+<pre><code>from roman import x, y, add, A
+
+print(x)            # Output: 1234
+print(y)            # Output: 5678
+print(add(10, 20))  # Output: 30
+instance = A()
+</code></pre>
+
+<h3>Member Aliasing</h3>
+
+<p>You can assign aliases to imported members:</p>
+
+<pre><code>from roman import add as a, A as MyClass
+
+print(a(10, 20))    # Output: 30
+instance = MyClass()
+</code></pre>
+
+<h2>Various Import Statements</h2>
+
+<ol>
+    <li><code>import module1</code></li>
+    <li><code>import module1, module2, module3</code></li>
+    <li><code>import module1 as m1</code></li>
+    <li><code>import module1 as m1, module2 as m2</code></li>
+    <li><code>from module1 import member1</code></li>
+    <li><code>from module1 import member1 as m1</code></li>
+    <li><code>from module1 import member1 as m1, member2 as m2</code></li>
+    <li><code>from module1 import *</code></li>
+</ol>
+
+<h2>Module Naming Conflicts</h2>
+
+<p>When importing multiple modules with overlapping names, the last imported module's members will overwrite previous ones:</p>
+
+<pre><code># module1.py
+def add(a, b):
+    return a + b
+
+# module2.py
+def add(a, b):
+    return a * b
+
+from module1 import *
+from module2 import *
+
+print(add(10, 20))  # Output depends on which 'add' is imported last
+</code></pre>
+
+<p>To resolve naming conflicts, use module aliasing or member aliasing:</p>
+
+<pre><code>from module1 import add as add1
+from module2 import add as add2
+
+print(add1(10, 20))  # Uses add from module1
+print(add2(10, 20))  # Uses add from module2
+</code></pre>
+
+<h2>Module Reloading</h2>
+
+<p>By default, Python caches imported modules. If you modify a module after it has been imported, you need to reload it to see the changes.</p>
+
+<pre><code>import module1
+import module1  # This will not reload the module
+
+# To reload the module:
+from importlib import reload
+reload(module1)
+</code></pre>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>import time
+import module1
+
+module1.add(10, 20)  # Uses the initial version of module1
+
+time.sleep(30)  # During this time, you modify module1.py
+
+from importlib import reload
+reload(module1)
+
+module1.add(10, 20)  # Uses the updated version of module1
+</code></pre>
+
+<h2>Finding Members of a Module</h2>
+
+<h3>Using <code>dir()</code> Function</h3>
+
+<ul>
+    <li><code>dir()</code>: Lists all members of the current module.</li>
+    <li><code>dir(moduleName)</code>: Lists all members of the specified module.</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+
+<pre><code># test.py
+x = 0
+y = 1
+
+def add(a, b):
+    return a + b
+
+print(dir())
+# Output: ['__annotations__', '__builtins__', '__cached__', '__doc__', '__file__',
+# '__loader__', '__name__', '__package__', '__spec__', 'add', 'x', 'y']
+</code></pre>
+
+<h3>Using <code>help()</code> Function</h3>
+
+<p>The <code>help()</code> function provides documentation about modules, classes, functions, etc.</p>
+
+<pre><code>import math
+help(math)
+</code></pre>
+
+<p><strong>Difference between <code>dir()</code> and <code>help()</code>:</strong></p>
+
+<ul>
+    <li><code>dir()</code> lists the names defined in a module.</li>
+    <li><code>help()</code> provides detailed documentation about the module and its members.</li>
+</ul>
+
+<h2>Special Variables in Modules</h2>
+
+<p>Python automatically adds some special variables to modules:</p>
+
+<ul>
+    <li><code>__name__</code>: The name of the module.</li>
+    <li><code>__file__</code>: The path to the module file.</li>
+    <li><code>__doc__</code>: The module's documentation string.</li>
+    <li><code>__package__</code>: The package name.</li>
+</ul>
+
+<h3>Using <code>__name__</code></h3>
+
+<p>The <code>__name__</code> variable allows a module to detect whether it is being run directly or being imported.</p>
+
+<pre><code># module1.py
+def f1():
+    print('Function f1 executed')
+
+def f2():
+    print('Function f2 executed')
+
+if __name__ == '__main__':
+    f1()
+    f2()
+</code></pre>
+
+<p>If you run <code>module1.py</code> directly:</p>
+
+<pre><code>python module1.py
+# Output:
+Function f1 executed
+Function f2 executed
+</code></pre>
+
+<p>If you import <code>module1</code> in another script:</p>
+
+<pre><code># test.py
+import module1
+
+module1.f1()
+# Output:
+Function f1 executed
+</code></pre>
+
+<p>The code inside <code>if __name__ == '__main__':</code> will not execute during import.</p>
+
+<h3>Using <code>__doc__</code></h3>
+
+<p>The <code>__doc__</code> variable contains the module's documentation string.</p>
+
+<pre><code># module1.py
+'''This module provides utility functions.'''
+
+def add(a, b):
+    '''Adds two numbers.'''
+    return a + b
+
+print(__doc__)
+# Output:
+This module provides utility functions.
+</code></pre>
+
+<h3>Using <code>__file__</code></h3>
+
+<p>The <code>__file__</code> variable contains the path to the module file.</p>
+
+<pre><code>print(__file__)
+# Output: /path/to/module1.py
+
+import os
+print(os.path.abspath(__file__))        # Absolute path
+print(os.path.dirname(os.path.abspath(__file__)))  # Directory path
+</code></pre>
+
+<h2>Working with the <code>math</code> Module</h2>
+
+<p>The <code>math</code> module provides mathematical functions:</p>
+
+<pre><code>from math import *
+
+print(factorial(4))    # Output: 24
+print(sqrt(16))        # Output: 4.0
+print(fabs(-10.6))     # Output: 10.6
+print(ceil(10.5))      # Output: 11
+print(floor(10.5))     # Output: 10
+</code></pre>
+
+<h3>Calculating the Area of a Circle</h3>
+
+<pre><code>from math import pi
+
+radius = 10
+area = pi * radius ** 2
+print('Area of the circle:', area)
+# Output: Area of the circle: 314.1592653589793
+</code></pre>
+
+<h2>Working with the <code>random</code> Module</h2>
+
+<p>The <code>random</code> module is used to generate random numbers:</p>
+
+<pre><code>from random import *
+</code></pre>
+
+<h3>1. <code>random()</code></h3>
+
+<p>Generates a random float between 0.0 and 1.0 (excluding 1.0).</p>
+
+<pre><code>print(random())  # Example Output: 0.6394267984578837
+</code></pre>
+
+<h3>2. <code>uniform(a, b)</code></h3>
+
+<p>Generates a random float between <code>a</code> and <code>b</code> (excluding <code>b</code>).</p>
+
+<pre><code>print(uniform(5, 10))  # Example Output: 7.2345678912345
+</code></pre>
+
+<h3>3. <code>randint(a, b)</code></h3>
+
+<p>Generates a random integer between <code>a</code> and <code>b</code> (including both).</p>
+
+<pre><code>print(randint(1, 10))  # Output: An integer between 1 and 10
+</code></pre>
+
+<h3>4. <code>randrange(start, stop[, step])</code></h3>
+
+<p>Generates a random integer from <code>start</code> to <code>stop - 1</code>. The <code>step</code> argument is optional.</p>
+
+<pre><code>print(randrange(5))          # Output: 0 to 4
+print(randrange(1, 10, 2))    # Output: Odd numbers between 1 and 9
+</code></pre>
+
+<h3>5. <code>choice(sequence)</code></h3>
+
+<p>Selects a random element from a non-empty sequence.</p>
+
+<pre><code>fruits = ['apple', 'banana', 'orange', 'mango']
+print(choice(fruits))  # Output: Random fruit from the list
+</code></pre>
+
+<h2>Generating Random OTP and Passwords</h2>
+
+<h3>Example: Generating a 6-Digit Random OTP</h3>
+
+<pre><code>from random import randint
+
+otp = ''
+for _ in range(6):
+    otp += str(randint(0, 9))
+
+print('Your OTP is:', otp)
+# Example Output: Your OTP is: 837465
+</code></pre>
+
+<p><strong>Note:</strong> Using <code>randint(0, 9)</code> six times ensures that leading zeros are preserved. Using <code>randint(100000, 999999)</code> may exclude OTPs starting with zero.</p>
+
+<h3>Example: Generating a Random Password</h3>
+
+<p>Generate a 6-character password where characters at odd positions are alphabets and characters at even positions are digits.</p>
+
+<pre><code>from random import choice
+
+alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+digits = '0123456789'
+
+password = ''
+for i in range(6):
+    if i % 2 == 0:
+        password += choice(alphabets)
+    else:
+        password += choice(digits)
+
+print('Your password is:', password)
+# Example Output: Your password is: A3B7C9
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>Modules in Python are a powerful way to organize and reuse code. They allow for namespace separation, code reusability, and improved maintainability. Understanding how to create, import, and use modules effectively is essential for efficient Python programming.</p>
+
+</body>
+</html>

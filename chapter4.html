@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 4: String Data Type</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 4: More on Strings </h1>
+
+<h2>Introduction</h2>
+
+<p>In Python, strings are one of the most commonly used data types. Approximately 90% of objects in any programming language are string objects. In Python, there is no separate character data type; a single character is simply a string of length one.</p>
+
+<p>A string in Python is a sequence of characters enclosed within single quotes <code>'</code> or double quotes <code>"</code>. Multi-line strings can be created using triple quotes:</p>
+
+<pre><code>multi_line_str = '''Roman
+Son
+Thapa'''
+</code></pre>
+
+<h2>Accessing Characters in a String</h2>
+
+<h3>1. By Using Index</h3>
+
+<p>Python strings support both positive and negative indexing:</p>
+
+<pre><code>s = 'durga'
+# Indexing:
+#  D    U    R    G    A
+#  0    1    2    3    4   (Positive Index)
+# -5   -4   -3   -2   -1   (Negative Index)
+
+print(s[0])   # Output: 'd'
+print(s[-1])  # Output: 'a'
+print(s[100]) # Raises IndexError
+</code></pre>
+
+<h4>Example: Display Characters with Positive and Negative Indices</h4>
+
+<pre><code>s = input('Enter a string: ')
+i = 0
+for x in s:
+    print('The character at +ve index {} and -ve index {} is: {}'.format(i, i - len(s), x))
+    i += 1
+</code></pre>
+
+<h3>2. By Using Slice Operator</h3>
+
+<p>Syntax:</p>
+
+<pre><code>s[begin:end:step]
+</code></pre>
+
+<ul>
+    <li><code>begin</code>: Starting index (default is <code>0</code> if omitted)</li>
+    <li><code>end</code>: Ending index (default is <code>len(s)</code> if omitted)</li>
+    <li><code>step</code>: Step size (default is <code>1</code> if omitted)</li>
+</ul>
+
+<p>The slice will include characters from index <code>begin</code> to <code>end - 1</code>.</p>
+
+<h4>Examples:</h4>
+
+<pre><code>s = 'abcdefghijk'
+print(s[2:7])    # Output: 'cdefg'
+print(s[:7])     # Output: 'abcdefg'
+print(s[2:])     # Output: 'cdefghijk'
+print(s[:])      # Output: 'abcdefghijk'
+print(s[2:7:2])  # Output: 'ceg'
+print(s[::2])    # Output: 'acegik'
+</code></pre>
+
+<h4>Slice Operator Rules</h4>
+
+<ul>
+    <li><code>begin</code>, <code>end</code>, and <code>step</code> can be positive or negative.</li>
+    <li>If <code>step</code> is zero, it raises a <code>ValueError</code>.</li>
+    <li>Default values:
+        <ul>
+            <li>Forward direction (positive step): <code>begin=0</code>, <code>end=len(s)</code></li>
+            <li>Backward direction (negative step): <code>begin=-1</code>, <code>end=-(len(s)+1)</code></li>
+        </ul>
+    </li>
+</ul>
+
+<h2>String Operators</h2>
+
+<h3>Concatenation (<code>+</code>)</h3>
+
+<p>Combines two strings into one.</p>
+
+<pre><code>print('Hello' + ' World')  # Output: 'Hello World'
+</code></pre>
+
+<h3>Repetition (<code>*</code>)</h3>
+
+<p>Repeats a string multiple times.</p>
+
+<pre><code>print('Hello' * 3)  # Output: 'HelloHelloHello'
+</code></pre>
+
+<h3>Membership Operators</h3>
+
+<ul>
+    <li><code>in</code>: Returns <code>True</code> if a substring is found in the string.</li>
+    <li><code>not in</code>: Returns <code>True</code> if a substring is not found in the string.</li>
+</ul>
+
+<pre><code>print('a' in 'durga')  # Output: True
+
+s = input("Enter the main string: ")
+subs = input("Enter the substring to search: ")
+if subs in s:
+    print('Substring is present in the string')
+else:
+    print('Substring is not present in the string')
+</code></pre>
+
+<h2>String Comparison</h2>
+
+<p>We can use comparison operators (<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>) and equality operators (<code>==</code>, <code>!=</code>) for strings. Comparison is based on lexicographical order (Unicode code points).</p>
+
+<h4>Example:</h4>
+
+<pre><code>s1 = input("Enter first string: ")
+s2 = input("Enter second string: ")
+
+if s1 == s2:
+    print("Both strings are equal")
+elif s1 &lt; s2:
+    print("First string is less than second string")
+else:
+    print("First string is greater than second string")
+</code></pre>
+
+<h2>Removing Spaces from a String</h2>
+
+<p>Methods to remove spaces:</p>
+
+<ul>
+    <li><code>lstrip()</code>: Removes leading spaces.</li>
+    <li><code>rstrip()</code>: Removes trailing spaces.</li>
+    <li><code>strip()</code>: Removes both leading and trailing spaces.</li>
+</ul>
+
+<pre><code>city = input('Enter the name of the city: ').strip()
+if city == 'Banepa':
+    print('Gokul Baskota')
+elif city == 'Bhojpur':
+    print('Sudan Kirati')
+else:
+    print('KP Oli')
+</code></pre>
+
+<h2>Finding Substrings</h2>
+
+<h3>1. <code>find()</code> Method</h3>
+
+<p>Searches for a substring from left to right and returns the index of the first occurrence. Returns <code>-1</code> if not found.</p>
+
+<pre><code>s = 'ABCBA'
+print(s.find('B'))   # Output: 1
+print(s.find('Z'))   # Output: -1
+</code></pre>
+
+<h3>2. <code>rfind()</code> Method</h3>
+
+<p>Searches for a substring from right to left and returns the index of the first occurrence from the right. Returns <code>-1</code> if not found.</p>
+
+<pre><code>print(s.rfind('B'))  # Output: 3
+</code></pre>
+
+<h3>3. <code>index()</code> Method</h3>
+
+<p>Similar to <code>find()</code> but raises a <code>ValueError</code> if the substring is not found.</p>
+
+<pre><code>print(s.index('B'))   # Output: 1
+# print(s.index('Z'))  # Raises ValueError
+</code></pre>
+
+<h3>4. <code>rindex()</code> Method</h3>
+
+<p>Similar to <code>rfind()</code> but raises a <code>ValueError</code> if the substring is not found.</p>
+
+<pre><code>print(s.rindex('B'))  # Output: 3
+</code></pre>
+
+<h4>Example: Email Validation Using <code>index()</code> Method</h4>
+
+<pre><code>email = input('Enter your email ID: ')
+try:
+    i = email.index('@')
+    print('Valid email ID')
+except ValueError:
+    print('Invalid email ID')
+</code></pre>
+
+<h2>Counting Substrings</h2>
+
+<p>Use the <code>count()</code> method to count occurrences of a substring:</p>
+
+<pre><code>s = 'ABCDABCD'
+print(s.count('A'))     # Output: 2
+print(s.count('Z'))     # Output: 0
+</code></pre>
+
+<h4>Example: Find All Occurrences of a Substring</h4>
+
+<pre><code>s = 'ABCABCABCA'
+subs = input('Enter substring to search: ')
+i = s.find(subs)
+if i == -1:
+    print('Specified substring not found')
+else:
+    while i != -1:
+        print('{} found at index: {}'.format(subs, i))
+        i = s.find(subs, i + len(subs), len(s))
+    print('Total occurrences:', s.count(subs))
+</code></pre>
+
+<h2>Replacing Substrings</h2>
+
+<p>The <code>replace()</code> method replaces occurrences of a substring with another substring:</p>
+
+<pre><code>s = 'ABABABA'
+s_new = s.replace('A', 'B')
+print(s_new)  # Output: 'BBBBBBB'
+</code></pre>
+
+<p>Note: Strings are immutable in Python. Methods like <code>replace()</code> create a new string.</p>
+
+<pre><code>s = 'ABABABAB'
+print('Before replacement:', id(s))
+s = s.replace('A', 'B')
+print('After replacement:', id(s))
+</code></pre>
+
+<h2>Splitting and Joining Strings</h2>
+
+<h3>Splitting Strings</h3>
+
+<p>The <code>split()</code> method divides a string into a list of substrings based on a separator (default is space).</p>
+
+<pre><code>s = 'Durga Software Solutions'
+lst = s.split()
+print(lst)  # Output: ['Durga', 'Software', 'Solutions']
+</code></pre>
+
+<h3>Joining Strings</h3>
+
+<p>The <code>join()</code> method combines a list of strings into a single string with a specified separator.</p>
+
+<pre><code>lst = ['Roman', 'Son', 'Thapa']
+s = ''.join(lst)
+print(s)  # Output: 'RomanSonThapa'
+</code></pre>
+
+<h2>Changing Case of Characters</h2>
+
+<ul>
+    <li><code>upper()</code>: Converts all characters to uppercase.</li>
+    <li><code>lower()</code>: Converts all characters to lowercase.</li>
+    <li><code>swapcase()</code>: Swaps case of all characters.</li>
+    <li><code>title()</code>: Capitalizes the first character of each word.</li>
+    <li><code>capitalize()</code>: Capitalizes the first character of the string.</li>
+</ul>
+
+<pre><code>s = 'Learning Python is very easy'
+print(s.upper())       # Output: 'LEARNING PYTHON IS VERY EASY'
+print(s.lower())       # Output: 'learning python is very easy'
+print(s.swapcase())    # Output: 'lEARNING pYTHON IS VERY EASY'
+print(s.title())       # Output: 'Learning Python Is Very Easy'
+print(s.capitalize())  # Output: 'Learning python is very easy'
+</code></pre>
+
+<h4>Example: Case-Insensitive String Comparison</h4>
+
+<pre><code>s1 = input('Enter first string: ').lower()
+s2 = input('Enter second string: ').lower()
+if s1 == s2:
+    print('Yes, both are equal')
+else:
+    print('No, the strings are different')
+</code></pre>
+
+<h4>Example: Validate Username and Password</h4>
+
+<p>Username is case-insensitive, but password is case-sensitive.</p>
+
+<pre><code>username = input('Enter username: ').lower()
+password = input('Enter password: ')
+if username == 'durga' and password == 'anushka':
+    print('Valid user')
+else:
+    print('Invalid user')
+</code></pre>
+
+<h4>Example: Convert First and Last Character to Uppercase</h4>
+
+<pre><code>s = input('Enter a string: ')
+output = s[0].upper() + s[1:len(s)-1] + s[-1].upper()
+print('Output:', output)
+</code></pre>
+
+<h2>Checking Starting and Ending Substrings</h2>
+
+<ul>
+    <li><code>startswith(substring)</code>: Checks if the string starts with the specified substring.</li>
+    <li><code>endswith(substring)</code>: Checks if the string ends with the specified substring.</li>
+</ul>
+
+<pre><code>s = 'Learning with Durgasoft is fun'
+print(s.startswith('Learning'))  # Output: True
+print(s.endswith('fun'))         # Output: True
+print(s.endswith('boring'))      # Output: False
+</code></pre>
+
+<h2>Checking the Type of Characters in a String</h2>
+
+<ul>
+    <li><code>isalnum()</code>: Returns <code>True</code> if all characters are alphanumeric.</li>
+    <li><code>isalpha()</code>: Returns <code>True</code> if all characters are alphabetic.</li>
+    <li><code>islower()</code>: Returns <code>True</code> if all characters are lowercase.</li>
+    <li><code>isupper()</code>: Returns <code>True</code> if all characters are uppercase.</li>
+    <li><code>isdigit()</code>: Returns <code>True</code> if all characters are digits.</li>
+    <li><code>istitle()</code>: Returns <code>True</code> if the string is in title case.</li>
+    <li><code>isspace()</code>: Returns <code>True</code> if the string contains only whitespace.</li>
+</ul>
+
+<h4>Examples:</h4>
+
+<pre><code>print('Durga786'.isalnum())    # Output: True
+print('durga786'.isalpha())    # Output: False
+print('durga'.isalpha())       # Output: True
+print('durga'.isdigit())       # Output: False
+print('786786'.isdigit())      # Output: True
+print('abc'.islower())         # Output: True
+print('Abc'.islower())         # Output: False
+print('abc123'.islower())      # Output: True
+print('ABC'.isupper())         # Output: True
+print('Learning python is Easy'.istitle())  # Output: False
+print('Learning Python Is Easy'.istitle())  # Output: True
+print('   '.isspace())         # Output: True
+</code></pre>
+
+<h4>Demo Program:</h4>
+
+<pre><code>char = input("Enter any character: ")
+if char.isalnum():
+    print("Alphanumeric character")
+    if char.isalpha():
+        print("Alphabet character")
+        if char.islower():
+            print("Lowercase alphabet character")
+        else:
+            print("Uppercase alphabet character")
+    else:
+        print("Digit character")
+elif char.isspace():
+    print("It is a space character")
+else:
+    print("Non-space special character")
+</code></pre>
+
+</body>
+</html>

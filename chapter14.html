@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 14: Object-Oriented Programming in Python - Part Three</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 14: Object-Oriented Programming in Python - Part Three</h1>
+
+<h2>Introduction</h2>
+
+<p>In this chapter, we continue exploring Object-Oriented Programming (OOP) concepts in Python. We will focus on different types of methods within classes—instance methods, class methods, and static methods—as well as inner classes and nested methods.</p>
+
+<h2>Instance Methods</h2>
+
+<p>An <strong>instance method</strong> is a method that operates on the instance variables of a class. If you are using instance variables in a method, it is compulsory that the method is an instance method.</p>
+
+<h3>Characteristics of Instance Methods</h3>
+
+<ul>
+    <li>The first parameter is always <code>self</code>, which refers to the instance.</li>
+    <li>Can access and modify instance variables.</li>
+    <li>Can also access class variables.</li>
+    <li>Called using the object reference.</li>
+</ul>
+
+<h3>Setter and Getter Methods</h3>
+
+<p>Instance methods are often used as setter (mutator) and getter (accessor) methods to set and retrieve the values of instance variables.</p>
+
+<h4>Setter Methods</h4>
+
+<p>Used to set or update the value of an instance variable.</p>
+
+<pre><code>def set_variable_name(self, value):
+    self.variable_name = value
+</code></pre>
+
+<h4>Example</h4>
+
+<pre><code>def set_marks(self, marks):
+    self.marks = marks
+</code></pre>
+
+<h4>Getter Methods</h4>
+
+<p>Used to retrieve the value of an instance variable.</p>
+
+<pre><code>def get_variable_name(self):
+    return self.variable_name
+</code></pre>
+
+<h4>Example</h4>
+
+<pre><code>def get_marks(self):
+    return self.marks
+</code></pre>
+
+<h3>Example: Using Setter and Getter Methods</h3>
+
+<pre><code>class Student:
+    def set_name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
+
+    def set_marks(self, marks):
+        self.marks = marks
+
+    def get_marks(self):
+        return self.marks
+
+# Creating an object
+student = Student()
+student.set_name('Alice')
+student.set_marks(95)
+
+print('Name:', student.get_name())
+print('Marks:', student.get_marks())
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Name: Alice
+Marks: 95
+</code></pre>
+
+<h2>Class Methods</h2>
+
+<p>A <strong>class method</strong> is a method that is bound to the class and not the instance of the class. It can modify a class state that would apply across all the instances of the class. Class methods are used to access or modify the class state.</p>
+
+<h3>Characteristics of Class Methods</h3>
+
+<ul>
+    <li>Declared using the <code>@classmethod</code> decorator.</li>
+    <li>The first parameter is <code>cls</code>, which refers to the class itself.</li>
+    <li>Can access or modify class variables (static variables).</li>
+    <li>Can be called using the class name or an object reference.</li>
+</ul>
+
+<h3>Example</h3>
+
+<pre><code>class Test:
+    s = 10  # Static variable
+
+    @classmethod
+    def display(cls):
+        print('Static variable s =', cls.s)
+</code></pre>
+
+<p>In this example:</p>
+
+<ul>
+    <li><code>cls</code> is a reference to the class object.</li>
+    <li><code>@classmethod</code> decorator is used to declare a class method.</li>
+    <li>Static variable <code>s</code> is accessed using <code>cls.s</code>.</li>
+</ul>
+
+<h3>Example with the <code>Bird</code> Class</h3>
+
+<pre><code>class Bird:
+    wings = 2  # Static variable
+
+    @classmethod
+    def fly(cls, name):
+        print('{} flies with {} wings.'.format(name, cls.wings))
+
+Bird.fly('Parrot')  # Output: Parrot flies with 2 wings.
+Bird.fly('Eagle')   # Output: Eagle flies with 2 wings.
+</code></pre>
+
+<h2>Instance Method vs. Class Method</h2>
+
+<table>
+    <tr>
+        <th>Instance Method</th>
+        <th>Class Method</th>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Uses instance variables.</li>
+                <li>May also access class variables.</li>
+                <li>No decorator used.</li>
+                <li>First parameter is <code>self</code>.</li>
+                <li>Called via object reference.</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Uses class variables (static variables).</li>
+                <li>Does not use instance variables.</li>
+                <li>Declared with <code>@classmethod</code> decorator.</li>
+                <li>First parameter is <code>cls</code>.</li>
+                <li>Can be called via class name or object reference.</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<h2>Static Methods</h2>
+
+<p>A <strong>static method</strong> is a method that does not receive an implicit first argument, and it cannot access or modify class or instance state. Static methods are utility-type methods that take some parameters and work upon those parameters. They are declared using the <code>@staticmethod</code> decorator.</p>
+
+<h3>Characteristics of Static Methods</h3>
+
+<ul>
+    <li>Declared using the <code>@staticmethod</code> decorator.</li>
+    <li>Do not have <code>self</code> or <code>cls</code> parameters.</li>
+    <li>Cannot access or modify instance or class variables.</li>
+    <li>Can be called using the class name or object reference (class name recommended).</li>
+</ul>
+
+<h3>Example</h3>
+
+<pre><code>class MathUtils:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+result = MathUtils.add(10, 20)
+print('Sum:', result)  # Output: Sum: 30
+</code></pre>
+
+<h3>Notes</h3>
+
+<ol>
+    <li><code>self</code> is not applicable since no instance variables are accessed.</li>
+    <li>Recommended to call static methods using the class name.</li>
+    <li><code>@staticmethod</code> decorator should be used to define a static method.</li>
+</ol>
+
+<h3>What Happens If We Don't Use Any Decorator?</h3>
+
+<p>If you don't use any decorator, the method's behavior depends on how it is called and defined.</p>
+
+<ul>
+    <li>For class methods, the <code>@classmethod</code> decorator is mandatory.</li>
+    <li>For static methods, the <code>@staticmethod</code> decorator is optional, but recommended for clarity.</li>
+</ul>
+
+<p>Example:</p>
+
+<pre><code>class Test:
+    def m1(x):
+        pass
+</code></pre>
+
+<ul>
+    <li>If you call <code>obj.m1()</code>, Python treats <code>x</code> as <code>self</code>, and it becomes an instance method.</li>
+    <li>If you call <code>Test.m1()</code>, Python does not pass any arguments automatically, and you need to ensure the method can handle it.</li>
+    <li>If the method doesn't accept any parameters and you call <code>obj.m1()</code>, it will result in an error because Python tries to pass <code>self</code> automatically.</li>
+</ul>
+
+<h2>Inner Classes</h2>
+
+<p>An <strong>inner class</strong> is a class defined inside another class. Inner classes are used when an object cannot exist without the outer class object. They help in logical grouping and encapsulation.</p>
+
+<h3>When to Use Inner Classes</h3>
+
+<p>Use inner classes when:</p>
+
+<ul>
+    <li>There is a strong relationship between the inner and outer class.</li>
+    <li>The inner class is not useful without the outer class.</li>
+</ul>
+
+<h3>Example</h3>
+
+<pre><code>class University:  # Outer class
+    def __init__(self, name):
+        self.name = name
+
+    class Department:  # Inner class
+        def __init__(self, dept_name):
+            self.dept_name = dept_name
+
+        def display(self):
+            print('Department:', self.dept_name)
+
+# Creating outer class object
+uni = University('MIT')
+
+# Creating inner class object
+dept = uni.Department('Computer Science')
+dept.display()  # Output: Department: Computer Science
+</code></pre>
+
+<h3>Advantages of Inner Classes</h3>
+
+<ol>
+    <li><strong>Modularity</strong>: Inner classes help in logically grouping classes that are only used in one place.</li>
+    <li><strong>Encapsulation</strong>: Inner classes can access the members of the outer class, allowing for tighter integration.</li>
+</ol>
+
+<h3>Creating Inner Class Objects</h3>
+
+<p>To create an instance of an inner class:</p>
+
+<pre><code># Method 1
+outer = OuterClass()
+inner = outer.InnerClass()
+inner.method()
+
+# Method 2
+inner = OuterClass().InnerClass()
+inner.method()
+</code></pre>
+
+<h2>Nested Methods</h2>
+
+<p>In Python, you can define a function inside another function, known as a nested method. Nested methods are useful when a method requires a helper function that doesn't need to be available outside the method.</p>
+
+<h3>When and Why to Use Nested Methods</h3>
+
+<ul>
+    <li>To encapsulate functionality that is only used within the enclosing method.</li>
+    <li>To avoid cluttering the class namespace with helper methods.</li>
+    <li>To maintain logical grouping of related code.</li>
+</ul>
+
+<h3>Example</h3>
+
+<pre><code>class Test:
+    def m1(self):
+        def calc(a, b):
+            print('The sum:', a + b)
+            print('The product:', a * b)
+            print('The difference:', a - b)
+            print('The average:', (a + b) / 2)
+        # Calling the nested function multiple times
+        calc(10, 20)
+        calc(102, 202)
+        calc(130, 201)
+
+# Creating an object and calling the method
+t = Test()
+t.m1()
+</code></pre>
+
+<h3>Output</h3>
+
+<pre><code>The sum: 30
+The product: 200
+The difference: -10
+The average: 15.0
+The sum: 304
+The product: 20604
+The difference: -100
+The average: 152.0
+The sum: 331
+The product: 26130
+The difference: -71
+The average: 165.5
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>In this chapter, we explored advanced concepts of Object-Oriented Programming in Python, including different types of methods and inner classes. Understanding the distinctions between instance methods, class methods, and static methods is crucial for designing robust and maintainable classes. Inner classes and nested methods provide additional tools for encapsulating functionality and improving code organization.</p>
+
+<p>Key takeaways:</p>
+
+<ul>
+    <li><strong>Instance Methods</strong>: Operate on instance variables; first parameter is <code>self</code>.</li>
+    <li><strong>Class Methods</strong>: Operate on class variables; use the <code>@classmethod</code> decorator; first parameter is <code>cls</code>.</li>
+    <li><strong>Static Methods</strong>: Do not access instance or class variables; use the <code>@staticmethod</code> decorator; no default parameters.</li>
+    <li><strong>Inner Classes</strong>: Classes defined within other classes; used for logical grouping and encapsulation.</li>
+    <li><strong>Nested Methods</strong>: Functions defined within methods; used for encapsulating functionality used only within the method.</li>
+</ul>
+
+<p>By mastering these concepts, you can write more efficient, readable, and well-structured Python code that adheres to OOP principles.</p>
+
+</body>
+</html>

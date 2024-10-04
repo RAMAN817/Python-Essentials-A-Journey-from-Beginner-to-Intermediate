@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 17: Object-Oriented Programming in Python - Part Six</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</style>
+</head>
+<body>
+
+<h1>Chapter 17: Object-Oriented Programming in Python - Part Six</h1>
+
+<h2>Introduction</h2>
+
+<p>In this chapter, we delve deeper into advanced concepts of Object-Oriented Programming (OOP) in Python, focusing on the Method Resolution Order (MRO) algorithm and the use of the <code>super()</code> function. Understanding MRO is crucial when dealing with multiple inheritance, as it defines the order in which base classes are searched when executing a method. We will also explore how to use the <code>super()</code> function to call methods from parent classes, and discuss its limitations.</p>
+
+<h2>Method Resolution Order (MRO)</h2>
+
+<p>The <strong>Method Resolution Order (MRO)</strong> in Python is the order in which base classes are searched for a method or attribute during inheritance. This is especially important in the context of multiple inheritance, where a class inherits from multiple parent classes.</p>
+
+<h3>Finding the MRO of a Class</h3>
+
+<p>You can find the MRO of any class using the <code>mro()</code> method or by accessing the <code>__mro__</code> attribute.</p>
+
+<pre><code>print(ClassName.mro())
+# or
+print(ClassName.__mro__)
+</code></pre>
+
+<h3>Example</h3>
+
+<pre><code>class A:
+    pass
+
+class B(A):
+    pass
+
+class C(A):
+    pass
+
+class D(B, C):
+    pass
+
+# Printing the MRO
+print(A.mro())  # Output: [<class '__main__.A'>, <class 'object'>]
+print(B.mro())  # Output: [<class '__main__.B'>, <class '__main__.A'>, <class 'object'>]
+print(C.mro())  # Output: [<class '__main__.C'>, <class '__main__.A'>, <class 'object'>]
+print(D.mro())  # Output: [<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>]
+</code></pre>
+
+<p>In this order, Python resolves methods and attributes when they are called on instances of these classes.</p>
+
+<h3>Another Example</h3>
+
+<pre><code>class A:
+    pass
+
+class B:
+    pass
+
+class C:
+    pass
+
+class D(A, B):
+    pass
+
+class E(B, C):
+    pass
+
+class F(D, E, C):
+    pass
+
+# Printing the MRO
+print(A.mro())  # Output: [<class '__main__.A'>, <class 'object'>]
+print(B.mro())  # Output: [<class '__main__.B'>, <class 'object'>]
+print(C.mro())  # Output: [<class '__main__.C'>, <class 'object'>]
+print(D.mro())  # Output: [<class '__main__.D'>, <class '__main__.A'>, <class '__main__.B'>, <class 'object'>]
+print(E.mro())  # Output: [<class '__main__.E'>, <class '__main__.B'>, <class '__main__.C'>, <class 'object'>]
+print(F.mro())  # Output: [<class '__main__.F'>, <class '__main__.D'>, <class '__main__.A'>, <class '__main__.E'>, <class '__main__.B'>, <class '__main__.C'>, <class 'object'>]
+</code></pre>
+
+<p>The MRO of class <code>F</code> is determined using the MRO algorithm, also known as the C3 linearization algorithm.</p>
+
+<h2>The MRO Algorithm (C3 Linearization)</h2>
+
+<p>The MRO algorithm, also known as the C3 linearization algorithm, was proposed by Samuele Pedroni. It ensures a consistent and predictable order in which classes are searched for methods and attributes. The algorithm follows the principles of:</p>
+
+<ul>
+    <li><strong>Depth-First Left-to-Right (DLR)</strong>: Child classes are given priority, and the left parent is searched before the right parent.</li>
+    <li><strong>No Circularities</strong>: The algorithm prevents inheritance cycles.</li>
+</ul>
+
+<h3>The MRO Formula</h3>
+
+<p>The MRO of a class <code>X</code> is defined as:</p>
+
+<blockquote>MRO(X) = X + Merge(MRO(P1), MRO(P2), ..., ParentList)</blockquote>
+
+<p>Where:</p>
+
+<ul>
+    <li><code>X</code>: The class whose MRO is being computed.</li>
+    <li><code>P1, P2, ...</code>: Immediate parents of <code>X</code>.</li>
+    <li><code>ParentList</code>: The list of immediate parents in the order they are inherited.</li>
+</ul>
+
+<h3>Understanding Merge in the MRO Algorithm</h3>
+
+<p>The <code>Merge</code> operation combines the MROs of the parent classes and the parent list while maintaining the order and respecting the precedence of classes.</p>
+
+<h4>Head Element vs. Tail</h4>
+
+<p>In the context of the merge operation:</p>
+
+<ul>
+    <li><strong>Head Element</strong>: The first element of a list (e.g., <code>C1</code> in <code>[C1, C2, C3]</code>).</li>
+    <li><strong>Tail</strong>: The rest of the list after the head (e.g., <code>[C2, C3]</code>).</li>
+</ul>
+
+<h4>How Merge Works</h4>
+
+<ol>
+    <li>Take the head elements of each MRO list.</li>
+    <li>Select the head that is not present in the tail of any other lists. This head is the next in the MRO.</li>
+    <li>Remove the selected head from all lists where it appears.</li>
+    <li>Repeat the process until all classes are merged.</li>
+</ol>
+
+<h3>Example: Calculating MRO Using C3 Algorithm</h3>
+
+<p>Consider the following class hierarchy:</p>
+
+<pre><code>class A:
+    pass
+
+class B:
+    pass
+
+class C:
+    pass
+
+class D(A, B):
+    pass
+
+class E(B, C):
+    pass
+
+class F(D, E, C):
+    pass
+</code></pre>
+
+<p>Let's compute the MRO of class <code>F</code>.</p>
+
+<h4>Step 1: List MROs of Parent Classes</h4>
+
+<pre><code>MRO(A) = [A, object]
+MRO(B) = [B, object]
+MRO(C) = [C, object]
+MRO(D) = [D, A, B, object]
+MRO(E) = [E, B, C, object]
+</code></pre>
+
+<h4>Step 2: Apply the MRO Formula</h4>
+
+<blockquote>MRO(F) = F + Merge(MRO(D), MRO(E), MRO(C), [D, E, C])</blockquote>
+
+<pre><code>MRO(F) = [F] + Merge([D, A, B, object], [E, B, C, object], [C, object], [D, E, C])
+</code></pre>
+
+<h4>Step 3: Perform Merge Operation</h4>
+
+<ol>
+    <li>Heads: D, E, C, D</li>
+    <li>Select D (not in any other tails), add to MRO(F).</li>
+    <li>Remove D from all lists.</li>
+    <li>Updated lists:
+        <ul>
+            <li>[A, B, object]</li>
+            <li>[E, B, C, object]</li>
+            <li>[C, object]</li>
+            <li>[E, C]</li>
+        </ul>
+    </li>
+    <li>Heads: A, E, C, E</li>
+    <li>Select A (not in any other tails), add to MRO(F).</li>
+    <li>Remove A from all lists.</li>
+    <li>Repeat the process until all classes are added.</li>
+</ol>
+
+<h4>Final MRO of Class F</h4>
+
+<pre><code>MRO(F) = [F, D, A, E, B, C, object]
+</code></pre>
+
+<p>This is consistent with what Python computes as the MRO of class <code>F</code>.</p>
+
+<h2>The <code>super()</code> Function</h2>
+
+<p>The <code>super()</code> function in Python returns a proxy object that allows you to refer to the parent class by <em>avoiding</em> explicit use of the parent class name. It is commonly used in method overriding to call methods of the superclass.</p>
+
+<h3>Need for <code>super()</code></h3>
+
+<p>When a child class overrides a method from the parent class, you might still want to call the parent class's version of the method. Using <code>super()</code> allows you to do this without hardcoding the parent class name, which is beneficial in multiple inheritance scenarios.</p>
+
+<h3>Example Without <code>super()</code></h3>
+
+<pre><code>class Parent:
+    def m1(self):
+        print('Parent Method')
+
+class Child(Parent):
+    def m1(self):
+        print('Child Method')
+        self.m1()  # This will cause infinite recursion
+
+c = Child()
+c.m1()
+</code></pre>
+
+<p>This code will result in a recursion error because <code>self.m1()</code> calls the overridden method in the child class, leading to infinite recursion.</p>
+
+<h3>Using <code>super()</code> to Resolve the Issue</h3>
+
+<pre><code>class Parent:
+    def m1(self):
+        print('Parent Method')
+
+class Child(Parent):
+    def m1(self):
+        super().m1()  # Calls the parent class method
+        print('Child Method')
+
+c = Child()
+c.m1()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Parent Method
+Child Method
+</code></pre>
+
+<h3>Calling Methods from a Specific Parent Class</h3>
+
+<p>If you need to call a method from a specific parent class in a multiple inheritance scenario, you can use the class name directly.</p>
+
+<pre><code>class A:
+    def m1(self):
+        print('Method from A')
+
+class B:
+    def m1(self):
+        print('Method from B')
+
+class C(A, B):
+    def m1(self):
+        A.m1(self)  # Calls method from class A
+        B.m1(self)  # Calls method from class B
+        print('Method from C')
+
+c = C()
+c.m1()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Method from A
+Method from B
+Method from C
+</code></pre>
+
+<h3>Limitations of <code>super()</code></h3>
+
+<p>There are some limitations when using <code>super()</code>:</p>
+
+<ul>
+    <li><strong>Cannot Access Parent Class Instance Variables Directly</strong>: You cannot use <code>super()</code> to access instance variables of the parent class.</li>
+    <li><strong>Only Methods and Class Variables</strong>: <code>super()</code> is primarily used to call methods and access class variables from the parent class.</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>class Parent:
+    a = 19  # Class variable
+
+    def __init__(self):
+        self.b = 999  # Instance variable
+
+class Child(Parent):
+    def m1(self):
+        print(super().a)   # Accesses class variable 'a' from Parent
+        print(super().b)   # AttributeError: 'super' object has no attribute 'b'
+
+c = Child()
+c.m1()
+</code></pre>
+
+<p>To access instance variables from the parent class, you should use <code>self</code>.</p>
+
+<h4>Corrected Example</h4>
+
+<pre><code>class Child(Parent):
+    def m1(self):
+        print(self.a)  # Accesses class variable 'a' from Parent
+        print(self.b)  # Accesses instance variable 'b' from Parent
+
+c = Child()
+c.m1()
+</code></pre>
+
+<h3>Using <code>super()</code> with Constructors and Methods</h3>
+
+<p>From a child class's constructor or instance methods, you can call the parent class's constructor and instance methods using <code>super()</code>. However, from class methods and static methods, you cannot directly access the parent class's constructor or instance methods.</p>
+
+<h4>Example: Calling Parent Constructor</h4>
+
+<pre><code>class Parent:
+    def __init__(self):
+        print('Parent Constructor')
+
+class Child(Parent):
+    def __init__(self):
+        super().__init__()  # Calls Parent's constructor
+        print('Child Constructor')
+
+c = Child()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Parent Constructor
+Child Constructor
+</code></pre>
+
+<h4>Example: Calling Parent Method from Child Instance Method</h4>
+
+<pre><code>class Parent:
+    def display(self):
+        print('Parent Method')
+
+class Child(Parent):
+    def display(self):
+        super().display()  # Calls Parent's method
+        print('Child Method')
+
+c = Child()
+c.display()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Parent Method
+Child Method
+</code></pre>
+
+<h3>Using <code>super()</code> in Class Methods and Static Methods</h3>
+
+<p>In class methods and static methods, you cannot use <code>super()</code> to access instance methods or constructors of the parent class because there is no instance to reference.</p>
+
+<h4>Example in Class Method</h4>
+
+<pre><code>class Parent:
+    @classmethod
+    def cm(cls):
+        print('Parent Class Method')
+
+class Child(Parent):
+    @classmethod
+    def cm(cls):
+        super(Child, cls).cm()  # Calls Parent's class method
+        print('Child Class Method')
+
+Child.cm()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Parent Class Method
+Child Class Method
+</code></pre>
+
+<h4>Example in Static Method</h4>
+
+<pre><code>class Parent:
+    @staticmethod
+    def sm():
+        print('Parent Static Method')
+
+class Child(Parent):
+    @staticmethod
+    def sm():
+        super(Child, Child).sm()  # Calls Parent's static method
+        print('Child Static Method')
+
+Child.sm()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Parent Static Method
+Child Static Method
+</code></pre>
+
+<p>Note that when using <code>super()</code> in class methods and static methods, you need to provide the class and the object or class as arguments.</p>
+
+<h2>Conclusion</h2>
+
+<p>Understanding the Method Resolution Order (MRO) and the use of the <code>super()</code> function is essential when working with inheritance in Python, especially multiple inheritance. The MRO determines the order in which classes are searched for methods and attributes, ensuring consistent behavior. The <code>super()</code> function provides a way to call methods from parent classes without hardcoding class names, making your code more maintainable and adaptable to changes in the class hierarchy.</p>
+
+<p>Key takeaways:</p>
+
+<ul>
+    <li>The MRO can be obtained using the <code>mro()</code> method and is determined using the C3 linearization algorithm.</li>
+    <li>The <code>super()</code> function is used to call methods from parent classes, especially in method overriding scenarios.</li>
+    <li>When using <code>super()</code>, be aware of its limitations, such as not being able to access parent class instance variables directly.</li>
+    <li>In class methods and static methods, you need to provide arguments to <code>super()</code> to access parent class methods.</li>
+</ul>
+
+<p>By mastering these advanced OOP concepts, you can write more robust, efficient, and maintainable Python code that leverages the full power of inheritance and polymorphism.</p>
+
+</body>
+</html>

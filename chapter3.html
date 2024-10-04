@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 3: Flow Control</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 3: Flow Control</h1>
+
+<h2>Introduction and Indentation</h2>
+
+<p>Flow control refers to the order in which individual statements, instructions, or function calls are executed or evaluated. In Python, flow control can be managed using conditional statements, loops, and other control structures.</p>
+
+<h3>Conditional Statements</h3>
+
+<p>Conditional statements allow you to execute certain code blocks based on a condition.</p>
+
+<h4><code>if</code> Statement</h4>
+
+<p>Syntax:</p>
+
+<pre><code>if condition:
+    statement(s)
+</code></pre>
+
+<p>If the condition evaluates to <code>True</code>, the indented statements are executed.</p>
+
+<h5>Example:</h5>
+
+<pre><code>name = input("Enter Name: ")
+if name == "durga":
+    print("Hello Durga, Good Morning")
+    print("How are you!!!")
+</code></pre>
+
+<p><strong>Note:</strong> Indentation is crucial in Python. Failing to indent properly will result in an <code>IndentationError</code>.</p>
+
+<h3>Iterative Statements (Loops)</h3>
+
+<p>Iterative statements allow you to execute a block of code repeatedly.</p>
+
+<h4><code>for</code> Loop</h4>
+
+<p>The <code>for</code> loop is used to iterate over a sequence (such as a list, tuple, string, or range).</p>
+
+<pre><code>for variable in sequence:
+    statement(s)
+</code></pre>
+
+<h5>Example:</h5>
+
+<pre><code>s = input('Enter any string: ')
+i = 0
+for x in s:
+    print("The character present at index {}: {}".format(i, x))
+    i += 1
+</code></pre>
+
+<h5>Printing a Message Multiple Times:</h5>
+
+<pre><code>for x in range(10):
+    print('Welcome to Python for loop')
+</code></pre>
+
+<h5>Displaying Odd Numbers from 1 to 20:</h5>
+
+<pre><code>for x in range(1, 21, 2):
+    print(x)
+</code></pre>
+
+<h5>Displaying Numbers from 10 to 1 in Descending Order:</h5>
+
+<pre><code>for x in range(10, 0, -1):
+    print(x)
+</code></pre>
+
+<h4>Calculating the Sum of a List:</h4>
+
+<pre><code>lst = [10, 20, 30]
+print('The sum:', sum(lst))
+</code></pre>
+
+<h4><code>while</code> Loop</h4>
+
+<p>The <code>while</code> loop is used when the number of iterations is not known in advance and depends on some condition.</p>
+
+<pre><code>while condition:
+    statement(s)
+</code></pre>
+
+<h5>Example:</h5>
+
+<pre><code>i = 1
+while i <= 10:
+    print('Hello, welcome to while loop')
+    i += 1
+</code></pre>
+
+<h5>Waiting for Specific User Input:</h5>
+
+<pre><code>name = ''
+while name != 'sunny':
+    name = input('Enter your favourite actress: ')
+print('Thanks for confirmation')
+</code></pre>
+
+<h5>Infinite Loop:</h5>
+
+<pre><code>i = 1
+while True:
+    print('Hello', i)
+    i += 1
+    # Use a break condition to exit the loop if needed
+</code></pre>
+
+<h3>Nested Loops</h3>
+
+<p>A nested loop is a loop inside another loop.</p>
+
+<h5>Example:</h5>
+
+<pre><code>for i in range(3):  # 0, 1, 2
+    for j in range(2):  # 0, 1
+        print('Hello')
+</code></pre>
+
+<p>This will print 'Hello' 6 times.</p>
+
+<h2>Transfer Statements</h2>
+
+<p>Transfer statements alter the flow of execution in a loop.</p>
+
+<h3><code>break</code> Statement</h3>
+
+<p>The <code>break</code> statement is used to exit a loop prematurely when a certain condition is met.</p>
+
+<h5>Example:</h5>
+
+<pre><code>for i in range(10):
+    if i == 7:
+        print('Processing is enough')
+        break
+    print(i)
+</code></pre>
+
+<h5>Example with a Shopping Cart:</h5>
+
+<pre><code>cart = [10, 20, 30, 600, 70, 80]
+for item in cart:
+    if item > 500:
+        print("Please take insurance for item:", item)
+        break
+    print('Processing item:', item)
+</code></pre>
+
+<h3><code>continue</code> Statement</h3>
+
+<p>The <code>continue</code> statement skips the current iteration and moves to the next iteration of the loop.</p>
+
+<h5>Example:</h5>
+
+<pre><code>for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i)  # Prints odd numbers between 0 and 9
+</code></pre>
+
+<h5>Example with a Shopping Cart:</h5>
+
+<pre><code>cart = [10, 20, 30, 600, 70, 80]
+for item in cart:
+    if item > 500:
+        print("Insurance is required, skipping item:", item)
+        continue
+    print('Processing item:', item)
+</code></pre>
+
+<h3>Loop with <code>else</code> Block</h3>
+
+<p>In Python, a loop can have an <code>else</code> clause that executes after the loop completes normally (i.e., without encountering a <code>break</code> statement).</p>
+
+<h5>Example:</h5>
+
+<pre><code>cart = [10, 20, 30, 40, 50]
+for item in cart:
+    if item > 500:
+        print('We cannot process this order; insurance is required.')
+        break
+    print('Processing item:', item)
+else:
+    print('Congratulations, all items processed successfully!')
+</code></pre>
+
+<h2>Special Statements</h2>
+
+<h3><code>pass</code> Statement</h3>
+
+<p>The <code>pass</code> statement is a null operation; nothing happens when it executes. It's used when a statement is syntactically required but you don't want any command or code to execute.</p>
+
+<h5>Example:</h5>
+
+<pre><code>def some_function():
+    pass  # TODO: implement this function later
+</code></pre>
+
+<h3><code>del</code> Statement</h3>
+
+<p>The <code>del</code> statement is used to delete references to objects.</p>
+
+<h5>Example:</h5>
+
+<pre><code>x = 10
+del x
+# print(x)  # This would raise a NameError
+</code></pre>
+
+<p>Deleting a variable removes the reference to the object in memory. If other references exist, the object remains in memory.</p>
+
+<h5>Example with Multiple References:</h5>
+
+<pre><code>s1 = 'durga'
+s2 = s1
+s3 = s2
+
+del s1
+print(s2)  # Output: 'durga'
+print(s3)  # Output: 'durga'
+</code></pre>
+
+<p>In this case, the string object 'durga' is not deleted because <code>s2</code> and <code>s3</code> still reference it.</p>
+
+<h3><code>del</code> vs. Immutable Objects</h3>
+
+<p>You cannot delete elements of immutable objects like strings.</p>
+
+<pre><code>s = 'durga'
+# del s[0]  # This would raise a TypeError
+</code></pre>
+
+<h3><code>del</code> vs. <code>None</code></h3>
+
+<p>Assigning <code>None</code> to a variable removes the reference to the original object but keeps the variable defined.</p>
+
+<pre><code>x = 10
+x = None
+print(x)  # Output: None
+</code></pre>
+
+<h2>Prime Number Programs</h2>
+
+<h3>Check if a Number is Prime</h3>
+
+<p>A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.</p>
+
+<h5>Program:</h5>
+
+<pre><code>n = int(input('Enter the number: '))
+if n &lt;= 1:
+    print('It is not a prime number')
+else:
+    is_prime = True
+    for i in range(2, n // 2 + 1):
+        if n % i == 0:
+            is_prime = False
+            break
+    if is_prime:
+        print('It is a prime number')
+    else:
+        print('It is not a prime number')
+</code></pre>
+
+<h3>Generate Prime Numbers up to a Given Number</h3>
+
+<h5>Program:</h5>
+
+<pre><code>n = int(input('Enter the value of n: '))
+n1 = 2
+while n1 &lt;= n:
+    is_prime = True
+    for i in range(2, n1 // 2 + 1):
+        if n1 % i == 0:
+            is_prime = False
+            break
+    if is_prime:
+        print(n1)
+    n1 += 1
+</code></pre>
+
+<h3>Generate First <code>n</code> Prime Numbers</h3>
+
+<h5>Program:</h5>
+
+<pre><code>n = int(input('Enter the number of prime numbers to generate: '))
+count = 0
+num = 2
+while True:
+    is_prime = True
+    for i in range(2, num // 2 + 1):
+        if num % i == 0:
+            is_prime = False
+            break
+    if is_prime:
+        print(num)
+        count += 1
+    if count == n:
+        break
+    num += 1
+</code></pre>
+
+</body>
+</html>

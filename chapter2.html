@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 2: Operators and Expressions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 2: Operators and Expressions</h1>
+
+<h2>Arithmetic Operators</h2>
+
+<p>Python supports the following arithmetic operators:</p>
+
+<ul>
+    <li><strong>Addition</strong>: <code>+</code></li>
+    <li><strong>Subtraction</strong>: <code>-</code></li>
+    <li><strong>Multiplication</strong>: <code>*</code></li>
+    <li><strong>Division</strong>: <code>/</code></li>
+    <li><strong>Modulus (Remainder)</strong>: <code>%</code></li>
+</ul>
+
+<p>Example:</p>
+
+<pre><code>a = 100
+b = 20
+print(a + b)   # Output: 120
+print(a * b)   # Output: 2000
+print(a - b)   # Output: 80
+print(a % b)   # Output: 0  # Remainder
+</code></pre>
+
+<h3>Division and Floor Division Operators</h3>
+
+<p>The division operator <code>/</code> always returns a floating-point value. The floor division operator <code>//</code> returns the largest integer less than or equal to the division result.</p>
+
+<pre><code>a = 100
+b = 20
+print(a / b)       # Output: 5.0 (Division always returns a float)
+print(10 // 2)     # Output: 5   (Floor division returns an int if both operands are int)
+print(10.0 // 2)   # Output: 5.0 (Floor division returns a float if one operand is float)
+print(10 / 3)      # Output: 3.3333333333333335
+print(10.0 / 3)    # Output: 3.3333333333333335
+print(10 // 3)     # Output: 3
+print(10.0 // 3)   # Output: 3.0
+</code></pre>
+
+<p>Concatenating strings and numbers requires explicit conversion:</p>
+
+<pre><code>print('roman' + str(10))  # Output: 'roman10'
+</code></pre>
+
+<h2>Relational Operators</h2>
+
+<p>Relational operators compare values and return a Boolean result (<code>True</code> or <code>False</code>):</p>
+
+<ul>
+    <li><code>==</code>: Equal to</li>
+    <li><code>!=</code>: Not equal to</li>
+    <li><code>&lt;</code>: Less than</li>
+    <li><code>&gt;</code>: Greater than</li>
+    <li><code>&lt;=</code>: Less than or equal to</li>
+    <li><code>&gt;=</code>: Greater than or equal to</li>
+</ul>
+
+<p>Examples with integers:</p>
+
+<pre><code>a = 10
+b = 20
+print(a &gt; b)   # Output: False
+print(a &lt; b)   # Output: True
+print(a &lt;= b)  # Output: True
+print(a &gt;= b)  # Output: False
+</code></pre>
+
+<p>Examples with strings (based on Unicode values):</p>
+
+<pre><code>s1 = 'roman'
+s2 = 'durga'
+print(s1 &gt; s2)  # Output: True
+
+s3 = 'Roman'
+s4 = 'roman'
+print(s3 &gt; s4)  # Output: False
+</code></pre>
+
+<p>Examples with Booleans:</p>
+
+<pre><code>print(True &gt; False)  # Output: True
+</code></pre>
+
+<p>Chained comparisons:</p>
+
+<pre><code>print(10 &lt; 20 &lt; 30)  # Output: True
+print(10 &lt; 20 &lt; 30 &gt; 40)  # Output: False
+</code></pre>
+
+<h2>Equality Operators</h2>
+
+<p>Equality operators check if values are equal or not:</p>
+
+<ul>
+    <li><code>==</code>: Equal to</li>
+    <li><code>!=</code>: Not equal to</li>
+</ul>
+
+<p>Examples:</p>
+
+<pre><code>print(10 == 20)       # Output: False
+print(10 != 20)       # Output: True
+print(10 == 10.0)     # Output: True
+print(1 == True)      # Output: True
+</code></pre>
+
+<h3>Difference Between <code>is</code> and <code>==</code></h3>
+
+<p>- <code>is</code>: Checks if two variables point to the same object (identity comparison).</p>
+<p>- <code>==</code>: Checks if the values of two objects are equal (value comparison).</p>
+
+<p>Example:</p>
+
+<pre><code>l1 = [10, 20, 30, 40]
+l2 = [10, 20, 30, 40]
+print(l1 is l2)   # Output: False (different objects)
+print(l1 == l2)   # Output: True  (same content)
+
+l3 = l1
+print(l1 is l3)   # Output: True  (same object)
+</code></pre>
+
+<h2>Logical Operators</h2>
+
+<p>Logical operators are used to combine conditional statements:</p>
+
+<ul>
+    <li><code>and</code>: Returns <code>True</code> if both operands are <code>True</code></li>
+    <li><code>or</code>: Returns <code>True</code> if at least one operand is <code>True</code></li>
+    <li><code>not</code>: Returns the opposite Boolean value</li>
+</ul>
+
+<h3>Examples with Booleans:</h3>
+
+<pre><code>print(not True)       # Output: False
+print(True and False)  # Output: False
+print(True or False)   # Output: True
+</code></pre>
+
+<h3>User Authentication Example:</h3>
+
+<pre><code>username = input('Enter Username: ')
+password = input('Enter Password: ')
+
+if username == 'durga' and password == 'sunny':
+    print('Valid user')
+else:
+    print('Invalid user')
+</code></pre>
+
+<h3>Logical Operators with Non-Boolean Types:</h3>
+
+<p>In Python, logical operators can be used with non-boolean types, where:</p>
+
+<ul>
+    <li><strong>Zero</strong>, <strong>empty strings</strong>, and <strong>empty collections</strong> are considered <code>False</code>.</li>
+    <li><strong>Non-zero numbers</strong> and <strong>non-empty objects</strong> are considered <code>True</code>.</li>
+</ul>
+
+<h4><code>and</code> Operator:</h4>
+
+<p>The result is the first operand if it is <code>False</code>; otherwise, it is the second operand.</p>
+
+<pre><code>print(0 and 10)            # Output: 0
+print(20 and 10)           # Output: 10
+print('roman' and 'son')   # Output: 'son'
+print('' and 'roman')      # Output: ''
+</code></pre>
+
+<h4><code>or</code> Operator:</h4>
+
+<p>The result is the first operand if it is <code>True</code>; otherwise, it is the second operand.</p>
+
+<pre><code>print(10 or 20)   # Output: 10
+print(0 or 20)    # Output: 20
+</code></pre>
+
+<h4><code>not</code> Operator:</h4>
+
+<p>The result is always a Boolean value.</p>
+
+<pre><code>print(not 'roman')  # Output: False
+print(not '')       # Output: True
+print(not 0)        # Output: True
+print(not 10)       # Output: False
+</code></pre>
+
+<h2>Bitwise Operators</h2>
+
+<p>Bitwise operators perform operations on binary representations of integers and Booleans:</p>
+
+<ul>
+    <li><code>&amp;</code>: Bitwise AND</li>
+    <li><code>|</code>: Bitwise OR</li>
+    <li><code>^</code>: Bitwise XOR</li>
+    <li><code>~</code>: Bitwise NOT (complement)</li>
+    <li><code>&lt;&lt;</code>: Left shift</li>
+    <li><code>&gt;&gt;</code>: Right shift</li>
+</ul>
+
+<h3>Examples:</h3>
+
+<pre><code># Bitwise AND
+print(5 &amp; 4)  # Output: 4
+
+# Calculation:
+# 5 in binary: 101
+# 4 in binary: 100
+# Result:      100 (which is 4)
+</code></pre>
+
+<h3>Bitwise Complement (~)</h3>
+
+<p>The bitwise complement of an integer <code>n</code> is equal to <code>-(n+1)</code>.</p>
+
+<pre><code>print(~4)  # Output: -5
+# Explanation:
+# ~4 = -(4 + 1) = -5
+</code></pre>
+
+<h3>Shift Operators:</h3>
+
+<p><strong>Left Shift (<code>&lt;&lt;</code>)</strong>: Shifts bits to the left, filling vacant bits with zeros.</p>
+
+<pre><code>print(10 &lt;&lt; 2)  # Output: 40
+# 10 in binary: 0000...1010
+# After shifting: 0010...1000 (which is 40)
+</code></pre>
+
+<p><strong>Right Shift (<code>&gt;&gt;</code>)</strong>: Shifts bits to the right, filling vacant bits with zeros.</p>
+
+<pre><code>print(10 &gt;&gt; 2)  # Output: 2
+# 10 in binary: 0000...1010
+# After shifting: 0000...0010 (which is 2)
+</code></pre>
+
+<h3>Bitwise Operators with Booleans:</h3>
+
+<ul>
+    <li><code>True &amp; False</code>: <code>False</code></li>
+    <li><code>True | False</code>: <code>True</code></li>
+    <li><code>True ^ False</code>: <code>True</code></li>
+    <li><code>~True</code>: <code>-2</code> (since <code>~True</code> equals <code>-(1 + 1)</code>)</li>
+</ul>
+
+<h2>Assignment Operators</h2>
+
+<p>Assignment operators are used to assign values to variables:</p>
+
+<ul>
+    <li><code>=</code>: Simple assignment</li>
+    <li>Compound assignment operators combine an operation with assignment:</li>
+</ul>
+
+<p>Examples of compound assignment operators:</p>
+
+<ul>
+    <li><code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>//=</code>, <code>**=</code>, <code>&amp;=</code>, <code>|=</code>, <code>^=</code>, <code>&gt;&gt;=</code>, <code>&lt;&lt;=</code></li>
+</ul>
+
+<h3>Examples:</h3>
+
+<pre><code>x = 10
+x += 20
+print(x)  # Output: 30
+
+x = 10
+x &amp;= 5
+print(x)  # Output: 0
+</code></pre>
+
+<p><strong>Note:</strong> Python does not support increment (<code>x++</code>) or decrement (<code>x--</code>) operators.</p>
+
+<h2>Ternary Operator</h2>
+
+<p>A ternary operator in Python allows for conditional assignment or return of a value. The syntax is:</p>
+
+<pre><code>variable = value_if_true if condition else value_if_false
+</code></pre>
+
+<h3>Example:</h3>
+
+<pre><code>a, b = 10, 20
+x = 30 if a &lt; b else 40
+print(x)  # Output: 30
+</code></pre>
+
+<h3>Nesting Ternary Operators:</h3>
+
+<pre><code>a = int(input("Enter First Number: "))
+b = int(input("Enter Second Number: "))
+c = int(input("Enter Third Number: "))
+
+minimum = a if a &lt; b and a &lt; c else b if b &lt; c else c
+print("Minimum Value:", minimum)
+</code></pre>
+
+<h3>Another Example:</h3>
+
+<pre><code>a = int(input("Enter First Number: "))
+b = int(input("Enter Second Number: "))
+
+print("Both numbers are equal" if a == b else "First Number is less than Second Number" if a &lt; b else "First Number is greater than Second Number")
+</code></pre>
+
+<h2>Special Operators</h2>
+
+<h3>Identity Operators</h3>
+
+<p>Identity operators compare the memory addresses of two objects:</p>
+
+<ul>
+    <li><code>is</code>: Returns <code>True</code> if both variables point to the same object.</li>
+    <li><code>is not</code>: Returns <code>True</code> if they do not point to the same object.</li>
+</ul>
+
+<h4>Examples:</h4>
+
+<pre><code>a = 10
+b = 10
+print(a is b)  # Output: True
+
+x = True
+y = True
+print(x is y)  # Output: True
+
+a = "durga"
+b = "durga"
+print(a is b)  # Output: True
+
+list1 = ["one", "two", "three"]
+list2 = ["one", "two", "three"]
+print(list1 is list2)     # Output: False (different objects)
+print(list1 == list2)     # Output: True  (same content)
+</code></pre>
+
+<h3>Membership Operators</h3>
+
+<p>Membership operators check if a value is a member of a sequence (string, list, tuple, set, dictionary):</p>
+
+<ul>
+    <li><code>in</code>: Returns <code>True</code> if the value is present.</li>
+    <li><code>not in</code>: Returns <code>True</code> if the value is not present.</li>
+</ul>
+
+<h4>Examples:</h4>
+
+<pre><code>x = "Hello, learning Python is very easy!"
+print('h' in x)          # Output: True
+print('d' in x)          # Output: False
+print('d' not in x)      # Output: True
+print('Python' in x)     # Output: True
+
+list1 = ["sunny", "bunny", "chinny", "pinny"]
+print("sunny" in list1)   # Output: True
+print("tunny" in list1)   # Output: False
+print("tunny" not in list1)  # Output: True
+</code></pre>
+
+<h2>Operator Precedence</h2>
+
+<p>Operator precedence determines the order in which operations are performed. Parentheses <code>()</code> have the highest precedence, followed by exponentiation <code>**</code>, and so on.</p>
+
+<p>Refer to the Python documentation for the complete operator precedence table.</p>
+
+<h2>Mathematical Functions (math Module)</h2>
+
+<p>The <code>math</code> module provides access to mathematical functions:</p>
+
+<h3>Importing the math Module:</h3>
+
+<pre><code>import math
+</code></pre>
+
+<h3>Common Functions:</h3>
+
+<ul>
+    <li><code>ceil(x)</code>: Returns the smallest integer greater than or equal to <code>x</code>.</li>
+    <li><code>floor(x)</code>: Returns the largest integer less than or equal to <code>x</code>.</li>
+    <li><code>pow(x, y)</code>: Returns <code>x</code> raised to the power <code>y</code>.</li>
+    <li><code>factorial(x)</code>: Returns the factorial of <code>x</code>.</li>
+    <li><code>trunc(x)</code>: Truncates the decimal part of <code>x</code>.</li>
+    <li><code>gcd(x, y)</code>: Returns the greatest common divisor of <code>x</code> and <code>y</code>.</li>
+    <li><code>sin(x)</code>, <code>cos(x)</code>, <code>tan(x)</code>: Trigonometric functions.</li>
+</ul>
+
+<h3>Constants:</h3>
+
+<ul>
+    <li><code>pi</code>: 3.141592653589793</li>
+    <li><code>e</code>: 2.718281828459045</li>
+    <li><code>inf</code>: Infinity</li>
+    <li><code>nan</code>: Not a number</li>
+</ul>
+
+<h3>Example: Calculating the Area of a Circle</h3>
+
+<pre><code>from math import pi
+
+r = 16
+area = pi * r ** 2
+print("Area of the circle is:", area)
+# Output: Area of the circle is: 804.247719318987
+</code></pre>
+
+<h2>Input and Output Statements</h2>
+
+<h3>Input Functions</h3>
+
+<p>In Python 3.x, <code>input()</code> reads input from the user and returns it as a string.</p>
+
+<pre><code>name = input("Enter your name: ")
+print("Hello,", name)
+</code></pre>
+
+<h3>Reading Multiple Values</h3>
+
+<p>Using list comprehension and <code>split()</code>:</p>
+
+<pre><code>a, b = [int(x) for x in input("Enter two numbers: ").split()]
+print("Product is:", a * b)
+</code></pre>
+
+<h3>Using <code>eval()</code> Function</h3>
+
+<p>The <code>eval()</code> function evaluates the input string as a Python expression.</p>
+
+<pre><code>x = eval(input("Enter something: "))
+print(type(x))
+</code></pre>
+
+<h2>Command Line Arguments</h2>
+
+<p>Command line arguments are values passed to a script when it is executed. They are available via the <code>sys.argv</code> list.</p>
+
+<h3>Example:</h3>
+
+<pre><code>import sys
+
+print("Number of arguments:", len(sys.argv))
+print("Argument List:", sys.argv)
+</code></pre>
+
+<h3>Summing Command Line Arguments:</h3>
+
+<pre><code>import sys
+
+args = sys.argv[1:]
+total = 0
+for x in args:
+    total += int(x)
+print("The sum:", total)
+</code></pre>
+
+<h2>Output Statements</h2>
+
+<p>The <code>print()</code> function outputs data to the console.</p>
+
+<h3>Using <code>sep</code> Parameter:</h3>
+
+<pre><code>print('Python', 'is', 'fun', sep=' - ')
+# Output: Python - is - fun
+</code></pre>
+
+<h3>Using <code>end</code> Parameter:</h3>
+
+<pre><code>print("Hello", end=' ')
+print("World")
+# Output: Hello World
+</code></pre>
+
+<h3>Formatted Strings (Old Style)</h3>
+
+<p>Using format specifiers:</p>
+
+<ul>
+    <li><code>%i</code> or <code>%d</code>: Integer</li>
+    <li><code>%f</code>: Float</li>
+    <li><code>%s</code>: String</li>
+</ul>
+
+<pre><code>a = 10
+b = 20
+c = 30
+print("a value is %d" % a)
+print("b value is %d and c value is %d" % (b, c))
+# Output:
+# a value is 10
+# b value is 20 and c value is 30
+</code></pre>
+
+<h3>Formatted Strings (New Style)</h3>
+
+<p>Using the <code>format()</code> method:</p>
+
+<pre><code>name = "Durga"
+salary = 10000
+gf = "Sunny"
+
+print("Hello {0}, your salary is {1} and your friend {2} is waiting.".format(name, salary, gf))
+print("Hello {x}, your salary is {y} and your friend {z} is waiting.".format(x=name, y=salary, z=gf))
+# Output:
+# Hello Durga, your salary is 10000 and your friend Sunny is waiting.
+# Hello Durga, your salary is 10000 and your friend Sunny is waiting.
+</code></pre>
+
+</body>
+</html>

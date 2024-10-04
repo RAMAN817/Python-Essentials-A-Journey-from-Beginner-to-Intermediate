@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 15: Object-Oriented Programming in Python - Part Four</title>
+ <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 15: Object-Oriented Programming in Python - Part Four</h1>
+
+<h2>Introduction</h2>
+
+<p>In this chapter, we explore the concepts of garbage collection and destructors in Python. Unlike languages like C++, where the programmer is responsible for both creating and destroying objects, Python provides automatic memory management through garbage collection. We will discuss how garbage collection works in Python, how to enable or disable it, and how to use destructors to perform cleanup activities before an object is destroyed.</p>
+
+<h2>Garbage Collection in Python</h2>
+
+<p>In languages like C++, the programmer must manually manage memory allocation and deallocation. This can lead to issues like memory leaks if objects are not properly destroyed. Python, like Java, provides automatic garbage collection, which helps in managing memory by destroying objects that are no longer in use.</p>
+
+<p>The garbage collector runs in the background and frees up memory by destroying objects that have no references pointing to them. This automatic memory management reduces the chances of memory-related issues in Python programs.</p>
+
+<h3>When Does an Object Become Eligible for Garbage Collection?</h3>
+
+<p>An object becomes eligible for garbage collection when there are no more references pointing to it. In other words, if an object is not accessible through any variable or data structure, the garbage collector considers it as garbage and reclaims the memory.</p>
+
+<h2>Enabling and Disabling Garbage Collection</h2>
+
+<p>Garbage collection in Python is enabled by default. However, in rare cases, you might want to disable it, especially when dealing with performance-critical applications where you have a tight control over object creation and destruction.</p>
+
+<h3>Using the <code>gc</code> Module</h3>
+
+<p>Python provides the <code>gc</code> module to interact with the garbage collector. You can check whether the garbage collector is enabled, disable it, or enable it as needed.</p>
+
+<h3>Example: Checking and Modifying Garbage Collector Status</h3>
+
+<pre><code>import gc
+
+# Check if garbage collection is enabled
+print('Garbage Collection Enabled:', gc.isenabled())  # Output: True
+
+# Disable garbage collection
+gc.disable()
+print('Garbage Collection Enabled after disabling:', gc.isenabled())  # Output: False
+
+# Enable garbage collection again
+gc.enable()
+print('Garbage Collection Enabled after enabling:', gc.isenabled())  # Output: True
+</code></pre>
+
+<h3>Why Disable Garbage Collection?</h3>
+
+<p>You might consider disabling the garbage collector in scenarios where:</p>
+
+<ul>
+    <li>You have a program that creates a minimal number of objects and does not have memory constraints.</li>
+    <li>You want to optimize performance by avoiding the overhead of garbage collection.</li>
+</ul>
+
+<p>However, disabling garbage collection is generally not recommended unless you have a specific reason and are confident about managing memory manually.</p>
+
+<h2>Destructors in Python</h2>
+
+<p>A destructor is a special method that is called when an object is about to be destroyed by the garbage collector. In Python, the destructor method is defined using the <code>__del__()</code> method.</p>
+
+<h3>The <code>__del__()</code> Method</h3>
+
+<p>The <code>__del__()</code> method is called just before the object is destroyed. It can be used to perform cleanup activities, such as closing network connections, releasing resources, or any other necessary finalization tasks.</p>
+
+<h3>Example: Using a Destructor</h3>
+
+<pre><code>class Test:
+    def __init__(self):
+        print('Object Initialization Activities')
+
+    def __del__(self):
+        print('Fulfilling last wish and performing cleanup activities')
+
+# Creating objects
+t1 = Test()
+t2 = Test()
+
+print('End of application')
+</code></pre>
+
+<h4>Possible Output</h4>
+
+<pre><code>Object Initialization Activities
+Object Initialization Activities
+End of application
+Fulfilling last wish and performing cleanup activities
+Fulfilling last wish and performing cleanup activities
+</code></pre>
+
+<p>Note that the order in which destructors are called may vary depending on when the garbage collector decides to destroy the objects.</p>
+
+<h3>When Are Destructors Called?</h3>
+
+<p>Destructors are called when an object is about to be destroyed by the garbage collector. This happens when the object has no more references pointing to it. In the example above, when the program reaches the end, the objects <code>t1</code> and <code>t2</code> have no references, and thus, their destructors are called.</p>
+
+<h3>Explicitly Deleting Objects</h3>
+
+<p>You can explicitly delete an object or a reference to an object using the <code>del</code> statement. This reduces the reference count of the object by one. If the reference count reaches zero, the object becomes eligible for garbage collection.</p>
+
+<pre><code>class Test:
+    def __init__(self):
+        print('Object Initialization')
+
+    def __del__(self):
+        print('Destructor called, object deleted.')
+
+t = Test()
+del t  # Explicitly deletes the reference to the object
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Object Initialization
+Destructor called, object deleted.
+</code></pre>
+
+<h2>Difference Between <code>del t1</code> and <code>t1 = None</code></h2>
+
+<p>Both <code>del t1</code> and <code>t1 = None</code> can make an object eligible for garbage collection, but they behave differently.</p>
+
+<h3><code>del t1</code></h3>
+
+<ul>
+    <li>Deletes the reference variable <code>t1</code>.</li>
+    <li>If there are no other references to the object, it becomes eligible for garbage collection.</li>
+    <li>You cannot use <code>t1</code> again unless you reassign it.</li>
+</ul>
+
+<pre><code>t1 = Test()
+del t1
+# t1 no longer exists
+# print(t1)  # This would raise a NameError
+</code></pre>
+
+<h3><code>t1 = None</code></h3>
+
+<ul>
+    <li>Assigns <code>None</code> to the reference variable <code>t1</code>.</li>
+    <li>The original object may become eligible for garbage collection if there are no other references to it.</li>
+    <li>You can reuse <code>t1</code> to reference a new object later.</li>
+</ul>
+
+<pre><code>t1 = Test()
+t1 = None
+# t1 now references None
+# You can reassign t1
+t1 = Test()
+</code></pre>
+
+<h3>Which One to Use?</h3>
+
+<p>If you plan to reuse the reference variable, assigning <code>None</code> is appropriate. If you want to remove the variable completely, use <code>del</code>.</p>
+
+<h2>Finding the Number of References to an Object</h2>
+
+<p>You can determine the number of references pointing to an object using the <code>sys.getrefcount()</code> function from the <code>sys</code> module.</p>
+
+<h3>Example</h3>
+
+<pre><code>import sys
+
+class Test:
+    pass
+
+t1 = Test()
+print('Reference count:', sys.getrefcount(t1))
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Reference count: 2
+</code></pre>
+
+<p>The output is 2 because:</p>
+
+<ul>
+    <li>One reference is from the variable <code>t1</code>.</li>
+    <li>The other reference is from the argument passed to <code>sys.getrefcount()</code> itself.</li>
+</ul>
+
+<h2>Difference Between Constructors and Destructors</h2>
+
+<table>
+    <tr>
+        <th>Constructors</th>
+        <th>Destructors</th>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Special method named <code>__init__()</code>.</li>
+                <li>Used for initializing objects.</li>
+                <li>Called immediately after an object is created.</li>
+                <li>Cannot explicitly return a value.</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Special method named <code>__del__()</code>.</li>
+                <li>Used for cleanup activities before an object is destroyed.</li>
+                <li>Called when an object is about to be destroyed (not deterministic).</li>
+                <li>Cannot control when exactly it is called.</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<h2>Conclusion</h2>
+
+<p>Understanding garbage collection and destructors in Python is important for efficient memory management, especially in applications that create many objects or manage resources like files and network connections.</p>
+
+<p>Key points to remember:</p>
+
+<ul>
+    <li>Python's garbage collector automatically manages memory by destroying objects that are no longer in use.</li>
+    <li>You can enable or disable garbage collection using the <code>gc</code> module, though it's generally best to leave it enabled.</li>
+    <li>The <code>__del__()</code> method (destructor) allows you to define cleanup behavior just before an object is destroyed.</li>
+    <li>Using <code>del</code> removes a reference to an object, potentially making it eligible for garbage collection.</li>
+    <li>Assigning <code>None</code> to a reference variable also reduces the reference count of an object.</li>
+    <li>You can check the reference count of an object using <code>sys.getrefcount()</code>.</li>
+</ul>
+
+<p>By properly managing object lifecycles and understanding how Python handles memory, you can write more robust and efficient programs.</p>
+
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 8: Dictionaries</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 8: Dictionaries</h1>
+
+<h2>Introduction to Dictionaries</h2>
+
+<p>A <strong>dictionary</strong> in Python is a collection of key-value pairs. It's an unordered, mutable, and indexed collection. Dictionaries are also known in other programming languages as:</p>
+
+<ul>
+    <li><strong>C++/Java</strong>: Map</li>
+    <li><strong>Perl/Ruby</strong>: Hash</li>
+</ul>
+
+<p>Examples of real-world dictionaries include:</p>
+
+<ul>
+    <li>Phone directory: mapping mobile numbers to names.</li>
+    <li>DNS records: mapping IP addresses to domain names.</li>
+</ul>
+
+<h2>Characteristics of Dictionaries</h2>
+
+<ol>
+    <li><strong>Key-Value Pairs</strong>: Each element is a pair consisting of a key and a value.</li>
+    <li><strong>Duplicate Keys Not Allowed</strong>: Keys must be unique within a dictionary, but values can be duplicated.</li>
+    <li><strong>Insertion Order Not Preserved</strong>: Prior to Python 3.7, dictionaries did not preserve insertion order. From Python 3.7 onwards, insertion order is preserved as an implementation detail. However, it's best not to rely on this behavior in code meant to be portable across Python versions.</li>
+    <li><strong>No Indexing or Slicing</strong>: Dictionaries are unordered (up to Python 3.6), so indexing and slicing operations are not applicable.</li>
+    <li><strong>Heterogeneous Objects</strong>: Both keys and values can be of any data type.</li>
+    <li><strong>Mutable and Dynamic</strong>: Dictionaries can grow and shrink as needed. They are mutable, so you can change their content after creation.</li>
+    <li><strong>Dictionary Syntax</strong>: Defined using curly braces <code>{}</code> with key-value pairs separated by colons <code>:</code>.</li>
+</ol>
+
+<h2>Creating Dictionary Objects</h2>
+
+<h3>1. Empty Dictionary</h3>
+
+<pre><code>d = {}
+# or
+d = dict()
+</code></pre>
+
+<h3>2. With Known Data</h3>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+</code></pre>
+
+<h3>3. Using the <code>dict()</code> Function</h3>
+
+<p>You can create a dictionary from a sequence of key-value pairs.</p>
+
+<pre><code>l = [(100, 'A'), (200, 'B'), (300, 'C')]  # List of tuples
+d = dict(l)
+print(d)  # Output: {100: 'A', 200: 'B', 300: 'C'}
+</code></pre>
+
+<p><strong>Note:</strong> The sequence should contain elements with exactly two values (key and value). Possible combinations include:</p>
+
+<ul>
+    <li>List of tuples</li>
+    <li>Tuple of tuples</li>
+    <li>List of lists</li>
+    <li>Tuple of lists</li>
+    <li>Set of tuples</li>
+</ul>
+
+<h3>4. Using Dynamic Input</h3>
+
+<pre><code>d = eval(input('Enter the dictionary: '))
+</code></pre>
+
+<h2>Accessing Data from a Dictionary</h2>
+
+<p>To retrieve the value associated with a key:</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+print(d[100])  # Output: 'Alice'
+# print(d[400])  # Raises KeyError if the key is not present
+</code></pre>
+
+<p>To avoid a <code>KeyError</code>, you can check if the key exists using the <code>in</code> operator:</p>
+
+<pre><code>key = int(input('Enter the key to find the value: '))
+if key in d:
+    print('The corresponding value of the key is', d[key])
+else:
+    print('The specified key is not available')
+</code></pre>
+
+<h2>Adding or Updating Data in a Dictionary</h2>
+
+<p>To add a new key-value pair or update an existing key:</p>
+
+<pre><code>d[key] = value
+</code></pre>
+
+<p>Example:</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob'}
+d[300] = 'Charlie'  # Adding a new key-value pair
+print(d)  # Output: {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+
+d[200] = 'Bobby'    # Updating an existing key
+print(d)  # Output: {100: 'Alice', 200: 'Bobby', 300: 'Charlie'}
+</code></pre>
+
+<h2>Deleting Data from a Dictionary</h2>
+
+<p>To delete a key-value pair:</p>
+
+<pre><code>del d[key]
+</code></pre>
+
+<p>Example:</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+del d[200]
+print(d)  # Output: {100: 'Alice', 300: 'Charlie'}
+</code></pre>
+
+<p>Deleting multiple keys:</p>
+
+<pre><code>del d[100], d[300]
+print(d)  # Output: {}
+</code></pre>
+
+<p><strong>Note:</strong> Attempting to delete a key that doesn't exist will raise a <code>KeyError</code>.</p>
+
+<h2>Example: Storing Student Names and Marks</h2>
+
+<pre><code>n = int(input('Enter number of students: '))
+d = {}
+for i in range(n):
+    name = input('Enter the name of the student: ')
+    marks = int(input('Enter marks of the student: '))
+    d[name] = marks
+
+print('*' * 30)
+print('NAME', '\t\t', 'MARKS')
+print('*' * 30)
+for name in d:
+    print(name, '\t\t', d[name])
+</code></pre>
+
+<h2>Operators with Dictionaries</h2>
+
+<h3>Mathematical Operators</h3>
+
+<p>Operators like <code>+</code> and <code>*</code> are not applicable to dictionaries and will raise a <code>TypeError</code> if used.</p>
+
+<h3>Equality Operator</h3>
+
+<p>You can use <code>==</code> and <code>!=</code> to compare two dictionaries. They are equal if they have the same key-value pairs, regardless of the order.</p>
+
+<pre><code>d1 = {100: 'Alice', 200: 'Bob'}
+d2 = {200: 'Bob', 100: 'Alice'}
+print(d1 == d2)  # Output: True
+</code></pre>
+
+<h3>Relational Operators</h3>
+
+<p>Operators like <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> are not applicable to dictionaries.</p>
+
+<h3>Membership Operator</h3>
+
+<p>The <code>in</code> and <code>not in</code> operators check for the presence of keys in the dictionary.</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob'}
+print(100 in d)      # Output: True
+print(300 not in d)  # Output: True
+</code></pre>
+
+<h2>Important Methods and Functions</h2>
+
+<h3>1. <code>len()</code> Function</h3>
+
+<p>Returns the number of key-value pairs in the dictionary.</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+print(len(d))  # Output: 3
+</code></pre>
+
+<h3>2. <code>get()</code> Method</h3>
+
+<p>Retrieves the value associated with a key. Returns <code>None</code> (or a default value) if the key is not found, avoiding a <code>KeyError</code>.</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob'}
+print(d.get(100))               # Output: 'Alice'
+print(d.get(300))               # Output: None
+print(d.get(300, 'Not Found'))  # Output: 'Not Found'
+</code></pre>
+
+<h3>3. <code>update()</code> Method</h3>
+
+<p>Updates the dictionary with key-value pairs from another dictionary.</p>
+
+<pre><code>d1 = {100: 'Alice', 200: 'Bob'}
+d2 = {200: 'Bobby', 300: 'Charlie'}
+d1.update(d2)
+print(d1)  # Output: {100: 'Alice', 200: 'Bobby', 300: 'Charlie'}
+</code></pre>
+
+<h2>Dictionary Views</h2>
+
+<h3>1. <code>keys()</code> Method</h3>
+
+<p>Returns a view object containing the dictionary's keys.</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+keys = d.keys()
+print(keys)  # Output: dict_keys([100, 200, 300])
+
+# Iterating over keys
+for key in d.keys():
+    print(key)
+</code></pre>
+
+<h3>2. <code>values()</code> Method</h3>
+
+<p>Returns a view object containing the dictionary's values.</p>
+
+<pre><code>values = d.values()
+print(values)  # Output: dict_values(['Alice', 'Bob', 'Charlie'])
+
+# Iterating over values
+for value in d.values():
+    print(value)
+</code></pre>
+
+<h3>3. <code>items()</code> Method</h3>
+
+<p>Returns a view object containing the dictionary's key-value pairs as tuples.</p>
+
+<pre><code>items = d.items()
+print(items)  # Output: dict_items([(100, 'Alice'), (200, 'Bob'), (300, 'Charlie')])
+
+# Iterating over items
+for key, value in d.items():
+    print(key, '->', value)
+</code></pre>
+
+<h2>Example: Retrieving Value for a Given Key</h2>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+key = int(input('Enter key to get the value: '))
+if key in d:
+    print('The corresponding value:', d.get(key))
+else:
+    print('The specified key is not present')
+</code></pre>
+
+<h2>Example: Retrieving Key for a Given Value</h2>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+value = input('Enter value to find the key: ')
+found = False
+for k, v in d.items():
+    if v == value:
+        print('The corresponding key:', k)
+        found = True
+        break
+if not found:
+    print('The specified value is not found in the dictionary')
+</code></pre>
+
+<h2>Removing Items from a Dictionary</h2>
+
+<h3>1. <code>pop()</code> Method</h3>
+
+<p>Removes the item with the specified key and returns its value. Raises a <code>KeyError</code> if the key is not found.</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+value = d.pop(300)
+print(value)  # Output: 'Charlie'
+print(d)      # Output: {100: 'Alice', 200: 'Bob'}
+
+# Using default value to avoid KeyError
+value = d.pop(400, 'Not Found')
+print(value)  # Output: 'Not Found'
+</code></pre>
+
+<h3>2. <code>popitem()</code> Method</h3>
+
+<p>Removes and returns an arbitrary key-value pair as a tuple. Raises a <code>KeyError</code> if the dictionary is empty.</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+item = d.popitem()
+print(item)  # Output: (300, 'Charlie') (Output may vary)
+print(d)     # Remaining dictionary
+</code></pre>
+
+<h3>3. <code>clear()</code> Method</h3>
+
+<p>Removes all items from the dictionary.</p>
+
+<pre><code>d.clear()
+print(d)  # Output: {}
+</code></pre>
+
+<h3>4. <code>setdefault()</code> Method</h3>
+
+<p>Returns the value of a key. If the key does not exist, inserts the key with the specified default value.</p>
+
+<pre><code>d = {100: 'Alice', 200: 'Bob'}
+print(d.setdefault(300, 'Charlie'))  # Output: 'Charlie'
+print(d)  # Output: {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+
+# If the key exists, returns its value without changing the dictionary
+print(d.setdefault(100, 'Not Alice'))  # Output: 'Alice'
+print(d)  # Output: {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+</code></pre>
+
+<h2>Aliasing and Cloning Dictionaries</h2>
+
+<h3>Aliasing</h3>
+
+<p>Assigning one dictionary to another variable creates an alias. Both variables reference the same dictionary.</p>
+
+<pre><code>d1 = {100: 'Alice', 200: 'Bob'}
+d2 = d1  # Aliasing
+d1[300] = 'Charlie'
+print(d2)  # Output: {100: 'Alice', 200: 'Bob', 300: 'Charlie'}
+</code></pre>
+
+<h3>Cloning</h3>
+
+<p>Creating a copy of a dictionary that is independent of the original.</p>
+
+<pre><code>d1 = {100: 'Alice', 200: 'Bob'}
+d2 = d1.copy()  # Cloning
+d1[300] = 'Charlie'
+print(d2)  # Output: {100: 'Alice', 200: 'Bob'}
+</code></pre>
+
+<h2>Example: Sum of Dictionary Values</h2>
+
+<pre><code>d = eval(input('Enter a dictionary: '))
+total = sum(d.values())
+print('The sum of values:', total)
+</code></pre>
+
+<h2>Example: Counting Character Occurrences</h2>
+
+<p>Write a program to find the number of occurrences of each character in a given string.</p>
+
+<pre><code>word = input('Enter any string: ')
+d = {}
+for ch in word:
+    d[ch] = d.get(ch, 0) + 1
+print(d)
+</code></pre>
+
+<h2>Example: Counting Vowel Occurrences</h2>
+
+<p>Write a program to find the number of occurrences of each vowel in a given string.</p>
+
+<pre><code>word = input('Enter any string: ').lower()
+vowels = {'a', 'e', 'i', 'o', 'u'}
+d = {}
+for ch in word:
+    if ch in vowels:
+        d[ch] = d.get(ch, 0) + 1
+
+for k, v in d.items():
+    print(k, 'occurred', v, 'times')
+</code></pre>
+
+<h2>Example: Student Marks Management</h2>
+
+<pre><code>n = int(input('Enter the number of students: '))
+d = {}
+for i in range(n):
+    name = input('Enter the student name: ')
+    marks = int(input('Enter the student marks: '))
+    d[name] = marks
+
+print('Data entered successfully.')
+print('*' * 30)
+print('NAME', '\t\t', 'MARKS')
+print('*' * 30)
+for k, v in d.items():
+    print(k, '\t\t', v)
+
+print('Search operation started...')
+while True:
+    name = input('Enter student name to get marks: ')
+    marks = d.get(name)
+    if marks is None:
+        print('Student not found')
+    else:
+        print('Marks of', name, 'is', marks)
+    option = input('Do you want to find another student\'s marks? (yes/no): ')
+    if option.lower() == 'no':
+        break
+print('Thanks for using our application')
+</code></pre>
+
+<h2>Dictionary Comprehension</h2>
+
+<p>Dictionary comprehension provides a concise way to create dictionaries.</p>
+
+<pre><code>d = {x: x ** 2 for x in range(1, 6)}
+print(d)  # Output: {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+</code></pre>
+
+<h2>Merging Collections</h2>
+
+<h3>1. Merging Lists</h3>
+
+<p>Using the <code>+</code> operator:</p>
+
+<pre><code>l1 = [10, 20]
+l2 = [30, 40]
+l3 = l1 + l2
+print(l3)  # Output: [10, 20, 30, 40]
+</code></pre>
+
+<p>Using unpacking (applicable to other collections as well):</p>
+
+<pre><code>l3 = [*l1, *l2]
+print(l3)  # Output: [10, 20, 30, 40]
+</code></pre>
+
+<h3>2. Merging Tuples</h3>
+
+<pre><code>t1 = (10, 20)
+t2 = (30, 40)
+t3 = (*t1, *t2)
+print(t3)  # Output: (10, 20, 30, 40)
+</code></pre>
+
+<h3>3. Merging Sets</h3>
+
+<p>The <code>+</code> operator is not applicable to sets, but you can use unpacking:</p>
+
+<pre><code>s1 = {10, 20}
+s2 = {30, 40}
+s3 = {*s1, *s2}
+print(s3)  # Output: {40, 10, 20, 30} (Order may vary)
+</code></pre>
+
+<h3>4. Merging Dictionaries</h3>
+
+<p>Using the <code>**</code> operator:</p>
+
+<pre><code>d1 = {100: 'A', 200: 'B'}
+d2 = {300: 'C', 400: 'D'}
+d3 = {**d1, **d2}
+print(d3)  # Output: {100: 'A', 200: 'B', 300: 'C', 400: 'D'}
+</code></pre>
+
+<h2>Nested Collections and Examples</h2>
+
+<p>You can have collections within collections, such as lists of tuples, dictionaries of lists, etc. This is especially useful in applications like web development with Django or REST APIs.</p>
+
+<h3>Example: List of Tuples</h3>
+
+<pre><code>l = [(10, 20, 30), (40, 50, 60)]
+print(l[0][1])  # Output: 20
+print(l[1][1])  # Output: 50
+</code></pre>
+
+<h3>Example: Dictionary with Tuples</h3>
+
+<pre><code>d = {
+    'cars': ('Innova', 'Swift', 'Brezza'),
+    'mobiles': ('Samsung', 'iPhone', 'Huawei')
+}
+
+# Display the second car name
+print(d['cars'][1])  # Output: 'Swift'
+
+# Display all mobile names
+for mobile in d.get('mobiles', []):
+    print(mobile)
+</code></pre>
+
+<h3>Note on Collections within Sets and Dictionaries</h3>
+
+<p>You cannot add mutable types like lists as elements of sets or keys of dictionaries because they are unhashable. However, you can use immutable types like tuples or use lists as values in dictionaries.</p>
+
+</body>
+</html>

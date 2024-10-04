@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 13: Object-Oriented Programming in Python - Part Two</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 13: Object-Oriented Programming in Python - Part Two</h1>
+
+<h2>Introduction</h2>
+
+<p>In the previous chapter, we introduced the basics of Object-Oriented Programming (OOP) in Python, focusing on classes, objects, and constructors. In this chapter, we delve deeper into OOP by exploring different types of variables and methods within classes.</p>
+
+<h2>Types of Variables in Python OOP</h2>
+
+<p>Variables in a Python class can be classified into three main types:</p>
+
+<ol>
+    <li><strong>Instance Variables</strong></li>
+    <li><strong>Class Variables (Static Variables)</strong></li>
+    <li><strong>Local Variables</strong></li>
+</ol>
+
+<h3>1. Instance Variables</h3>
+
+<p>An <strong>instance variable</strong> is a variable that is unique to each object (instance) of a class. If the value of a variable differs from one object to another, it is an instance variable. These variables are typically defined within methods using the <code>self</code> keyword.</p>
+
+<h4>Characteristics of Instance Variables</h4>
+
+<ul>
+    <li>Declared within the constructor (<code>__init__</code>) or other instance methods using <code>self</code>.</li>
+    <li>Each object has its own copy of the instance variables.</li>
+    <li>Used to maintain state information specific to an object.</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>class Student:
+    def __init__(self, name, roll_no):
+        self.name = name        # Instance variable
+        self.roll_no = roll_no  # Instance variable
+
+# Creating objects
+student1 = Student('Alice', 101)
+student2 = Student('Bob', 102)
+
+# Accessing instance variables
+print(student1.name)    # Output: Alice
+print(student2.name)    # Output: Bob
+</code></pre>
+
+<h3>2. Class Variables (Static Variables)</h3>
+
+<p>A <strong>class variable</strong>, also known as a <strong>static variable</strong>, is shared among all instances of a class. If the value of a variable is the same for all objects, it is a class variable. These variables are defined within the class but outside any methods.</p>
+
+<h4>Characteristics of Class Variables</h4>
+
+<ul>
+    <li>Declared inside the class but outside of any methods.</li>
+    <li>Shared by all instances of the class.</li>
+    <li>Accessed using the class name or an instance.</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>class Student:
+    school_name = 'DurgaSoft'  # Class variable
+
+    def __init__(self, name, roll_no):
+        self.name = name
+        self.roll_no = roll_no
+
+# Accessing class variable
+print(Student.school_name)  # Output: DurgaSoft
+
+student1 = Student('Alice', 101)
+print(student1.school_name)  # Output: DurgaSoft
+</code></pre>
+
+<h3>3. Local Variables</h3>
+
+<p><strong>Local variables</strong> are variables declared inside a method and are only accessible within that method. They are used to store temporary data needed during method execution.</p>
+
+<h4>Example</h4>
+
+<pre><code>class Calculator:
+    def add(self, a, b):
+        result = a + b  # Local variable
+        print('Sum:', result)
+
+calc = Calculator()
+calc.add(10, 20)  # Output: Sum: 30
+</code></pre>
+
+<h2>Types of Methods in Python OOP</h2>
+
+<p>Methods in a Python class can be categorized into three types:</p>
+
+<ol>
+    <li><strong>Instance Methods</strong></li>
+    <li><strong>Class Methods</strong></li>
+    <li><strong>Static Methods</strong></li>
+</ol>
+
+<h3>1. Instance Methods</h3>
+
+<p>An <strong>instance method</strong> is a method that operates on instance variables of an object. These methods require an object of the class to be created before they can be called. The first parameter of an instance method is always <code>self</code>.</p>
+
+<h4>Example</h4>
+
+<pre><code>class Student:
+    def __init__(self, name, roll_no):
+        self.name = name
+        self.roll_no = roll_no
+
+    def get_student_info(self):
+        print('Student Name:', self.name)
+        print('Student Roll No:', self.roll_no)
+
+student = Student('Alice', 101)
+student.get_student_info()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Student Name: Alice
+Student Roll No: 101
+</code></pre>
+
+<h3>2. Class Methods</h3>
+
+<p>A <strong>class method</strong> is a method that operates on the class variables (static variables). It doesn't require an instance of the class to be created. Class methods are declared using the <code>@classmethod</code> decorator, and the first parameter is <code>cls</code>, which refers to the class itself.</p>
+
+<h4>Example</h4>
+
+<pre><code>class Student:
+    school_name = 'Lambton'  # Class variable
+
+    @classmethod
+    def get_school_name(cls):
+        print('School Name:', cls.school_name)
+
+Student.get_school_name()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>School Name: Lambton
+</code></pre>
+
+<h4>Explanation</h4>
+
+<ul>
+    <li>The <code>@classmethod</code> decorator is used to declare a method as a class method.</li>
+    <li>The <code>cls</code> parameter refers to the class, not the instance.</li>
+    <li>Class methods can access and modify class variables.</li>
+</ul>
+
+<h4>Proof of <code>cls</code> Referring to the Class Object</h4>
+
+<pre><code>class Test:
+    @classmethod
+    def display_class_id(cls):
+        print('ID of cls:', id(cls))
+
+print('ID of Test:', id(Test))
+Test.display_class_id()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>ID of Test: 140255600765136
+ID of cls: 140255600765136
+</code></pre>
+
+<p>This shows that <code>cls</code> refers to the class object itself.</p>
+
+<h3>3. Static Methods</h3>
+
+<p>A <strong>static method</strong> is a general utility method that doesn't access any class or instance variables. Static methods are declared using the <code>@staticmethod</code> decorator.</p>
+
+<h4>Example</h4>
+
+<pre><code>class MathUtils:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+result = MathUtils.add(10, 20)
+print('Sum:', result)  # Output: Sum: 30
+</code></pre>
+
+<h4>Explanation</h4>
+
+<ul>
+    <li>The <code>@staticmethod</code> decorator is used to declare a static method.</li>
+    <li>Static methods do not have access to <code>self</code> or <code>cls</code>.</li>
+    <li>They behave like regular functions but belong to the class's namespace.</li>
+</ul>
+
+<h2>Declaring Instance Variables</h2>
+
+<p>Instance variables can be declared in various places within a class:</p>
+
+<h3>1. Inside the Constructor Using <code>self</code></h3>
+
+<pre><code>class Test:
+    def __init__(self):
+        self.a = 10
+        self.b = 20
+
+t = Test()
+print(t.__dict__)  # Output: {'a': 10, 'b': 20}
+</code></pre>
+
+<p>The <code>__dict__</code> attribute contains a dictionary of the instance's variables.</p>
+
+<h3>2. Inside an Instance Method Using <code>self</code></h3>
+
+<pre><code>class Test:
+    def __init__(self):
+        self.a = 10
+        self.b = 20
+
+    def set_c(self):
+        self.c = 30
+
+t = Test()
+t.set_c()
+print(t.__dict__)  # Output: {'a': 10, 'b': 20, 'c': 30}
+</code></pre>
+
+<h3>3. Outside the Class Using the Object Reference</h3>
+
+<pre><code>class Test:
+    def __init__(self):
+        self.a = 10
+        self.b = 20
+
+t = Test()
+t.c = 30  # Adding an instance variable outside the class
+print(t.__dict__)  # Output: {'a': 10, 'b': 20, 'c': 30}
+</code></pre>
+
+<h4>Note</h4>
+
+<p>The number of instance variables can vary between objects.</p>
+
+<pre><code>t1 = Test()
+t1.d = 40
+print(t1.__dict__)  # Output: {'a': 10, 'b': 20, 'd': 40}
+
+t2 = Test()
+print(t2.__dict__)  # Output: {'a': 10, 'b': 20}
+</code></pre>
+
+<h2>Accessing, Updating, and Deleting Instance Variables</h2>
+
+<h3>Accessing Instance Variables</h3>
+
+<pre><code>print(t.a)  # Accessing instance variable 'a'
+</code></pre>
+
+<h3>Updating Instance Variables</h3>
+
+<pre><code>t.a = 100  # Updating instance variable 'a'
+print(t.a)   # Output: 100
+</code></pre>
+
+<h3>Deleting Instance Variables</h3>
+
+<h4>Within the Class</h4>
+
+<pre><code>class Test:
+    def __init__(self):
+        self.a = 10
+        self.b = 20
+
+    def delete_b(self):
+        del self.b
+
+t = Test()
+t.delete_b()
+print(t.__dict__)  # Output: {'a': 10}
+</code></pre>
+
+<h4>Outside the Class</h4>
+
+<pre><code>del t.a  # Deleting instance variable 'a'
+print(t.__dict__)  # Output: {}
+</code></pre>
+
+<h2>Declaring Static Variables</h2>
+
+<p>Static variables can be declared in several ways:</p>
+
+<h3>1. Inside the Class but Outside Any Methods</h3>
+
+<pre><code>class Test:
+    a = 10  # Static variable
+</code></pre>
+
+<h3>2. Inside the Constructor Using the Class Name</h3>
+
+<pre><code>class Test:
+    def __init__(self):
+        Test.b = 20  # Static variable
+
+t = Test()
+print(Test.b)  # Output: 20
+</code></pre>
+
+<h3>3. Inside an Instance Method Using the Class Name</h3>
+
+<pre><code>class Test:
+    def set_c(self):
+        Test.c = 30  # Static variable
+
+t = Test()
+t.set_c()
+print(Test.c)  # Output: 30
+</code></pre>
+
+<h3>4. Inside a Class Method Using <code>cls</code> or Class Name</h3>
+
+<pre><code>class Test:
+    @classmethod
+    def set_d(cls):
+        cls.d = 40     # Using cls
+        Test.e = 50    # Using class name
+
+Test.set_d()
+print(Test.d)  # Output: 40
+print(Test.e)  # Output: 50
+</code></pre>
+
+<h3>5. Inside a Static Method Using the Class Name</h3>
+
+<pre><code>class Test:
+    @staticmethod
+    def set_f():
+        Test.f = 60  # Static variable
+
+Test.set_f()
+print(Test.f)  # Output: 60
+</code></pre>
+
+<h3>6. Outside the Class Using the Class Name</h3>
+
+<pre><code>Test.g = 70
+print(Test.g)  # Output: 70
+</code></pre>
+
+<h2>Accessing Static Variables</h2>
+
+<p>Static variables can be accessed using the class name or an object reference. However, it is recommended to use the class name.</p>
+
+<h3>Inside the Class</h3>
+
+<h4>Using <code>self</code> or Class Name in the Constructor</h4>
+
+<pre><code>class Test:
+    a = 10
+
+    def __init__(self):
+        print(self.a)    # Access via self
+        print(Test.a)    # Access via class name
+</code></pre>
+
+<h4>Using <code>self</code> or Class Name in an Instance Method</h4>
+
+<pre><code>class Test:
+    a = 10
+
+    def display_a(self):
+        print(self.a)    # Access via self
+        print(Test.a)    # Access via class name
+</code></pre>
+
+<h4>Using <code>cls</code> or Class Name in a Class Method</h4>
+
+<pre><code>class Test:
+    a = 10
+
+    @classmethod
+    def display_a(cls):
+        print(cls.a)     # Access via cls
+        print(Test.a)    # Access via class name
+</code></pre>
+
+<h3>Outside the Class</h3>
+
+<pre><code>t = Test()
+print(t.a)      # Access via object reference
+print(Test.a)   # Access via class name (recommended)
+</code></pre>
+
+<h2>Modifying Static Variables</h2>
+
+<p>Static variables can be modified anywhere using the class name or <code>cls</code> (inside class methods).</p>
+
+<h3>Example</h3>
+
+<pre><code>class Test:
+    a = 10
+
+    @classmethod
+    def modify_a(cls):
+        cls.a = 20  # Modifying static variable using cls
+
+Test.modify_a()
+print(Test.a)  # Output: 20
+
+Test.a = 30    # Modifying static variable using class name
+print(Test.a)  # Output: 30
+</code></pre>
+
+<h2>Difference Between Instance and Static Variables</h2>
+
+<table>
+    <tr>
+        <th>Instance Variables</th>
+        <th>Static Variables</th>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Object-level variables.</li>
+                <li>Separate copy for each object.</li>
+                <li>Defined using <code>self</code>.</li>
+                <li>Values can differ between objects.</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Class-level variables.</li>
+                <li>Shared among all objects.</li>
+                <li>Defined using class name or within the class.</li>
+                <li>Same value for all objects unless modified.</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<h2>Deleting Static Variables</h2>
+
+<p>Static variables can be deleted using the <code>del</code> statement and the class name.</p>
+
+<pre><code>class Test:
+    a = 10
+
+del Test.a  # Deleting static variable 'a'
+
+# Accessing Test.a now will raise an AttributeError
+# print(Test.a)  # AttributeError: type object 'Test' has no attribute 'a'
+</code></pre>
+
+<h2>Local Variables</h2>
+
+<p><strong>Local variables</strong> are variables declared inside a method and are only accessible within that method. They are used for temporary computations or storage.</p>
+
+<h4>Example</h4>
+
+<pre><code>class Test:
+    @staticmethod
+    def average(numbers):
+        total = sum(numbers)          # Local variable
+        count = len(numbers)          # Local variable
+        result = total / count        # Local variable
+        print('The average is', result)
+
+numbers = [10, 20, 30, 40, 50]
+Test.average(numbers)
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>The average is 30.0
+</code></pre>
+
+<p>In this example, <code>total</code>, <code>count</code>, and <code>result</code> are local variables used within the <code>average</code> method.</p>
+
+<h2>Conclusion</h2>
+
+<p>Understanding the different types of variables and methods in Python OOP is crucial for designing robust and maintainable classes. Instance variables and methods allow objects to maintain their own state and behavior, while static variables and methods provide shared data and functionality across all instances. Local variables help manage temporary data within methods.</p>
+
+<p>By leveraging these concepts, you can create classes that are efficient, organized, and aligned with the principles of object-oriented programming.</p>
+
+</body>
+</html>

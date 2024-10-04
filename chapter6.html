@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 6: Tuples</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 6: Tuples</h1>
+
+<h2>Introduction to Tuples</h2>
+
+<p>A <strong>tuple</strong> in Python is similar to a list. It shares the following properties with lists:</p>
+
+<ul>
+    <li><strong>Order is preserved</strong>: Elements have a defined order and can be accessed via indices.</li>
+    <li><strong>Duplicates are allowed</strong>: A tuple can contain multiple instances of the same element.</li>
+    <li><strong>Heterogeneous objects</strong>: Elements can be of different data types.</li>
+    <li><strong>Indexing and slicing are applicable</strong>: Elements can be accessed and manipulated using indices and slicing.</li>
+</ul>
+
+<p>The key difference between tuples and lists is that tuples are <strong>immutable</strong>. Once a tuple is created, its contents cannot be changed. Tuples are represented using parentheses <code>()</code>. Note that parentheses are optional; commas define the tuple.</p>
+
+<pre><code>a = 10, 20, 'roman'
+print(type(a))  # Output: &lt;class 'tuple'&gt;
+</code></pre>
+
+<h3>Use Cases</h3>
+
+<p><strong>Lists</strong> are suitable when you need a collection of items that can change over time. Examples include:</p>
+
+<ul>
+    <li>YouTube comment sections</li>
+    <li>Twitter comments</li>
+</ul>
+
+<p><strong>Tuples</strong> are suitable when you need a collection of items that should not change. Examples include:</p>
+
+<ul>
+    <li>Allowed input values for a vending machine</li>
+    <li>Coordinates in a game</li>
+</ul>
+
+<h2>Creating Tuples</h2>
+
+<h3>Single-Valued Tuple</h3>
+
+<p>To create a tuple with a single value, include a comma after the value. Parentheses are optional but recommended for clarity.</p>
+
+<pre><code>t = (10,)
+print(type(t))  # Output: &lt;class 'tuple'&gt;
+
+t = 10,
+print(type(t))  # Output: &lt;class 'tuple'&gt;
+
+t = (10)
+print(type(t))  # Output: &lt;class 'int'&gt; (Not a tuple)
+</code></pre>
+
+<h3>Empty Tuple</h3>
+
+<pre><code>t = ()
+print(type(t))  # Output: &lt;class 'tuple'&gt;
+</code></pre>
+
+<h3>Multi-Valued Tuple</h3>
+
+<pre><code>t = (10, 20, 30)
+t = 10, 20, 30
+t = (10, 20, 30,)
+</code></pre>
+
+<h3>Using the <code>tuple()</code> Function</h3>
+
+<p>You can create a tuple from a sequence using the <code>tuple()</code> constructor.</p>
+
+<pre><code>l = [10, 20, 30, 40, 50, 60]
+t = tuple(l)
+print(t)  # Output: (10, 20, 30, 40, 50, 60)
+</code></pre>
+
+<h3>With Dynamic Input</h3>
+
+<pre><code>t = eval(input('Enter tuple of values: '))
+print(t)
+</code></pre>
+
+<h2>Accessing Elements of a Tuple</h2>
+
+<h3>1. By Using Index</h3>
+
+<pre><code>t = (10, 20, 30, 40, 50, 60)
+print(t[0])    # Output: 10
+print(t[-1])   # Output: 60
+print(t[5])    # Output: 60
+# print(t[100])  # Raises IndexError
+</code></pre>
+
+<h3>2. By Using Slice Operators</h3>
+
+<pre><code>t = (10, 20, 30, 40, 50, 60, 70, 80)
+print(t[2:5])   # Output: (30, 40, 50)
+print(t[::2])   # Output: (10, 30, 50, 70)
+</code></pre>
+
+<h2>Mathematical Operators for Tuples</h2>
+
+<h3>1. Concatenation Operator (<code>+</code>)</h3>
+
+<p>Tuples can be concatenated using the <code>+</code> operator. Both operands must be tuples.</p>
+
+<pre><code>t1 = (10, 20, 30)
+t2 = (40, 50, 60)
+t3 = t1 + t2
+print(t3)  # Output: (10, 20, 30, 40, 50, 60)
+
+# Invalid concatenations:
+# t3 = t1 + 10        # TypeError
+# t3 = t1 + [30, 30]  # TypeError
+</code></pre>
+
+<h3>2. Repetition Operator (<code>*</code>)</h3>
+
+<p>You can repeat a tuple multiple times using the <code>*</code> operator.</p>
+
+<pre><code>t1 = (10, 20, 30)
+t3 = t1 * 3
+print(t3)  # Output: (10, 20, 30, 10, 20, 30, 10, 20, 30)
+</code></pre>
+
+<h2>Equality Operators for Tuples</h2>
+
+<p>Using <code>==</code> and <code>!=</code> operators:</p>
+
+<ol>
+    <li>The contents must be the same.</li>
+    <li>The order must be the same.</li>
+    <li>The elements must be the same.</li>
+</ol>
+
+<pre><code>l1 = ('a', 'b', 'c')
+l2 = ('A', 'B', 'C')
+l3 = ('c', 'a', 'b')
+l4 = ('a', 'b', 'c')
+
+print(l1 == l2)  # Output: False
+print(l1 == l3)  # Output: False
+print(l1 == l4)  # Output: True
+</code></pre>
+
+<h2>Relational Operators</h2>
+
+<p>Using <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> operators. Comparisons are made based on the content of the tuples, element by element.</p>
+
+<pre><code>l1 = (10, 20, 30, 40)
+l2 = (50, 60)
+
+print(l1 &lt; l2)   # Output: True
+print(l1 &lt;= l2)  # Output: True
+print(l1 &gt; l2)   # Output: False
+print(l1 &gt;= l2)  # Output: False
+</code></pre>
+
+<p>Example with strings:</p>
+
+<pre><code>l1 = ('Roman', 'son')
+l2 = ('Raman', 'son')
+
+print(l1 &gt; l2)  # Output: True (Because 'o' &gt; 'a' in 'Roman' vs 'Raman')
+</code></pre>
+
+<h2>Membership Operators</h2>
+
+<p>Using <code>in</code> and <code>not in</code> operators:</p>
+
+<pre><code>l1 = (10, 20, 30, 40, 80)
+print(50 in l1)        # Output: False
+print(50 not in l1)    # Output: True
+</code></pre>
+
+<h2>Important Methods and Functions</h2>
+
+<h3>1. <code>len()</code> Function</h3>
+
+<p>Returns the number of elements in the tuple.</p>
+
+<pre><code>t = (10, 20, 30, 40)
+print(len(t))  # Output: 4
+</code></pre>
+
+<h3>2. <code>count()</code> Method</h3>
+
+<p>Returns the number of times a specified value occurs in a tuple.</p>
+
+<pre><code>t = (10, 20, 10, 30, 10)
+print(t.count(10))  # Output: 3
+</code></pre>
+
+<h3>3. <code>index()</code> Method</h3>
+
+<p>Returns the index of the first occurrence of a specified value.</p>
+
+<pre><code>t = (10, 20, 30, 40)
+print(t.index(30))  # Output: 2
+# print(t.index(50))  # Raises ValueError
+</code></pre>
+
+<h2>Reversing Elements of a Tuple</h2>
+
+<p>Tuples do not have a <code>reverse()</code> method since they are immutable. However, you can reverse a tuple using the <code>reversed()</code> function and then converting the result back to a tuple.</p>
+
+<pre><code>t = (10, 20, 30, 40)
+# t.reverse()  # AttributeError
+
+r = reversed(t)
+t1 = tuple(r)
+print(t)   # Output: (10, 20, 30, 40)
+print(t1)  # Output: (40, 30, 20, 10)
+</code></pre>
+
+<h2>Sorting a Tuple</h2>
+
+<p>Since tuples are immutable, you cannot sort them in place. However, you can use the <code>sorted()</code> function to get a sorted list and then convert it back to a tuple.</p>
+
+<pre><code>t = (20, 5, 10, 0, 15)
+s = sorted(t)
+t1 = tuple(s)
+print(t1)  # Output: (0, 5, 10, 15, 20)
+</code></pre>
+
+<p>To sort in descending order:</p>
+
+<pre><code>s = sorted(t, reverse=True)
+t1 = tuple(s)
+print(t1)  # Output: (20, 15, 10, 5, 0)
+</code></pre>
+
+<h2><code>max()</code> and <code>min()</code> Functions for Tuples</h2>
+
+<p>You can use the built-in <code>max()</code> and <code>min()</code> functions to find the maximum and minimum values in a tuple.</p>
+
+<pre><code>t = (20, 5, 10, 0, 15)
+print(max(t))  # Output: 20
+print(min(t))  # Output: 0
+</code></pre>
+
+<h2>Tuple Packing and Unpacking</h2>
+
+<h3>Packing</h3>
+
+<p>Assigning multiple values to a single tuple variable.</p>
+
+<pre><code>a = 10
+b = 20
+c = 30
+d = 40
+t = a, b, c, d
+print(t)  # Output: (10, 20, 30, 40)
+
+# For lists:
+l = [a, b, c, d]
+print(l)  # Output: [10, 20, 30, 40]
+</code></pre>
+
+<h3>Unpacking</h3>
+
+<p>Assigning elements of a tuple to multiple variables.</p>
+
+<pre><code>t = (10, 20, 30, 40)
+a, b, c, d = t
+print(a, b, c, d)  # Output: 10 20 30 40
+
+# Incorrect unpacking:
+# a, b, c = t       # ValueError
+# a, b, c, d, e = t # ValueError
+
+# Using the asterisk (*) operator:
+a, *b = t
+print(a)  # Output: 10
+print(b)  # Output: [20, 30, 40]
+</code></pre>
+
+<h2>Tuple Comprehension</h2>
+
+<p>Tuple comprehension is not directly supported in Python. If you use comprehension syntax with parentheses, you get a generator object instead.</p>
+
+<pre><code>t = (x for x in range(2, 6))
+print(type(t))  # Output: &lt;class 'generator'&gt;
+
+# To create a tuple, you can use:
+t = tuple(x for x in range(2, 6))
+print(t)  # Output: (2, 3, 4, 5)
+</code></pre>
+
+<h2>Additional Notes</h2>
+
+<h3>Searching Methods</h3>
+
+<p>In sets and dictionaries, order is not important. They use hashing for efficient search operations. Here's a brief comparison of different searching methods:</p>
+
+<ul>
+    <li><strong>Linear Search</strong>: Checks each element one by one. Time complexity is O(n).</li>
+    <li><strong>Binary Search</strong>: Works on sorted sequences. Divides the search interval in half each time. Time complexity is O(log n).</li>
+    <li><strong>Hashing</strong>: Uses a hash function to map keys to values. Provides very efficient search, insertion, and deletion. Time complexity is O(1) on average.</li>
+</ul>
+
+<h3>Hashability</h3>
+
+<p>Lists are unhashable because they are mutable, whereas tuples are hashable because they are immutable.</p>
+
+<pre><code>import collections
+
+l = [10, 20, 30]
+t = (10, 20, 30)
+
+print(isinstance(l, collections.Hashable))  # Output: False
+print(isinstance(t, collections.Hashable))  # Output: True
+
+# Getting the hash value of a tuple
+print(hash(t))  # Output: (An integer hash value)
+</code></pre>
+
+<h3>Adding Tuples and Lists to a Set</h3>
+
+<p>You cannot add a list to a set because lists are unhashable. Tuples can be added to a set.</p>
+
+<pre><code>l = [10, 20, 30]
+t = (10, 20, 30)
+s = {10, 20}
+
+# s.add(l)  # TypeError: unhashable type: 'list'
+s.add(t)
+print(s)  # Output: {10, 20, (10, 20, 30)}
+</code></pre>
+
+<h2>Example Program</h2>
+
+<p>Write a program to take a tuple of numbers from the keyboard and print its sum and average.</p>
+
+<pre><code># Taking input
+t = eval(input('Enter tuple of numbers: '))
+
+# Calculating sum and average
+total = 0
+for x in t:
+    total += x
+
+print('The sum:', total)
+print('The average:', total / len(t))
+</code></pre>
+
+<h2>Comparison Between Lists and Tuples</h2>
+
+<table>
+    <tr>
+        <th>List</th>
+        <th>Tuple</th>
+    </tr>
+    <tr>
+        <td>
+            <ol>
+                <li>Lists are groups of comma-separated values within square brackets. Square brackets are mandatory.<br>
+                Example: <code>i = [10, 20, 30, 40]</code></li>
+                <li>List objects are mutable; you can perform changes after creation.<br>
+                Example: <code>i[1] = 70</code></li>
+                <li>If the content is not fixed and keeps changing, use a list.</li>
+                <li>List objects cannot be used as keys for dictionaries because they are unhashable and mutable.</li>
+            </ol>
+        </td>
+        <td>
+            <ol>
+                <li>Tuples are groups of comma-separated values within parentheses. Parentheses are optional.<br>
+                Example: <code>t = (10, 20, 30, 40)</code> or <code>t = 10, 20, 30, 40</code></li>
+                <li>Tuple objects are immutable; you cannot change their content after creation.<br>
+                Example: <code>t[1] = 70</code> raises <code>TypeError</code></li>
+                <li>If the content is fixed and never changes, use a tuple.</li>
+                <li>Tuple objects can be used as keys for dictionaries because they are hashable and immutable.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

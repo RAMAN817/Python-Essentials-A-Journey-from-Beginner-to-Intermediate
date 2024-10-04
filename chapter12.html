@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 12: Object-Oriented Programming in Python - Part One</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 12: Object-Oriented Programming in Python - Part One</h1>
+
+<h2>Introduction</h2>
+
+<p>Object-Oriented Programming (OOP) is a programming paradigm that provides a means of structuring programs so that properties and behaviors are bundled into individual objects. In Python, OOP is a fundamental part of the language. This chapter introduces the basic concepts of OOP in Python, focusing on classes, objects, and reference variables.</p>
+
+<h2>Class, Object, and Reference Variables</h2>
+
+<h3>Class</h3>
+
+<p>A <strong>class</strong> is a blueprint or template for creating objects. It defines the data members (attributes) and behaviors (methods) that the objects created from the class can have.</p>
+
+<p>In other words, a class is a logical grouping of data and functions that act upon that data.</p>
+
+<h3>Object</h3>
+
+<p>An <strong>object</strong> is an instance of a class. It is a physical representation of the class in memory. Objects have their own state and can interact with other objects.</p>
+
+<h3>Reference Variable</h3>
+
+<p>A <strong>reference variable</strong> is used to refer to an object. By using reference variables, we can access the properties and methods of an object. Multiple reference variables can refer to the same object.</p>
+
+<h2>Defining a Class in Python</h2>
+
+<p>You can define a class in Python using the <code>class</code> keyword:</p>
+
+<pre><code>class ClassName:
+    '''Documentation string (optional)'''
+    # Variables (attributes)
+    # Methods (behaviors)
+</code></pre>
+
+<p>The documentation string (<code>docstring</code>) is optional and can be accessed using <code>ClassName.__doc__</code> or <code>help(ClassName)</code>.</p>
+
+<h3>Example</h3>
+
+<pre><code>class Student:
+    '''This is a Student class.'''
+
+    # Variables and methods go here
+</code></pre>
+
+<h2>Variables in a Class</h2>
+
+<p>There are three types of variables in a class:</p>
+
+<ol>
+    <li><strong>Instance Variables</strong>: Variables that are unique to each object (instance).</li>
+    <li><strong>Static Variables</strong>: Class-level variables shared among all instances.</li>
+    <li><strong>Local Variables</strong>: Variables defined within methods and only accessible there.</li>
+</ol>
+
+<h2>Methods in a Class</h2>
+
+<p>Methods are functions defined inside a class that describe the behaviors of the objects.</p>
+
+<ol>
+    <li><strong>Instance Methods</strong>: Methods that act upon instance variables.</li>
+    <li><strong>Class Methods</strong>: Methods that act upon class variables and are bound to the class rather than the object instance.</li>
+    <li><strong>Static Methods</strong>: General utility methods that perform a task in isolation. They do not access or modify class state.</li>
+</ol>
+
+<h2>Example: Defining and Using a Class</h2>
+
+<pre><code>class Student:
+    '''This is the Student class.'''
+
+    def __init__(self):
+        self.name = 'Roman'
+        self.roll_no = 1010
+        self.marks = 90
+
+    def talk(self):
+        print('Hello, my name is', self.name)
+        print('My roll number is', self.roll_no)
+        print('My marks are', self.marks)
+
+# Creating an object (instance) of the Student class
+s = Student()
+
+# Accessing instance variables
+print(s.name)      # Output: Roman
+print(s.roll_no)   # Output: 1010
+print(s.marks)     # Output: 90
+
+# Calling an instance method
+s.talk()
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Hello, my name is Roman
+My roll number is 1010
+My marks are 90
+</code></pre>
+
+<h2>The <code>self</code> Variable</h2>
+
+<h3>Understanding <code>self</code></h3>
+
+<p>The <code>self</code> parameter refers to the instance of the class. It is used to access variables that belong to the class. In Python, <code>self</code> is not a keyword; it's just a convention. You can use any name instead of <code>self</code>, but it's highly recommended to stick with <code>self</code> to maintain code readability and consistency.</p>
+
+<p>Inside any instance method, the first parameter must be <code>self</code> (or any other name you choose), which refers to the object itself.</p>
+
+<h3>Proof of <code>self</code> Pointing to the Current Object</h3>
+
+<pre><code>class Test:
+    def __init__(self):
+        print('Constructor called')
+        print('ID of self:', id(self))
+
+# Creating an object
+t = Test()
+print('ID of t:', id(t))
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Constructor called
+ID of self: 140435671525584
+ID of t: 140435671525584
+</code></pre>
+
+<p>The IDs of <code>self</code> and <code>t</code> are the same, proving that <code>self</code> refers to the current object.</p>
+
+<h3>Example with Parameters</h3>
+
+<pre><code>class Student:
+    def __init__(self, name, roll_no, marks):
+        self.name = name
+        self.roll_no = roll_no
+        self.marks = marks
+
+    def talk(self):
+        print('Hello, my name is', self.name)
+        print('My roll number is', self.roll_no)
+        print('My marks are', self.marks)
+
+# Creating an object with parameters
+s1 = Student('Sunny', 101, 90)
+s1.talk()
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Hello, my name is Sunny
+My roll number is 101
+My marks are 90
+</code></pre>
+
+<h3>Customizing <code>self</code> (Not Recommended)</h3>
+
+<p>Although you can use any name instead of <code>self</code>, it's not recommended as it can make the code less readable.</p>
+
+<pre><code>class Student:
+    def __init__(this, name, roll_no, marks):
+        this.name = name
+        this.roll_no = roll_no
+        this.marks = marks
+
+    def talk(this):
+        print('Hello, my name is', this.name)
+        print('My roll number is', this.roll_no)
+        print('My marks are', this.marks)
+
+s1 = Student('Sunny', 101, 90)
+s1.talk()
+</code></pre>
+
+<p><strong>Note:</strong> Even though this code works, it's best to stick with <code>self</code>.</p>
+
+<h2>Constructors in Python</h2>
+
+<h3>The <code>__init__</code> Method</h3>
+
+<p>The <code>__init__</code> method is a special method in Python classes, known as the constructor. It is automatically called when an object is created. The purpose of the constructor is to initialize the object's attributes.</p>
+
+<pre><code>class Test:
+    def __init__(self):
+        print('Constructor executed')
+
+t = Test()
+# Output: Constructor executed
+</code></pre>
+
+<h3>Purpose of Constructors</h3>
+
+<ul>
+    <li>Initialize instance variables.</li>
+    <li>Set up initial state of the object.</li>
+</ul>
+
+<h3>Optional Constructors</h3>
+
+<p>If you do not define a constructor, Python provides a default constructor that does nothing.</p>
+
+<pre><code>class Test:
+    def m1(self):
+        print('Method m1 executed')
+
+t = Test()
+t.m1()
+# Output: Method m1 executed
+</code></pre>
+
+<h3>Overloading Constructors</h3>
+
+<p>Python does not support constructor overloading; you cannot have multiple constructors in a class. If you define multiple <code>__init__</code> methods, the last one will overwrite the previous ones.</p>
+
+<p>However, you can provide default values for parameters or use variable-length arguments to simulate overloading.</p>
+
+<pre><code>class Test:
+    def __init__(self, a=None, b=None, c=None):
+        self.a = a
+        self.b = b
+        self.c = c
+
+t1 = Test()
+t2 = Test(10)
+t3 = Test(10, 20)
+t4 = Test(10, 20, 30)
+</code></pre>
+
+<h2>Difference Between Methods and Constructors</h2>
+
+<table>
+    <tr>
+        <th>Constructors</th>
+        <th>Methods</th>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Special method named <code>__init__</code>.</li>
+                <li>Called automatically when an object is created.</li>
+                <li>Used to initialize instance variables.</li>
+                <li>Only one constructor per class (no overloading).</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Regular functions defined within a class.</li>
+                <li>Called explicitly using the object reference.</li>
+                <li>Used to define behaviors of the object.</li>
+                <li>Can have multiple methods with different names.</li>
+                <li>Can be called multiple times.</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<h2>Key Takeaways</h2>
+
+<ul>
+    <li>A class is a blueprint for creating objects.</li>
+    <li>An object is an instance of a class.</li>
+    <li>Reference variables are used to refer to objects.</li>
+    <li>The <code>self</code> variable refers to the current instance of the class.</li>
+    <li>Constructors are used to initialize the object's state.</li>
+    <li>Methods define the behaviors of the objects.</li>
+    <li>Understanding the use of <code>self</code> and constructors is crucial in OOP.</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>This chapter introduced the basic concepts of Object-Oriented Programming in Python, focusing on classes, objects, reference variables, and constructors. In the next chapters, we will delve deeper into other OOP concepts like inheritance, polymorphism, encapsulation, and abstraction.</p>
+
+</body>
+</html>

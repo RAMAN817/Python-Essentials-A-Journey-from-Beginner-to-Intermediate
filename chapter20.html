@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 20: Exception Handling in Python</title>
+    <link rel="stylesheset" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 20: Exception Handling in Python</h1>
+
+<h2>Introduction</h2>
+
+<p>In any programming language, errors can occur during the development and execution of programs. These errors are generally classified into two types:</p>
+
+<ol>
+    <li><strong>Syntax Errors</strong></li>
+    <li><strong>Runtime Errors (Exceptions)</strong></li>
+</ol>
+
+<p>Exception handling is a crucial aspect of writing robust and error-resistant code. In this chapter, we will explore how Python handles exceptions, the mechanisms for catching and handling exceptions, and how to create custom exceptions.</p>
+
+<h2>Types of Errors</h2>
+
+<h3>1. Syntax Errors</h3>
+
+<p>Syntax errors, also known as parsing errors, occur when the code does not conform to the grammar of the programming language. These errors are detected during the parsing stage before the program is executed.</p>
+
+<h4>Example</h4>
+
+<pre><code># Missing parentheses in call to 'print'
+print "Hello, World!"  # SyntaxError
+</code></pre>
+
+<h3>2. Runtime Errors (Exceptions)</h3>
+
+<p>Runtime errors occur during the execution of the program when the interpreter encounters an operation that it cannot handle. These errors are called <strong>exceptions</strong> in Python.</p>
+
+<h4>Example 1: Division by Zero</h4>
+
+<pre><code>a = int(input('Enter the first number: '))  # e.g., 10
+b = int(input('Enter the second number: '))  # e.g., 0
+print('The result is', a / b)  # ZeroDivisionError
+</code></pre>
+
+<h4>Example 2: File Not Found</h4>
+
+<pre><code>f = open('nonexistent_file.txt')
+print(f.read())  # FileNotFoundError
+</code></pre>
+
+<h2>Understanding Exceptions</h2>
+
+<h3>1. What is an Exception?</h3>
+
+<p>An <strong>exception</strong> is an unwanted or unexpected event that disrupts the normal flow of a program's execution. It is an error detected during execution.</p>
+
+<h4>Common Exceptions</h4>
+
+<ul>
+    <li><code>ZeroDivisionError</code></li>
+    <li><code>ValueError</code></li>
+    <li><code>FileNotFoundError</code></li>
+    <li><code>TypeError</code></li>
+    <li><code>IndexError</code></li>
+</ul>
+
+<h3>2. Objective of Exception Handling</h3>
+
+<p>The main objective of exception handling is to ensure the <strong>graceful termination</strong> of a program. By handling exceptions, we can provide alternative solutions or error messages that prevent the program from crashing and allow it to continue executing or terminate gracefully.</p>
+
+<h3>3. Meaning of Exception Handling</h3>
+
+<p>Exception handling does not mean repairing the error. Instead, it provides a way to handle the error and continue with the program execution or terminate gracefully without abrupt interruption.</p>
+
+<h2>Default Exception Handling in Python</h2>
+
+<p>In Python, if an exception is not handled, the interpreter will display a traceback and terminate the program. Every exception is an object, and for each exception type, there is a corresponding class.</p>
+
+<h4>Example</h4>
+
+<pre><code>print(10 / 0)
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Traceback (most recent call last):
+  File "example.py", line 1, in &lt;module&gt;
+    print(10 / 0)
+ZeroDivisionError: division by zero
+</code></pre>
+
+<p>The interpreter creates a <code>ZeroDivisionError</code> object and prints the traceback information.</p>
+
+<h2>Exception Hierarchy in Python</h2>
+
+<p>All exceptions in Python are instances of classes derived from the <code>BaseException</code> class. The hierarchy is as follows:</p>
+
+<pre><code>BaseException
+ +-- SystemExit
+ +-- KeyboardInterrupt
+ +-- GeneratorExit
+ +-- Exception
+      +-- StopIteration
+      +-- ArithmeticError
+           +-- ZeroDivisionError
+           +-- OverflowError
+      +-- LookupError
+           +-- IndexError
+           +-- KeyError
+      +-- ... (many others)
+</code></pre>
+
+<p>Most user-defined exceptions should be derived from the <code>Exception</code> class.</p>
+
+<h2>Customized Exception Handling Using <code>try</code> and <code>except</code></h2>
+
+<p>It is highly recommended to handle exceptions to prevent abrupt termination of programs. Python provides <code>try</code> and <code>except</code> blocks to catch and handle exceptions.</p>
+
+<h3>Basic Syntax</h3>
+
+<pre><code>try:
+    # Risky code that might raise an exception
+    pass
+except ExceptionType:
+    # Code to handle the exception
+    pass
+</code></pre>
+
+<h3>Example</h3>
+
+<pre><code>try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print('Cannot divide by zero')
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Cannot divide by zero
+</code></pre>
+
+<h2>Control Flow in <code>try</code>-<code>except</code></h2>
+
+<p>The control flow in a <code>try</code>-<code>except</code> block is as follows:</p>
+
+<ol>
+    <li>If no exception occurs, the <code>except</code> block is skipped, and execution continues after the <code>try</code> block.</li>
+    <li>If an exception occurs in the <code>try</code> block and it is handled by an <code>except</code> block, the rest of the <code>try</code> block is skipped, and execution continues after the <code>except</code> block.</li>
+    <li>If an exception occurs and is not handled, the program terminates abruptly.</li>
+</ol>
+
+<h3>Example</h3>
+
+<pre><code>try:
+    print('Statement 1')
+    print(10 / 0)
+    print('Statement 3')  # Skipped
+except ZeroDivisionError:
+    print('Exception occurred and handled')
+print('Statement 4')
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Statement 1
+Exception occurred and handled
+Statement 4
+</code></pre>
+
+<h2>Printing Exception Information</h2>
+
+<p>We can capture and print exception information using the <code>as</code> keyword.</p>
+
+<h3>Example</h3>
+
+<pre><code>try:
+    result = 10 / 0
+except ZeroDivisionError as e:
+    print('Exception Type:', type(e))
+    print('Exception Class Name:', e.__class__.__name__)
+    print('Exception Message:', e)
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Exception Type: &lt;class 'ZeroDivisionError'&gt;
+Exception Class Name: ZeroDivisionError
+Exception Message: division by zero
+</code></pre>
+
+<h2>Handling Multiple Exceptions</h2>
+
+<h3>Using Multiple <code>except</code> Blocks</h3>
+
+<p>You can specify multiple <code>except</code> blocks to handle different exceptions separately.</p>
+
+<pre><code>try:
+    x = int(input('Enter a number: '))
+    y = int(input('Enter another number: '))
+    result = x / y
+except ZeroDivisionError:
+    print('Cannot divide by zero')
+except ValueError:
+    print('Invalid input')
+except Exception as e:
+    print('An unexpected error occurred:', e)
+else:
+    print('Result:', result)
+</code></pre>
+
+<h3>Handling Multiple Exceptions in a Single Block</h3>
+
+<p>If the handling code is the same for multiple exceptions, you can use a single <code>except</code> block with a tuple of exceptions.</p>
+
+<pre><code>try:
+    x = int(input('Enter a number: '))
+    y = int(input('Enter another number: '))
+    result = x / y
+except (ZeroDivisionError, ValueError) as e:
+    print('Error:', e)
+else:
+    print('Result:', result)
+</code></pre>
+
+<h2>Using a Default <code>except</code> Block</h2>
+
+<p>You can use a default <code>except</code> block to catch any exception that is not handled by previous <code>except</code> blocks. The default <code>except</code> block should be placed last.</p>
+
+<pre><code>try:
+    # Risky code
+    pass
+except SpecificException:
+    # Handling code
+    pass
+except:
+    # Default handling code
+    pass
+</code></pre>
+
+<h3>Example</h3>
+
+<pre><code>try:
+    x = int(input('Enter a number: '))
+    y = int(input('Enter another number: '))
+    result = x / y
+except ZeroDivisionError:
+    print('Cannot divide by zero')
+except:
+    print('An error occurred')
+</code></pre>
+
+<h2>The <code>finally</code> Block</h2>
+
+<p>The <code>finally</code> block is used to define code that will be executed regardless of whether an exception occurs or not. It is typically used for cleanup actions, such as closing files or releasing resources.</p>
+
+<h3>Syntax</h3>
+
+<pre><code>try:
+    # Risky code
+    pass
+except ExceptionType:
+    # Handling code
+    pass
+finally:
+    # Cleanup code
+    pass
+</code></pre>
+
+<h3>Example</h3>
+
+<pre><code>try:
+    f = open('sample.txt', 'r')
+    print(f.read())
+except FileNotFoundError:
+    print('File not found')
+finally:
+    print('Closing the file')
+    f.close()
+</code></pre>
+
+<h3>Important Note</h3>
+
+<p>The <code>finally</code> block will not be executed if the program is terminated abruptly using <code>os._exit(0)</code>.</p>
+
+<h2><code>os._exit(0)</code> vs. <code>finally</code> Block</h2>
+
+<p>The <code>os._exit(0)</code> function terminates the program immediately without executing the <code>finally</code> block.</p>
+
+<h3>Example</h3>
+
+<pre><code>import os
+
+try:
+    print('try block')
+    os._exit(0)
+except:
+    print('except block')
+finally:
+    print('finally block')
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>try block
+</code></pre>
+
+<p>The <code>finally</code> block is not executed because the program exits before reaching it.</p>
+
+<h2><code>finally</code> Block vs. Destructor</h2>
+
+<p>Both the <code>finally</code> block and destructors are used for cleanup activities, but they serve different purposes:</p>
+
+<ul>
+    <li>The <code>finally</code> block is used for cleanup related to the <code>try</code> block, such as closing files opened within the <code>try</code> block.</li>
+    <li>Destructors (<code>__del__</code> methods) are used for cleanup related to objects, such as releasing resources held by the object before it is destroyed.</li>
+</ul>
+
+<h2>Nested <code>try</code>-<code>except</code>-<code>finally</code> Blocks</h2>
+
+<p>You can nest <code>try</code>-<code>except</code>-<code>finally</code> blocks inside other <code>try</code>, <code>except</code>, or <code>finally</code> blocks.</p>
+
+<h3>Example</h3>
+
+<pre><code>try:
+    print('Outer try block')
+    try:
+        print('Inner try block')
+        result = 10 / 0
+    except ZeroDivisionError:
+        print('Inner except block: Division by zero')
+    finally:
+        print('Inner finally block')
+except:
+    print('Outer except block')
+finally:
+    print('Outer finally block')
+</code></pre>
+
+<p><strong>Output:</strong></p>
+
+<pre><code>Outer try block
+Inner try block
+Inner except block: Division by zero
+Inner finally block
+Outer finally block
+</code></pre>
+
+<h2>The <code>else</code> Block with <code>try</code>-<code>except</code>-<code>finally</code></h2>
+
+<p>The <code>else</code> block can be used after the <code>try</code>-<code>except</code> blocks. It will be executed only if no exception occurs in the <code>try</code> block.</p>
+
+<h3>Syntax</h3>
+
+<pre><code>try:
+    # Risky code
+    pass
+except ExceptionType:
+    # Handling code
+    pass
+else:
+    # Executed if no exception occurs
+    pass
+finally:
+    # Cleanup code
+    pass
+</code></pre>
+
+<h3>Example</h3>
+
+<pre><code>try:
+    x = int(input('Enter a number: '))
+    y = int(input('Enter another number: '))
+    result = x / y
+except ZeroDivisionError:
+    print('Cannot divide by zero')
+except ValueError:
+    print('Invalid input')
+else:
+    print('Result:', result)
+finally:
+    print('Program execution completed')
+</code></pre>
+
+<h2>Types of Exceptions</h2>
+
+<h3>1. Predefined Exceptions</h3>
+
+<p>Also known as built-in exceptions, these are exceptions provided by Python that are raised automatically by the interpreter when certain errors occur.</p>
+
+<h4>Examples</h4>
+
+<ul>
+    <li><code>ZeroDivisionError</code></li>
+    <li><code>ValueError</code></li>
+    <li><code>TypeError</code></li>
+    <li><code>FileNotFoundError</code></li>
+    <li><code>IndexError</code></li>
+</ul>
+
+<h3>2. User-Defined Exceptions</h3>
+
+<p>Sometimes, you may need to create your own exceptions to indicate specific error conditions in your program. These are known as user-defined or custom exceptions.</p>
+
+<h2>Creating and Raising Custom Exceptions</h2>
+
+<h3>Defining a Custom Exception</h3>
+
+<p>To define a custom exception, create a class that inherits from the <code>Exception</code> class or one of its subclasses.</p>
+
+<h3>Example</h3>
+
+<pre><code>class InvalidAgeException(Exception):
+    def __init__(self, message):
+        self.message = message
+</code></pre>
+
+<h3>Raising a Custom Exception</h3>
+
+<p>You can raise a custom exception using the <code>raise</code> keyword.</p>
+
+<pre><code>def check_age(age):
+    if age &lt; 18:
+        raise InvalidAgeException('Age must be at least 18')
+    else:
+        print('Access granted')
+
+try:
+    user_age = int(input('Enter your age: '))
+    check_age(user_age)
+except InvalidAgeException as e:
+    print('Error:', e)
+</code></pre>
+
+<h3>Complete Example</h3>
+
+<pre><code>class TooYoungException(Exception):
+    def __init__(self, message):
+        self.message = message
+
+class TooOldException(Exception):
+    def __init__(self, message):
+        self.message = message
+
+age = int(input('Enter your age: '))
+
+try:
+    if age &lt; 18:
+        raise TooYoungException('You are too young to apply.')
+    elif age &gt; 65:
+        raise TooOldException('You are too old to apply.')
+    else:
+        print('You can apply.')
+except TooYoungException as e:
+    print('Error:', e.message)
+except TooOldException as e:
+    print('Error:', e.message)
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>Exception handling is an essential aspect of writing robust and reliable Python programs. By properly handling exceptions, you can prevent your programs from crashing unexpectedly and provide meaningful error messages to users. In this chapter, we covered:</p>
+
+<ul>
+    <li>The types of errors in Python: syntax errors and runtime exceptions.</li>
+    <li>The exception hierarchy and how Python handles exceptions by default.</li>
+    <li>How to use <code>try</code>, <code>except</code>, <code>else</code>, and <code>finally</code> blocks to handle exceptions.</li>
+    <li>How to capture and display exception information.</li>
+    <li>How to create and raise custom exceptions.</li>
+</ul>
+
+<p>By mastering exception handling, you can write code that is more resilient to errors and easier to debug and maintain.</p>
+
+</body>
+</html>

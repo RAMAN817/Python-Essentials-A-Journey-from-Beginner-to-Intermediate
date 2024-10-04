@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 16: Object-Oriented Programming in Python - Part Five</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 16: Object-Oriented Programming in Python - Part Five</h1>
+
+<h2>Introduction</h2>
+
+<p>In this chapter, we will explore how to use members of one class inside another class in Python. This involves understanding concepts like composition (Has-A relationship), inheritance (Is-A relationship), and the various types of inheritance supported in Python. These concepts are fundamental in object-oriented programming (OOP) and enable code reusability and modular design.</p>
+
+<h2>Using Members of One Class Inside Another</h2>
+
+<p>There are two primary ways to use members of one class inside another class:</p>
+
+<ol>
+    <li><strong>Composition (Has-A Relationship)</strong></li>
+    <li><strong>Inheritance (Is-A Relationship)</strong></li>
+</ol>
+
+<h3>1. Composition (Has-A Relationship)</h3>
+
+<p><strong>Composition</strong> is a design technique in which a class is composed of one or more objects of other classes, implying a strong ownership. In other words, a class can have objects of other classes as its members.</p>
+
+<p>For example, a <code>Car</code> class can have an <code>Engine</code> object. Here, the car "has an" engine.</p>
+
+<h4>Advantages of Composition</h4>
+
+<ul>
+    <li><strong>Code Reusability</strong>: Allows reuse of existing classes to build complex systems.</li>
+    <li><strong>Modularity</strong>: Encourages a modular design where components can be developed and tested independently.</li>
+</ul>
+
+<h4>Example: Car and Engine</h4>
+
+<pre><code>class Engine:
+    def use_engine(self):
+        print('Engine specific functionality')
+
+class Car:
+    def __init__(self):
+        self.engine = Engine()
+
+    def use_car(self):
+        print('Car requires engine functionality')
+        self.engine.use_engine()
+
+# Creating a Car object
+c = Car()
+c.use_car()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Car requires engine functionality
+Engine specific functionality
+</code></pre>
+
+<p>In this example:</p>
+
+<ul>
+    <li>The <code>Car</code> class has an instance of the <code>Engine</code> class.</li>
+    <li>The <code>Car</code> class uses the functionality of the <code>Engine</code> class through composition.</li>
+</ul>
+
+<h3>2. Inheritance (Is-A Relationship)</h3>
+
+<p><strong>Inheritance</strong> allows a class (child) to inherit attributes and methods from another class (parent). This represents an "is-a" relationship. The child class can extend or modify the behavior of the parent class.</p>
+
+<p>For example, a <code>Child</code> class can inherit from a <code>Parent</code> class, gaining access to its methods and properties.</p>
+
+<h4>Advantages of Inheritance</h4>
+
+<ul>
+    <li><strong>Code Reusability</strong>: Allows reuse of existing code, reducing redundancy.</li>
+    <li><strong>Code Extensibility</strong>: Child classes can extend or modify the behavior of parent classes.</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>class Parent:
+    def m1(self):
+        print('Parent Method')
+
+class Child(Parent):
+    def m2(self):
+        print('Child Method')
+
+# Creating a Child object
+c = Child()
+c.m1()  # Accessing parent method
+c.m2()  # Accessing child method
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Parent Method
+Child Method
+</code></pre>
+
+<h4>Explanation</h4>
+
+<ul>
+    <li>The <code>Child</code> class inherits from the <code>Parent</code> class.</li>
+    <li>The <code>Child</code> class can access methods from both the <code>Parent</code> and itself.</li>
+</ul>
+
+<h2>Composition vs. Aggregation</h2>
+
+<p>Both composition and aggregation are forms of association between classes. The key difference lies in the ownership and lifecycle of the contained objects.</p>
+
+<h3>Composition</h3>
+
+<p>In composition, the contained object cannot exist independently of the container object. If the container is destroyed, so are the contained objects.</p>
+
+<h4>Example: University and Department</h4>
+
+<pre><code>class Department:
+    def __init__(self, name):
+        self.name = name
+
+class University:
+    def __init__(self, dept_name):
+        self.department = Department(dept_name)
+
+# Creating a University object, which contains a Department
+uni = University('Computer Science')
+</code></pre>
+
+<p>In this example:</p>
+
+<ul>
+    <li>The <code>Department</code> object exists only within the <code>University</code> object.</li>
+    <li>Without the <code>University</code>, the <code>Department</code> does not exist.</li>
+</ul>
+
+<h3>Aggregation</h3>
+
+<p>In aggregation, the contained objects can exist independently of the container object. The container and the contained have a weak association.</p>
+
+<h4>Example: Department and Professor</h4>
+
+<pre><code>class Professor:
+    def __init__(self, name):
+        self.name = name
+
+class Department:
+    def __init__(self, prof):
+        self.professor = prof
+
+# Creating a Professor object independently
+prof = Professor('Dr. Smith')
+
+# Creating Department objects that aggregate the Professor
+cs_dept = Department(prof)
+it_dept = Department(prof)
+</code></pre>
+
+<p>In this example:</p>
+
+<ul>
+    <li>The <code>Professor</code> object exists independently of the <code>Department</code> objects.</li>
+    <li>Multiple departments can share the same professor.</li>
+</ul>
+
+<h2>Types of Inheritance in Python</h2>
+
+<p>Python supports several types of inheritance:</p>
+
+<ol>
+    <li><strong>Single Inheritance</strong></li>
+    <li><strong>Multilevel Inheritance</strong></li>
+    <li><strong>Hierarchical Inheritance</strong></li>
+    <li><strong>Multiple Inheritance</strong></li>
+    <li><strong>Hybrid Inheritance</strong></li>
+</ol>
+
+<h3>1. Single Inheritance</h3>
+
+<p>Single inheritance involves a single parent class and a single child class. The child class inherits from the parent class.</p>
+
+<h4>Example</h4>
+
+<pre><code>class Parent:
+    def m1(self):
+        print('Parent Method')
+
+class Child(Parent):
+    def m2(self):
+        print('Child Method')
+
+# Creating a Child object
+c = Child()
+c.m1()
+c.m2()
+</code></pre>
+
+<h3>2. Multilevel Inheritance</h3>
+
+<p>Multilevel inheritance involves a chain of inheritance where a class inherits from a child class, which in turn inherits from another class.</p>
+
+<h4>Example</h4>
+
+<pre><code>class Grandparent:
+    def m1(self):
+        print('Grandparent Method')
+
+class Parent(Grandparent):
+    def m2(self):
+        print('Parent Method')
+
+class Child(Parent):
+    def m3(self):
+        print('Child Method')
+
+# Creating a Child object
+c = Child()
+c.m1()
+c.m2()
+c.m3()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Grandparent Method
+Parent Method
+Child Method
+</code></pre>
+
+<h3>3. Hierarchical Inheritance</h3>
+
+<p>Hierarchical inheritance involves multiple child classes inheriting from a single parent class.</p>
+
+<h4>Example</h4>
+
+<pre><code>class Parent:
+    def m1(self):
+        print('Parent Method')
+
+class Child1(Parent):
+    def m2(self):
+        print('Child1 Method')
+
+class Child2(Parent):
+    def m3(self):
+        print('Child2 Method')
+
+# Creating objects of Child1 and Child2
+c1 = Child1()
+c2 = Child2()
+
+c1.m1()
+c1.m2()
+
+c2.m1()
+c2.m3()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Parent Method
+Child1 Method
+Parent Method
+Child2 Method
+</code></pre>
+
+<h3>4. Multiple Inheritance</h3>
+
+<p>Multiple inheritance involves a child class inheriting from multiple parent classes.</p>
+
+<p>Python supports multiple inheritance, unlike some other programming languages that avoid it due to potential complexities such as the "Diamond Problem."</p>
+
+<h4>Example</h4>
+
+<pre><code>class Parent1:
+    def m1(self):
+        print('Parent1 Method')
+
+class Parent2:
+    def m2(self):
+        print('Parent2 Method')
+
+class Child(Parent1, Parent2):
+    def m3(self):
+        print('Child Method')
+
+# Creating a Child object
+c = Child()
+c.m1()
+c.m2()
+c.m3()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Parent1 Method
+Parent2 Method
+Child Method
+</code></pre>
+
+<h4>Diamond Problem and Method Resolution Order (MRO)</h4>
+
+<p>The Diamond Problem occurs when a class inherits from two classes that have a common superclass. This can cause ambiguity in method resolution. Python resolves this using the Method Resolution Order (MRO), which defines the order in which base classes are searched when executing a method.</p>
+
+<p>In the case of conflicting methods, Python follows the order specified in the class definition. For example:</p>
+
+<pre><code>class A:
+    def m1(self):
+        print('Method from A')
+
+class B(A):
+    def m1(self):
+        print('Method from B')
+
+class C(A):
+    def m1(self):
+        print('Method from C')
+
+class D(B, C):
+    pass
+
+d = D()
+d.m1()
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Method from B
+</code></pre>
+
+<p>Here, the method from class <code>B</code> is called because <code>B</code> appears before <code>C</code> in the inheritance list of <code>D</code>. The MRO for class <code>D</code> is <code>[D, B, C, A, object]</code>.</p>
+
+<h3>5. Hybrid Inheritance</h3>
+
+<p>Hybrid inheritance is a combination of multiple types of inheritance, such as multilevel and multiple inheritance.</p>
+
+<p>It can be complex and is used to demonstrate the use of different types of inheritance together.</p>
+
+<h4>Example</h4>
+
+<pre><code>class A:
+    def m1(self):
+        print('Method from A')
+
+class B(A):
+    def m2(self):
+        print('Method from B')
+
+class C(A):
+    def m3(self):
+        print('Method from C')
+
+class D(B, C):
+    def m4(self):
+        print('Method from D')
+
+d = D()
+d.m1()  # Inherited from A
+d.m2()  # Inherited from B
+d.m3()  # Inherited from C
+d.m4()  # Defined in D
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>Method from A
+Method from B
+Method from C
+Method from D
+</code></pre>
+
+<h3>Method Resolution Order (MRO)</h3>
+
+<p>The MRO is the order in which Python looks for a method in a hierarchy of classes. You can view the MRO of a class using the <code>__mro__</code> attribute or the <code>mro()</code> method.</p>
+
+<pre><code>print(D.__mro__)
+# or
+print(D.mro())
+</code></pre>
+
+<h4>Output</h4>
+
+<pre><code>(<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
+</code></pre>
+
+<h2>Cyclic Inheritance</h2>
+
+<p>Cyclic inheritance occurs when a class indirectly inherits from itself. This is not allowed in Python and most other programming languages because it leads to infinite loops in the inheritance hierarchy.</p>
+
+<p><strong>Example:</strong> Class <code>A</code> inherits from class <code>B</code>, and class <code>B</code> inherits from class <code>A</code>.</p>
+
+<pre><code># This will raise an error
+class A(B):
+    pass
+
+class B(A):
+    pass
+</code></pre>
+
+<h4>Error Message</h4>
+
+<pre><code>NameError: name 'B' is not defined
+</code></pre>
+
+<p>Cyclic inheritance does not make sense in OOP design and should be avoided.</p>
+
+<h2>Conclusion</h2>
+
+<p>Understanding how to use members of one class inside another is crucial for designing robust and reusable code in object-oriented programming. Composition and inheritance are powerful tools that, when used appropriately, can greatly enhance the maintainability and scalability of your codebase.</p>
+
+<p>Key takeaways:</p>
+
+<ul>
+    <li><strong>Composition</strong> (Has-A relationship) allows a class to contain objects of other classes, promoting code reuse and modularity.</li>
+    <li><strong>Inheritance</strong> (Is-A relationship) enables a class to inherit attributes and methods from another class, facilitating code reuse and extensibility.</li>
+    <li>Python supports various types of inheritance, including single, multilevel, hierarchical, multiple, and hybrid inheritance.</li>
+    <li>The <strong>Method Resolution Order (MRO)</strong> in Python ensures that the correct method is called in cases of multiple inheritance.</li>
+    <li><strong>Cyclic inheritance</strong> is not supported and should be avoided as it leads to logical errors.</li>
+</ul>
+
+<p>By mastering these concepts, you can write more efficient, maintainable, and scalable Python programs that leverage the full power of object-oriented programming.</p>
+
+</body>
+</html>

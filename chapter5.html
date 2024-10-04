@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 5: Lists</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 5: Lists</h1>
+
+<h2>Introduction</h2>
+
+<p>A <strong>list</strong> in Python is a collection of objects represented as a single entity. Lists are ordered, allow duplicate elements, and can contain heterogeneous objects. They are dynamic in size and mutable, meaning they can be modified after creation. Lists are defined using square brackets <code>[]</code>.</p>
+
+<p>Key characteristics of lists:</p>
+
+<ol>
+    <li><strong>Insertion Order is Preserved</strong>: Elements maintain the order in which they are added.</li>
+    <li><strong>Duplicate Elements are Allowed</strong>: Lists can contain multiple instances of the same element.</li>
+    <li><strong>Heterogeneous Objects</strong>: Elements can be of different data types.</li>
+    <li><strong>Dynamic Size</strong>: Lists can grow and shrink as needed.</li>
+    <li><strong>Mutable</strong>: Elements can be added, removed, or changed.</li>
+</ol>
+
+<h2>Creating List Objects</h2>
+
+<h3>1. Empty List</h3>
+
+<pre><code>l = []
+</code></pre>
+
+<h3>2. With Known Data</h3>
+
+<pre><code>l = [10, 'asdf', 909]
+</code></pre>
+
+<h3>3. Dynamic Input</h3>
+
+<pre><code>l = eval(input('Enter list: '))
+</code></pre>
+
+<h3>4. Using the <code>list()</code> Constructor</h3>
+
+<pre><code>l = list('durga')
+print(l)  # Output: ['d', 'u', 'r', 'g', 'a']
+</code></pre>
+
+<h2>Accessing Elements of a List</h2>
+
+Consider the list:
+
+<pre><code>l = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+</code></pre>
+
+<h3>1. By Using Index</h3>
+
+<pre><code>print(l[0])    # Output: 10
+print(l[-1])   # Output: 100
+# print(l[100])  # IndexError: list index out of range
+</code></pre>
+
+<h3>2. By Using Slice Operator</h3>
+
+<pre><code>print(l[2:7])     # Output: [30, 40, 50, 60, 70]
+print(l[2:7:2])  # Output: [30, 50, 70]
+print(l[4::2])   # Output: [50, 70, 90]
+print(l[8:2:-2]) # Output: [90, 70, 50]
+print(l[4:100])  # Output: [50, 60, 70, 80, 90, 100]
+print(l[4:0:2])  # Output: []
+</code></pre>
+
+<h2>Traversing Elements of a List</h2>
+
+Given:
+
+<pre><code>l = [10, 20, 30, 40, 50, 60]
+</code></pre>
+
+<h3>1. Using a <code>while</code> Loop</h3>
+
+<pre><code>i = 0
+while i &lt; len(l):
+    print(l[i])
+    i += 1
+</code></pre>
+
+<h3>2. Using a <code>for</code> Loop</h3>
+
+<pre><code>for x in l:
+    print(x)
+</code></pre>
+
+<h3>3. Printing Even Numbers</h3>
+
+<pre><code>for x in l:
+    if x % 2 == 0:
+        print('The even number is:', x)
+</code></pre>
+
+<h3>4. Printing Elements with Indices</h3>
+
+<pre><code>i = 0
+while i &lt; len(l):
+    print('Element at +ve index {} and -ve index {} is {}'.format(i, i - len(l), l[i]))
+    i += 1
+</code></pre>
+
+<h2>Mathematical Operators for Lists</h2>
+
+<h3>1. Concatenation Operator (<code>+</code>)</h3>
+
+<p>Both operands must be lists; otherwise, a <code>TypeError</code> will occur.</p>
+
+<pre><code>l1 = [10, 20, 30]
+l2 = [40, 50, 60]
+l3 = l1 + l2
+print(l3)  # Output: [10, 20, 30, 40, 50, 60]
+
+# Incorrect usage:
+# l2 = l1 + 40  # TypeError
+l2 = l1 + [40]
+print(l2)  # Output: [10, 20, 30, 40]
+</code></pre>
+
+<h3>2. Repetition Operator (<code>*</code>)</h3>
+
+<p>One operand must be a list and the other an integer.</p>
+
+<pre><code>l1 = [10, 20, 30]
+l2 = l1 * 2
+print(l2)  # Output: [10, 20, 30, 10, 20, 30]
+</code></pre>
+
+<h2>Equality Operators for Lists</h2>
+
+<p>Using <code>==</code> and <code>!=</code> operators:</p>
+
+<ol>
+    <li>The contents must be the same.</li>
+    <li>The order must be the same.</li>
+    <li>The elements must be the same.</li>
+</ol>
+
+<pre><code>l1 = ['a', 'b', 'c']
+l2 = ['A', 'B', 'C']
+l3 = ['c', 'a', 'b']
+l4 = ['a', 'b', 'c']
+
+print(l1 == l2)  # Output: False
+print(l1 == l3)  # Output: False
+print(l1 == l4)  # Output: True
+</code></pre>
+
+<h2>Relational Operators</h2>
+
+<p>Using <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> operators. Comparisons are made based on the content of the lists, element by element.</p>
+
+<pre><code>l1 = [10, 20, 30, 40]
+l2 = [50, 60]
+
+print(l1 &lt; l2)   # Output: True
+print(l1 &lt;= l2)  # Output: True
+print(l1 &gt; l2)   # Output: False
+print(l1 &gt;= l2)  # Output: False
+
+l1 = ['Roman', 'son']
+l2 = ['Raman', 'son']
+
+print(l1 &gt; l2)  # Output: True  ('o' &gt; 'a' in 'Roman' vs 'Raman')
+</code></pre>
+
+<h2>Membership Operators</h2>
+
+<p>Using <code>in</code> and <code>not in</code> operators:</p>
+
+<pre><code>l1 = [10, 20, 30, 40, 80]
+print(50 in l1)       # Output: False
+print(50 not in l1)   # Output: True
+</code></pre>
+
+<h2>Manipulating Elements of a List</h2>
+
+<h3>1. <code>append()</code> Method</h3>
+
+<p>Adds an element to the end of the list.</p>
+
+<pre><code>l = []
+l.append(10)
+l.append(20)
+print(l)  # Output: [10, 20]
+</code></pre>
+
+<h4>Example: Adding Numbers Divisible by 10</h4>
+
+<pre><code>l = []
+for x in range(1, 101):
+    if x % 10 == 0:
+        l.append(x)
+print(l)  # Output: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+</code></pre>
+
+<h3>2. <code>insert()</code> Method</h3>
+
+<p>Adds an element at a specified position.</p>
+
+<pre><code>l = [10, 20, 30, 40, 60]
+l.insert(4, 50)
+print(l)  # Output: [10, 20, 30, 40, 50, 60]
+
+l.insert(100, 777)    # Index exceeds length; element added at the end
+l.insert(-100, 777)   # Negative index beyond start; element added at the beginning
+print(l)  # Output: [777, 10, 20, 30, 40, 50, 60, 777]
+</code></pre>
+
+<h3>3. <code>extend()</code> Method</h3>
+
+<p>Adds all elements of a given sequence to the list.</p>
+
+<pre><code>l = ['romanson', 'thapa']
+l2 = ['white', 'elephant']
+l.extend(l2)
+print(l)  # Output: ['romanson', 'thapa', 'white', 'elephant']
+</code></pre>
+
+<p><strong>Note:</strong> Using <code>append()</code> would add the sequence as a single element.</p>
+
+<pre><code>l = ['romanson', 'thapa']
+l2 = ['white', 'elephant']
+l.append(l2)
+print(l)          # Output: ['romanson', 'thapa', ['white', 'elephant']]
+print(len(l))     # Output: 3
+</code></pre>
+
+<h2>Removing Elements from a List</h2>
+
+<h3>1. <code>remove()</code> Method</h3>
+
+<p>Removes the first occurrence of a specified element from the list.</p>
+
+<pre><code>n = [10, 20, 10, 30]
+n.remove(10)
+print(n)  # Output: [20, 10, 30]
+</code></pre>
+
+<p>If the specified element is not present, a <code>ValueError</code> is raised.</p>
+
+<pre><code># n.remove(40)  # ValueError: list.remove(x): x not in list
+</code></pre>
+
+<h4>Removing All Occurrences of an Element</h4>
+
+<pre><code>l = [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3]
+x = int(input('Enter element to remove: '))
+while True:
+    if x in l:
+        l.remove(x)
+    else:
+        break
+print('After Removal:', l)
+</code></pre>
+
+<h3>2. <code>pop()</code> Method</h3>
+
+<p>Removes and returns the last element from the list. If the list is empty, an <code>IndexError</code> is raised.</p>
+
+<pre><code>l = [10, 30, 40, 30, 60]
+print(l.pop())  # Output: 60
+print(l)        # Output: [10, 30, 40, 30]
+</code></pre>
+
+<h4>Using <code>pop()</code> with an Index</h4>
+
+<pre><code>l = [10, 30, 40, 30, 60]
+l.pop(2)
+print(l)  # Output: [10, 30, 30, 60]
+</code></pre>
+
+<h3>Comparison of <code>remove()</code> and <code>pop()</code></h3>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th><code>remove()</code></th>
+        <th><code>pop()</code></th>
+    </tr>
+    <tr>
+        <td>Removes a specified element.</td>
+        <td>Removes and returns an element (default is the last one).</td>
+    </tr>
+    <tr>
+        <td>Does not return the removed element.</td>
+        <td>Returns the removed element.</td>
+    </tr>
+    <tr>
+        <td>Raises <code>ValueError</code> if the element is not found.</td>
+        <td>Raises <code>IndexError</code> if the list is empty.</td>
+    </tr>
+</table>
+
+<h3>3. <code>clear()</code> Method</h3>
+
+<p>Removes all elements from the list.</p>
+
+<pre><code>l = [10, 20, 30, 40]
+l.clear()
+print(l)  # Output: []
+</code></pre>
+
+<h2>Ordering Elements of a List</h2>
+
+<h3>1. Reversing Order</h3>
+
+<h4>1.1 <code>reverse()</code> Method</h4>
+
+<p>Reverses the elements of the list in place.</p>
+
+<pre><code>l = [10, 20, 30, 40]
+l.reverse()
+print(l)  # Output: [40, 30, 20, 10]
+</code></pre>
+
+<h4>1.2 <code>reversed()</code> Function</h4>
+
+<p>Returns an iterator that accesses the given sequence in the reverse order.</p>
+
+<pre><code>l = [10, 20, 30, 40]
+r = reversed(l)
+l1 = list(r)
+print(l1)  # Output: [40, 30, 20, 10]
+</code></pre>
+
+<h3>2. Sorting Elements of Lists</h3>
+
+<p>By default, numbers are sorted in ascending order, and strings are sorted alphabetically.</p>
+
+<pre><code>l = [0, 10, 15, 30, 40, 50, 5, 20]
+l.sort()
+print(l)  # Output: [0, 5, 10, 15, 20, 30, 40, 50]
+</code></pre>
+
+<h4>Sorting in Descending Order</h4>
+
+<pre><code>l.sort(reverse=True)
+print(l)  # Output: [50, 40, 30, 20, 15, 10, 5, 0]
+</code></pre>
+
+<h4>Sorting Strings</h4>
+
+<pre><code>l = ['apple', 'banana', 'mango']
+l.sort(reverse=True)
+print(l)  # Output: ['mango', 'banana', 'apple']
+</code></pre>
+
+<p><strong>Note:</strong> All elements must be of the same type when using <code>sort()</code>; otherwise, a <code>TypeError</code> will occur.</p>
+
+<h4>Using <code>sorted()</code> Function</h4>
+
+<p>The <code>sorted()</code> function returns a new sorted list, leaving the original list unchanged.</p>
+
+<pre><code>l = [0, 10, 15, 30, 40, 50, 5, 20]
+l1 = sorted(l)
+print(l1)  # Output: [0, 5, 10, 15, 20, 30, 40, 50]
+</code></pre>
+
+<h2>Aliasing and Cloning of List Objects</h2>
+
+<h3>Aliasing</h3>
+
+<p>Aliasing refers to assigning one variable to another, making both variables point to the same list object.</p>
+
+<pre><code>l1 = [10, 20, 30, 40]
+l2 = l1
+l1[0] = 222
+
+print(l1)       # Output: [222, 20, 30, 40]
+print(l2)       # Output: [222, 20, 30, 40]
+print(id(l1))   # e.g., 140507890101584
+print(id(l2))   # e.g., 140507890101584
+</code></pre>
+
+<p><strong>Problem:</strong> Changes made through one variable affect the other.</p>
+
+<h3>Cloning</h3>
+
+<p>Cloning creates a new list object with the same elements, so changes to one list do not affect the other.</p>
+
+<h4>Method 1: Using Slice Operator</h4>
+
+<pre><code>l1 = [10, 20, 30, 40]
+l2 = l1[:]
+l1[0] = 222
+
+print(l1)       # Output: [222, 20, 30, 40]
+print(l2)       # Output: [10, 20, 30, 40]
+print(id(l1))   # e.g., 140507890101584
+print(id(l2))   # e.g., 140507890102144
+</code></pre>
+
+<h4>Method 2: Using <code>copy()</code> Method</h4>
+
+<pre><code>l1 = [10, 20, 30, 40]
+l2 = l1.copy()
+</code></pre>
+
+<h2>Nested Lists</h2>
+
+<p>A list can contain another list as an element, which is called a nested list.</p>
+
+<pre><code>l = [10, 20, [30, 40]]
+
+print(l[0])      # Output: 10
+print(l[1])      # Output: 20
+print(l[2])      # Output: [30, 40]
+
+# Accessing elements of the nested list
+print(l[2][0])   # Output: 30
+print(l[2][1])   # Output: 40
+</code></pre>
+
+<h3>Nested List as a Matrix</h3>
+
+<pre><code>l = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+for row in l:
+    for item in row:
+        print(item, end=' ')
+    print()
+# Output:
+# 10 20 30
+# 40 50 60
+# 70 80 90
+</code></pre>
+
+<h2>List Comprehension</h2>
+
+<p>List comprehension offers a concise way to create lists.</p>
+
+<h3>Normal Way</h3>
+
+<pre><code>l = []
+for x in range(1, 11):
+    l.append(x)
+print(l)  # Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+
+<h3>Using List Comprehension</h3>
+
+<pre><code>l = [x for x in range(1, 11)]
+print(l)  # Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+
+<h4>Examples</h4>
+
+<h5>1. Create a List of Square Values from 1 to 10</h5>
+
+<pre><code>l = [x * x for x in range(1, 11)]
+print(l)  # Output: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+</code></pre>
+
+<h5>2. Create a List of Powers of 2 from 1 to 10</h5>
+
+<pre><code>l = [2 ** x for x in range(1, 11)]
+print(l)  # Output: [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+</code></pre>
+
+<h5>3. Create a List of Numbers from 1 to 100 Divisible by 10</h5>
+
+<pre><code>l = [x for x in range(1, 101) if x % 10 == 0]
+print(l)  # Output: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+</code></pre>
+
+<h5>4. Elements Present in <code>l1</code> but Not in <code>l2</code></h5>
+
+<pre><code>l1 = [10, 20, 30, 40]
+l2 = [30, 40, 50, 60]
+l3 = [x for x in l1 if x not in l2]
+print(l3)  # Output: [10, 20]
+</code></pre>
+
+<h5>5. Elements Present in Both <code>l1</code> and <code>l2</code></h5>
+
+<pre><code>l4 = [x for x in l1 if x in l2]
+print(l4)  # Output: [30, 40]
+</code></pre>
+
+<h5>6. Create a List with the First Letter of Each Word</h5>
+
+<pre><code>l = ['Romanson', 'bllubadwa', 'pkcutiya']
+l1 = [word[0] for word in l]
+print(l1)  # Output: ['R', 'b', 'p']
+</code></pre>
+
+<h5>7. List of Words in Uppercase with Their Lengths</h5>
+
+<pre><code>s = 'the quick brown fox jumps over the lazy dog'
+words = s.split()
+l = [[word.upper(), len(word)] for word in words]
+print(l)
+# Output: [['THE', 3], ['QUICK', 5], ['BROWN', 5], ['FOX', 3], ['JUMPS', 5], ['OVER', 4], ['THE', 3], ['LAZY', 4], ['DOG', 3]]
+</code></pre>
+
+<h5>8. Find Unique Vowels in a Given Word</h5>
+
+<h6>First Logic</h6>
+
+<pre><code>vowels = ['a', 'e', 'i', 'o', 'u']
+word = input('Enter any string: ').lower()
+result = []
+for x in word:
+    if x in vowels:
+        if x not in result:
+            result.append(x)
+print('Unique vowels:', result)
+print('Number of unique vowels:', len(result))
+</code></pre>
+
+<h6>Second Logic Using List Comprehension</h6>
+
+<pre><code>vowels = ['a', 'e', 'i', 'o', 'u']
+word = input('Enter any string: ').lower()
+result = [x for x in vowels if x in word]
+print('Unique vowels:', result)
+print('Number of unique vowels:', len(result))
+</code></pre>
+
+</body>
+</html>

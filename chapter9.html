@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 9: Functions in Python</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 9: Functions in Python</h1>
+
+<h2>Introduction</h2>
+
+<p>Functions are a fundamental building block in Python programming. They help in reducing code redundancy, improving code reusability, and making programs more modular and easier to understand. Functions allow you to encapsulate a block of code that performs a specific task and can be reused whenever needed.</p>
+
+<h2>Need and Advantages of Functions</h2>
+
+<p>Consider the following code without functions:</p>
+
+<pre><code>a = 10
+b = 20
+print('Sum:', a + b)
+print('Division:', a / b)
+print('Multiplication:', a * b)
+
+a = 100
+b = 200
+print('Sum:', a + b)
+print('Division:', a / b)
+print('Multiplication:', a * b)
+</code></pre>
+
+<p>This code repeats the same set of operations for different values of <code>a</code> and <code>b</code>, leading to redundancy. Functions help eliminate such repetition:</p>
+
+<pre><code>def calculate(a, b):
+    print('Sum:', a + b)
+    print('Division:', a / b)
+    print('Multiplication:', a * b)
+
+calculate(20, 10)
+calculate(200, 100)
+calculate(2000, 1000)
+</code></pre>
+
+<p>Advantages of using functions:</p>
+
+<ul>
+    <li><strong>Code Reusability</strong>: Functions allow you to reuse code without rewriting it.</li>
+    <li><strong>Modularity</strong>: Functions make code more organized and modular.</li>
+    <li><strong>Maintainability</strong>: Easier to maintain and update code.</li>
+    <li><strong>Readability</strong>: Improves code readability by abstracting complex logic.</li>
+</ul>
+
+<h2>Types of Functions</h2>
+
+<h3>1. Built-in Functions</h3>
+
+<p>Functions that are already defined in Python and can be used without defining them explicitly. Examples include <code>print()</code>, <code>len()</code>, <code>type()</code>, <code>input()</code>, etc.</p>
+
+<h3>2. User-Defined Functions</h3>
+
+<p>Functions defined by the programmer to perform specific tasks.</p>
+
+<pre><code>def function_name(parameters):
+    '''Documentation String'''
+    Function Body
+    return [expression]
+</code></pre>
+
+<h2>Defining and Calling Functions</h2>
+
+<h3>Example: Simple Function</h3>
+
+<pre><code>def wish():
+    print('Hello! Welcome to Python programming.')
+
+wish()
+wish()
+</code></pre>
+
+<h3>Function Parameters</h3>
+
+<p>Functions can accept parameters to process data and return results.</p>
+
+<pre><code>def wish(name):
+    print('Hello,', name, 'Welcome!')
+
+wish('Alice')
+wish('Bob')
+</code></pre>
+
+<h3>Return Statement</h3>
+
+<p>The <code>return</code> statement is used to exit a function and return a value.</p>
+
+<pre><code>def add(a, b):
+    return a + b
+
+result = add(10, 20)
+print('The result is', result)
+</code></pre>
+
+<h2>Returning Multiple Values from a Function</h2>
+
+<p>In Python, a function can return multiple values as a tuple.</p>
+
+<pre><code>def sum_subtract(a, b):
+    return a + b, a - b
+
+sum_result, subtract_result = sum_subtract(20, 10)
+print('Sum:', sum_result)
+print('Subtract:', subtract_result)
+</code></pre>
+
+<h2>Types of Arguments</h2>
+
+<p>Python supports various types of arguments:</p>
+
+<h3>1. Positional Arguments</h3>
+
+<p>Arguments passed to a function in the correct positional order.</p>
+
+<pre><code>def subtract(a, b):
+    print(a - b)
+
+subtract(20, 10)  # Output: 10
+subtract(10, 20)  # Output: -10
+</code></pre>
+
+<h3>2. Keyword Arguments</h3>
+
+<p>Arguments passed using the parameter names as keywords.</p>
+
+<pre><code>def greet(name, message):
+    print(message, name)
+
+greet(name='Alice', message='Hello')
+greet(message='Hi', name='Bob')
+</code></pre>
+
+<h3>3. Default Arguments</h3>
+
+<p>Parameters that assume a default value if no argument is provided.</p>
+
+<pre><code>def wish(name='Guest'):
+    print('Hello', name)
+
+wish()          # Output: Hello Guest
+wish('Charlie') # Output: Hello Charlie
+</code></pre>
+
+<p><strong>Note:</strong> Default arguments should follow non-default arguments in the function definition.</p>
+
+<h3>4. Variable-Length Arguments</h3>
+
+<p>Functions can accept any number of positional or keyword arguments.</p>
+
+<h4>Positional Variable-Length Arguments (<code>*args</code>)</h4>
+
+<pre><code>def sum_all(*numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    print('Sum:', total)
+
+sum_all(10, 20, 30)
+sum_all(5, 15)
+</code></pre>
+
+<h4>Keyword Variable-Length Arguments (<code>**kwargs</code>)</h4>
+
+<pre><code>def display_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+display_info(name='Alice', age=30, city='New York')
+</code></pre>
+
+<h2>Using Both <code>*args</code> and <code>**kwargs</code></h2>
+
+<pre><code>def func(*args, **kwargs):
+    print('Positional arguments:', args)
+    print('Keyword arguments:', kwargs)
+
+func(1, 2, 3, a=10, b=20)
+</code></pre>
+
+<h2>Global and Local Variables</h2>
+
+<h3>Global Variables</h3>
+
+<p>Variables defined outside any function and accessible throughout the script.</p>
+
+<pre><code>a = 10  # Global variable
+
+def display():
+    print('Inside function:', a)
+
+display()
+print('Outside function:', a)
+</code></pre>
+
+<h3>Local Variables</h3>
+
+<p>Variables defined inside a function and accessible only within that function.</p>
+
+<pre><code>def display():
+    b = 20  # Local variable
+    print('Inside function:', b)
+
+display()
+# print('Outside function:', b)  # This will raise a NameError
+</code></pre>
+
+<h3>The <code>global</code> Keyword</h3>
+
+<p>Used to declare that a variable inside a function is global.</p>
+
+<pre><code>a = 10
+
+def modify_global():
+    global a
+    a = 20
+    print('Inside function:', a)
+
+modify_global()
+print('Outside function:', a)
+</code></pre>
+
+<h2>Recursive Functions</h2>
+
+<p>A recursive function is a function that calls itself.</p>
+
+<h3>Example: Calculating Factorial</h3>
+
+<pre><code>def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+print(factorial(5))  # Output: 120
+</code></pre>
+
+<h3>Limitations of Recursion</h3>
+
+<p>Python has a maximum recursion depth limit (default is 1000). Exceeding this limit will raise a <code>RecursionError</code>.</p>
+
+<h2>Anonymous Functions (Lambda Functions)</h2>
+
+<p>Lambda functions are small, anonymous functions defined using the <code>lambda</code> keyword.</p>
+
+<pre><code># Syntax: lambda arguments: expression
+
+square = lambda x: x * x
+print(square(5))  # Output: 25
+</code></pre>
+
+<h2>Functions as Arguments</h2>
+
+<p>Functions can be passed as arguments to other functions.</p>
+
+<h3>Built-in Higher-Order Functions</h3>
+
+<ul>
+    <li><code>filter(function, iterable)</code></li>
+    <li><code>map(function, iterable)</code></li>
+    <li><code>reduce(function, iterable)</code> (requires importing from <code>functools</code>)</li>
+</ul>
+
+<h3>Using <code>filter()</code> Function</h3>
+
+<p>Filters items in an iterable for which the function returns <code>True</code>.</p>
+
+<pre><code># Example: Filtering even numbers
+numbers = [1, 2, 3, 4, 5, 6]
+
+even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+print(even_numbers)  # Output: [2, 4, 6]
+</code></pre>
+
+<h3>Using <code>map()</code> Function</h3>
+
+<p>Applies a function to all items in an iterable.</p>
+
+<pre><code># Example: Squaring numbers
+numbers = [1, 2, 3, 4, 5]
+
+squared_numbers = list(map(lambda x: x * x, numbers))
+print(squared_numbers)  # Output: [1, 4, 9, 16, 25]
+</code></pre>
+
+<h3>Using <code>reduce()</code> Function</h3>
+
+<p>Applies a rolling computation to sequential pairs of values in an iterable.</p>
+
+<pre><code>from functools import reduce
+
+numbers = [1, 2, 3, 4, 5]
+
+sum_of_numbers = reduce(lambda x, y: x + y, numbers)
+print(sum_of_numbers)  # Output: 15
+</code></pre>
+
+<h2>Examples Using Lambda Functions</h2>
+
+<h3>Example: Filtering Names Starting with 'A'</h3>
+
+<pre><code>names = ['Alice', 'Bob', 'Amanda', 'Charlie']
+a_names = list(filter(lambda name: name.startswith('A'), names))
+print(a_names)  # Output: ['Alice', 'Amanda']
+</code></pre>
+
+<h3>Example: Mapping Names to Their Lengths</h3>
+
+<pre><code>names = ['Alice', 'Bob', 'Amanda', 'Charlie']
+name_lengths = list(map(lambda name: len(name), names))
+print(name_lengths)  # Output: [5, 3, 6, 7]
+</code></pre>
+
+<h2>Key Takeaways</h2>
+
+<ul>
+    <li>Functions help in making code modular, reusable, and organized.</li>
+    <li>Python supports various types of arguments: positional, keyword, default, and variable-length.</li>
+    <li><code>*args</code> and <code>**kwargs</code> are used for variable-length positional and keyword arguments, respectively.</li>
+    <li>Global and local variables have different scopes.</li>
+    <li>Recursive functions can simplify complex problems but have limitations.</li>
+    <li>Lambda functions provide a concise way to write small, anonymous functions.</li>
+    <li>Higher-order functions like <code>filter()</code>, <code>map()</code>, and <code>reduce()</code> can operate on iterables efficiently.</li>
+</ul>
+
+</body>
+</html>

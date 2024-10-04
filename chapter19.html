@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chapter 19: Abstraction and Encapsulation in Python</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Chapter 19: Abstraction and Encapsulation in Python</h1>
+
+<h2>Introduction</h2>
+
+<p>In this chapter, we will delve into two fundamental concepts of Object-Oriented Programming (OOP): <strong>Abstraction</strong> and <strong>Encapsulation</strong>. These concepts play a crucial role in designing robust, maintainable, and secure software. We will explore how Python implements abstraction through abstract methods and classes, and how encapsulation helps in data hiding and security.</p>
+
+<h2>Abstraction in Python</h2>
+
+<p><strong>Abstraction</strong> is the concept of hiding the internal implementation details of a class and exposing only the necessary functionalities. It focuses on what an object does rather than how it does it. Abstraction in Python is achieved using abstract classes and abstract methods.</p>
+
+<h3>1. Abstract Methods</h3>
+
+<p>An <strong>abstract method</strong> is a method that is declared but contains no implementation. In other words, it has only a declaration but not a definition (the body of the method is empty). Abstract methods are meant to be overridden in derived classes.</p>
+
+<h4>Declaring an Abstract Method</h4>
+
+<p>In Python, you can declare an abstract method using the <code>@abstractmethod</code> decorator from the <code>abc</code> module.</p>
+
+<pre><code>from abc import ABC, abstractmethod
+
+class Vehicle(ABC):
+    @abstractmethod
+    def get_no_of_wheels(self):
+        pass
+</code></pre>
+
+<p>In this example:</p>
+
+<ul>
+    <li>The <code>Vehicle</code> class is an abstract class (we will discuss abstract classes shortly).</li>
+    <li>The method <code>get_no_of_wheels</code> is an abstract method declared using the <code>@abstractmethod</code> decorator.</li>
+</ul>
+
+<h4>Purpose of Abstract Methods</h4>
+
+<ul>
+    <li>They provide a blueprint for derived classes.</li>
+    <li>They enforce certain methods to be implemented in child classes.</li>
+</ul>
+
+<h3>2. Abstract Classes</h3>
+
+<p>An <strong>abstract class</strong> is a class that cannot be instantiated and may contain one or more abstract methods. It can also contain concrete methods (methods with implementation). Abstract classes are used to define common behaviors that can be shared by multiple subclasses.</p>
+
+<h4>Declaring an Abstract Class</h4>
+
+<p>To declare a class as abstract, it must inherit from the <code>ABC</code> class provided by the <code>abc</code> module.</p>
+
+<pre><code>from abc import ABC, abstractmethod
+
+class Vehicle(ABC):
+    @abstractmethod
+    def get_no_of_wheels(self):
+        pass
+</code></pre>
+
+<p>In this example:</p>
+
+<ul>
+    <li><code>Vehicle</code> is an abstract class because it inherits from <code>ABC</code>.</li>
+    <li>It contains an abstract method <code>get_no_of_wheels</code>.</li>
+</ul>
+
+<h4>Characteristics of Abstract Classes</h4>
+
+<ul>
+    <li>Cannot be instantiated (you cannot create an object of an abstract class).</li>
+    <li>May contain abstract methods and concrete methods.</li>
+    <li>Used to provide a common interface for subclasses.</li>
+</ul>
+
+<h4>Implementing Abstract Methods in Child Classes</h4>
+
+<p>Child classes that inherit from an abstract class must provide implementations for all abstract methods, or else they will also be considered abstract classes.</p>
+
+<pre><code>class Bus(Vehicle):
+    def get_no_of_wheels(self):
+        return 6
+
+class Auto(Vehicle):
+    def get_no_of_wheels(self):
+        return 3
+
+# Creating objects
+bus = Bus()
+print('Bus has', bus.get_no_of_wheels(), 'wheels.')  # Output: Bus has 6 wheels.
+
+auto = Auto()
+print('Auto has', auto.get_no_of_wheels(), 'wheels.')  # Output: Auto has 3 wheels.
+</code></pre>
+
+<h4>Note</h4>
+
+<p>You cannot create an instance of the <code>Vehicle</code> class because it is abstract:</p>
+
+<pre><code># This will raise an error
+vehicle = Vehicle()
+</code></pre>
+
+<h4>Important Points</h4>
+
+<ol>
+    <li>If a class contains at least one abstract method and extends the <code>ABC</code> class, it is an abstract class and cannot be instantiated.</li>
+    <li>If a child class does not implement all abstract methods of the parent abstract class, it becomes an abstract class itself.</li>
+</ol>
+
+<h3>Interfaces in Python</h3>
+
+<p>Python does not have a formal concept of interfaces as in Java or C#. However, you can achieve similar functionality using abstract classes with only abstract methods.</p>
+
+<pre><code>from abc import ABC, abstractmethod
+
+class Test(ABC):
+    @abstractmethod
+    def m1(self):
+        pass
+
+    @abstractmethod
+    def m2(self):
+        pass
+</code></pre>
+
+<p>In this example, <code>Test</code> acts like an interface, providing method declarations without implementations. Classes that inherit from <code>Test</code> must implement all the abstract methods.</p>
+
+<h4>Role of Interfaces</h4>
+
+<ul>
+    <li>Act as a contract or blueprint for classes.</li>
+    <li>Specify what methods a class must implement.</li>
+    <li>Promote code consistency and enforce certain behaviors.</li>
+</ul>
+
+<h3>Interface vs. Abstract Class vs. Concrete Class</h3>
+
+<table>
+    <tr>
+        <th>Interface</th>
+        <th>Abstract Class</th>
+        <th>Concrete Class</th>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>Contains only abstract methods (in theory).</li>
+                <li>Cannot be instantiated.</li>
+                <li>Defines a contract for subclasses.</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>May contain both abstract and concrete methods.</li>
+                <li>Cannot be instantiated.</li>
+                <li>Provides partial implementation.</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Contains concrete methods with implementations.</li>
+                <li>Can be instantiated.</li>
+                <li>Fully implemented class.</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<h2>Access Modifiers in Python</h2>
+
+<p>Access modifiers are used to set the accessibility of classes, methods, and variables. Python does not have the same access modifiers as some other languages (like Java or C++), but it uses naming conventions to indicate the intended level of access.</p>
+
+<h3>Public Members</h3>
+
+<p>By default, all members in a Python class are public. Public members can be accessed from anywhere, both inside and outside the class.</p>
+
+<pre><code>class Test:
+    def __init__(self):
+        self.x = 10  # Public variable
+
+    def m1(self):
+        print('Public method')
+
+t = Test()
+print(t.x)  # Accessing public variable
+t.m1()      # Calling public method
+</code></pre>
+
+<h3>Private Members</h3>
+
+<p>A <strong>private member</strong> is intended to be accessed only within its class definition. In Python, you can define a private member by prefixing it with double underscores <code>__</code>.</p>
+
+<h4>Example</h4>
+
+<pre><code>class Test:
+    def __init__(self):
+        self.__x = 10  # Private variable
+
+    def __m1(self):    # Private method
+        print('Private method')
+
+    def m2(self):
+        print(self.__x)
+        self.__m1()
+
+t = Test()
+t.m2()         # Output: 10, Private method
+print(t.__x)   # AttributeError
+t.__m1()       # AttributeError
+</code></pre>
+
+<h4>Name Mangling</h4>
+
+<p>Python performs name mangling on private members to prevent access from outside the class. The private member name is transformed into <code>_ClassName__member</code>. You can access a private member using name mangling (not recommended).</p>
+
+<pre><code>print(t._Test__x)  # Output: 10
+t._Test__m1()         # Output: Private method
+</code></pre>
+
+<p><strong>Note:</strong> Accessing private members this way is discouraged as it violates the intended encapsulation.</p>
+
+<h3>Protected Members</h3>
+
+<p>A <strong>protected member</strong> is intended to be accessed within its class and by subclasses. In Python, you indicate a protected member by prefixing it with a single underscore <code>_</code>.</p>
+
+<pre><code>class Test:
+    def __init__(self):
+        self._x = 10  # Protected variable
+
+    def m1(self):
+        print(self._x)
+
+class SubTest(Test):
+    def m2(self):
+        print(self._x)
+
+t = SubTest()
+t.m1()    # Output: 10
+t.m2()    # Output: 10
+</code></pre>
+
+<p>While the convention suggests that protected members should not be accessed outside the class hierarchy, Python does not enforce this, and you can still access them directly.</p>
+
+<pre><code>print(t._x)  # Output: 10
+</code></pre>
+
+<p><strong>Note:</strong> Accessing protected members from outside the class hierarchy is considered bad practice.</p>
+
+<h4>Conventions vs. Enforcement</h4>
+
+<p>In Python, access modifiers are based on naming conventions rather than language-enforced rules. It is up to the developer to respect these conventions to maintain code integrity and encapsulation.</p>
+
+<h2>Data Hiding</h2>
+
+<p><strong>Data hiding</strong> is the concept of restricting access to the internal state of an object from outside the class definition. By using private members, you can prevent external code from modifying the object's internal data in unintended ways.</p>
+
+<h3>Example</h3>
+
+<pre><code>class Account:
+    def __init__(self, initial_balance):
+        self.__balance = initial_balance  # Private variable
+
+    def get_balance(self):
+        # Perform validation or authentication
+        return self.__balance
+
+a = Account(1000)
+print(a.get_balance())  # Output: 1000
+print(a.__balance)      # AttributeError
+</code></pre>
+
+<p>In this example, the <code>__balance</code> variable is private, and external code cannot access it directly. Access is provided through the <code>get_balance</code> method, where you can include validation or authentication logic.</p>
+
+<h3>Advantages of Data Hiding</h3>
+
+<ul>
+    <li><strong>Security</strong>: Sensitive data is protected from unauthorized access.</li>
+    <li><strong>Control</strong>: Provides control over how data is accessed or modified.</li>
+    <li><strong>Encapsulation</strong>: Enforces the encapsulation principle of OOP.</li>
+</ul>
+
+<h2>Abstraction vs. Encapsulation</h2>
+
+<h3>Abstraction</h3>
+
+<p><strong>Abstraction</strong> refers to the concept of hiding the internal implementation details of a class and exposing only the necessary functionalities to the users. It focuses on the <em>what</em> rather than the <em>how</em>.</p>
+
+<h4>Advantages of Abstraction</h4>
+
+<ul>
+    <li><strong>Security</strong>: Internal implementation is hidden from the user.</li>
+    <li><strong>Ease of Use</strong>: Simplifies the interface for the user.</li>
+    <li><strong>Maintainability</strong>: Changes in implementation do not affect users.</li>
+    <li><strong>Modularity</strong>: Encourages modular design.</li>
+</ul>
+
+<h4>Examples of Abstraction</h4>
+
+<ul>
+    <li>Using a <strong>GUI</strong> to interact with a complex system (e.g., ATM machine).</li>
+    <li>Providing <strong>APIs</strong> that expose certain functionalities without revealing the internal workings.</li>
+</ul>
+
+<h3>Encapsulation</h3>
+
+<p><strong>Encapsulation</strong> is the process of bundling data (variables) and methods that operate on that data into a single unit or class. It also involves restricting access to the internal state of the object to enforce data hiding.</p>
+
+<h4>Implementing Encapsulation</h4>
+
+<p>In Python, encapsulation is achieved through classes and access modifiers (using naming conventions).</p>
+
+<pre><code>class Student:
+    def __init__(self, name, roll_no, marks):
+        self.__name = name         # Private variable
+        self.__roll_no = roll_no   # Private variable
+        self.__marks = marks       # Private variable
+
+    def get_details(self):
+        return 'Name: {}, Roll No: {}, Marks: {}'.format(self.__name, self.__roll_no, self.__marks)
+
+student = Student('Alice', 101, 95)
+print(student.get_details())  # Output: Name: Alice, Roll No: 101, Marks: 95
+</code></pre>
+
+<h4>Advantages of Encapsulation</h4>
+
+<ul>
+    <li><strong>Security</strong>: Protects the internal state of the object.</li>
+    <li><strong>Modularity</strong>: Groups related data and methods together.</li>
+    <li><strong>Maintainability</strong>: Changes in internal implementation do not affect external code.</li>
+    <li><strong>Ease of Enhancement</strong>: Modifying one part of the code has minimal impact on others.</li>
+</ul>
+
+<h4>Disadvantages of Encapsulation</h4>
+
+<ul>
+    <li><strong>Performance Overhead</strong>: Additional layers of access can slow down execution.</li>
+    <li><strong>Increased Code Length</strong>: More code is needed to implement getters and setters.</li>
+</ul>
+
+<h3>Relationship Between Abstraction and Encapsulation</h3>
+
+<p>Abstraction and encapsulation are related but distinct concepts:</p>
+
+<ul>
+    <li><strong>Abstraction</strong>: Focuses on hiding the internal implementation and exposing only the necessary details.</li>
+    <li><strong>Encapsulation</strong>: Involves bundling data and methods together and controlling access to them.</li>
+</ul>
+
+<p>Encapsulation can be used to implement abstraction. By encapsulating data and methods, and restricting access through access modifiers, you can hide the internal workings of a class.</p>
+
+<h2>The Three Pillars of OOP</h2>
+
+<p>The three main principles of Object-Oriented Programming are:</p>
+
+<ol>
+    <li><strong>Inheritance</strong>: The mechanism by which one class can inherit attributes and methods from another class.</li>
+    <li><strong>Polymorphism</strong>: The ability of different classes to be treated as instances of the same class through a common interface.</li>
+    <li><strong>Encapsulation</strong>: The bundling of data and methods into a single unit and restricting access to the internal state.</li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>Understanding abstraction and encapsulation is crucial for designing secure, maintainable, and modular software systems. By effectively using abstract classes, interfaces, and access modifiers, you can create classes that expose only what is necessary and hide the rest, promoting a clear separation of concerns.</p>
+
+<p>Key takeaways:</p>
+
+<ul>
+    <li><strong>Abstraction</strong> hides internal implementation details and exposes only the necessary functionalities.</li>
+    <li><strong>Abstract methods</strong> are methods without implementations that must be overridden in child classes.</li>
+    <li><strong>Abstract classes</strong> cannot be instantiated and may contain abstract methods.</li>
+    <li><strong>Encapsulation</strong> bundles data and methods together and restricts access to internal data using access modifiers.</li>
+    <li><strong>Data hiding</strong> protects sensitive data by making variables private and providing controlled access through methods.</li>
+    <li>Python uses naming conventions to indicate access levels (public, protected, private).</li>
+    <li>The three pillars of OOP are inheritance, polymorphism, and encapsulation.</li>
+</ul>
+
+<p>By applying these principles, you can write Python code that is more robust, secure, and easier to maintain.</p>
+
+</body>
+</html>
