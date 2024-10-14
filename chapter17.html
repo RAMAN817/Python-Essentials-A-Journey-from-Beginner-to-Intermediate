@@ -2,14 +2,21 @@
 <html>
 <head>
     <title>Chapter 17: Object-Oriented Programming in Python - Part Six</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Include Prism.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Include the Python language component -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    
+        <link rel="stylesheet" href="prism-vsc-dark-plus.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </style>
 </head>
 <body>
 
-<h1>Chapter 17: Object-Oriented Programming in Python - Part Six</h1>
+<h1>Chapter 17: OOP-Part Six</h1>
 
 <h2>Introduction</h2>
 
@@ -23,14 +30,16 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 
 <p>You can find the MRO of any class using the <code>mro()</code> method or by accessing the <code>__mro__</code> attribute.</p>
 
-<pre><code>print(ClassName.mro())
+<pre><code class="language-python">
+print(ClassName.mro())
 # or
 print(ClassName.__mro__)
 </code></pre>
 
 <h3>Example</h3>
 
-<pre><code>class A:
+<pre><code class="language-python">
+class A:
     pass
 
 class B(A):
@@ -53,7 +62,8 @@ print(D.mro())  # Output: [<class '__main__.D'>, <class '__main__.B'>, <class '_
 
 <h3>Another Example</h3>
 
-<pre><code>class A:
+<pre><code class="language-python">
+class A:
     pass
 
 class B:
@@ -131,7 +141,8 @@ print(F.mro())  # Output: [<class '__main__.F'>, <class '__main__.D'>, <class '_
 
 <p>Consider the following class hierarchy:</p>
 
-<pre><code>class A:
+<pre><code class="language-python">
+class A:
     pass
 
 class B:
@@ -154,7 +165,8 @@ class F(D, E, C):
 
 <h4>Step 1: List MROs of Parent Classes</h4>
 
-<pre><code>MRO(A) = [A, object]
+<pre><code class="language-python">
+MRO(A) = [A, object]
 MRO(B) = [B, object]
 MRO(C) = [C, object]
 MRO(D) = [D, A, B, object]
@@ -165,7 +177,8 @@ MRO(E) = [E, B, C, object]
 
 <blockquote>MRO(F) = F + Merge(MRO(D), MRO(E), MRO(C), [D, E, C])</blockquote>
 
-<pre><code>MRO(F) = [F] + Merge([D, A, B, object], [E, B, C, object], [C, object], [D, E, C])
+<pre><code class="language-python">
+MRO(F) = [F] + Merge([D, A, B, object], [E, B, C, object], [C, object], [D, E, C])
 </code></pre>
 
 <h4>Step 3: Perform Merge Operation</h4>
@@ -190,7 +203,8 @@ MRO(E) = [E, B, C, object]
 
 <h4>Final MRO of Class F</h4>
 
-<pre><code>MRO(F) = [F, D, A, E, B, C, object]
+<pre><code class="language-python">
+MRO(F) = [F, D, A, E, B, C, object]
 </code></pre>
 
 <p>This is consistent with what Python computes as the MRO of class <code>F</code>.</p>
@@ -205,7 +219,8 @@ MRO(E) = [E, B, C, object]
 
 <h3>Example Without <code>super()</code></h3>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     def m1(self):
         print('Parent Method')
 
@@ -222,7 +237,8 @@ c.m1()
 
 <h3>Using <code>super()</code> to Resolve the Issue</h3>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     def m1(self):
         print('Parent Method')
 
@@ -237,7 +253,8 @@ c.m1()
 
 <h4>Output</h4>
 
-<pre><code>Parent Method
+<pre><code class="language-python">
+Parent Method
 Child Method
 </code></pre>
 
@@ -245,7 +262,8 @@ Child Method
 
 <p>If you need to call a method from a specific parent class in a multiple inheritance scenario, you can use the class name directly.</p>
 
-<pre><code>class A:
+<pre><code class="language-python">
+class A:
     def m1(self):
         print('Method from A')
 
@@ -265,7 +283,8 @@ c.m1()
 
 <h4>Output</h4>
 
-<pre><code>Method from A
+<pre><code class="language-python">
+Method from A
 Method from B
 Method from C
 </code></pre>
@@ -281,7 +300,8 @@ Method from C
 
 <h4>Example</h4>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     a = 19  # Class variable
 
     def __init__(self):
@@ -300,7 +320,8 @@ c.m1()
 
 <h4>Corrected Example</h4>
 
-<pre><code>class Child(Parent):
+<pre><code class="language-python">
+class Child(Parent):
     def m1(self):
         print(self.a)  # Accesses class variable 'a' from Parent
         print(self.b)  # Accesses instance variable 'b' from Parent
@@ -315,7 +336,8 @@ c.m1()
 
 <h4>Example: Calling Parent Constructor</h4>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     def __init__(self):
         print('Parent Constructor')
 
@@ -329,13 +351,15 @@ c = Child()
 
 <h4>Output</h4>
 
-<pre><code>Parent Constructor
+<pre><code class="language-python">
+Parent Constructor
 Child Constructor
 </code></pre>
 
 <h4>Example: Calling Parent Method from Child Instance Method</h4>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     def display(self):
         print('Parent Method')
 
@@ -350,7 +374,8 @@ c.display()
 
 <h4>Output</h4>
 
-<pre><code>Parent Method
+<pre><code class="language-python">
+Parent Method
 Child Method
 </code></pre>
 
@@ -360,7 +385,8 @@ Child Method
 
 <h4>Example in Class Method</h4>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     @classmethod
     def cm(cls):
         print('Parent Class Method')
@@ -376,13 +402,15 @@ Child.cm()
 
 <h4>Output</h4>
 
-<pre><code>Parent Class Method
+<pre><code class="language-python">
+Parent Class Method
 Child Class Method
 </code></pre>
 
 <h4>Example in Static Method</h4>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     @staticmethod
     def sm():
         print('Parent Static Method')
@@ -398,7 +426,8 @@ Child.sm()
 
 <h4>Output</h4>
 
-<pre><code>Parent Static Method
+<pre><code class="language-python">
+Parent Static Method
 Child Static Method
 </code></pre>
 

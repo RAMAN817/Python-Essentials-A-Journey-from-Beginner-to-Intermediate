@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chapter 18: Polymorphism in Python</title>
+    <title> Chapter 18:Polymorphism in Python</title>
+        <!-- Include Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<!-- Include the Python language component -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <link rel="stylesheet" href="prism-vsc-dark-plus.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -20,7 +27,8 @@
 
 <p>Operator overloading is a form of polymorphism where the same operator behaves differently based on the operands. In Python, operators like <code>+</code> can be used with different data types and perform different operations.</p>
 
-<pre><code># Adding integers
+<pre><code class="language-python">
+# Adding integers
 result = 10 + 20
 print(result)  # Output: 30
 
@@ -35,7 +43,8 @@ print(result)  # Output: durgasoft
 
 <p>Method overriding allows a child class to provide a specific implementation of a method that is already defined in its parent class. This is another form of polymorphism.</p>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     def marry(self):
         print('Subbalakshmi or Appalamma')
 
@@ -49,7 +58,8 @@ c.marry()
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Katrina Kaif
+<pre><code class="language-python">
+Katrina Kaif
 </code></pre>
 
 <p>In this example, the <code>Child</code> class overrides the <code>marry</code> method of the <code>Parent</code> class to provide its own implementation.</p>
@@ -62,7 +72,7 @@ c.marry()
 
 <p>Suppose we have a <code>Book</code> class, and we want to add two <code>Book</code> objects to get the total number of pages.</p>
 
-<pre><code>class Book:
+<pre><code class="language-python">class Book:
     def __init__(self, pages):
         self.pages = pages
 
@@ -111,7 +121,8 @@ print(b1 + b3)  # Output: 600
 
 <h3>Example</h3>
 
-<pre><code>class Student:
+<pre><code class="language-python">
+class Student:
     def __init__(self, name, rollno, marks):
         self.name = name
         self.rollno = rollno
@@ -129,7 +140,8 @@ print(s2)
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Name: Ram, Roll No: 102, Marks: 239
+<pre><code class="language-python">
+Name: Ram, Roll No: 102, Marks: 239
 Name: Roman, Roll No: 101, Marks: 348
 </code></pre>
 
@@ -137,7 +149,8 @@ Name: Roman, Roll No: 101, Marks: 348
 
 <h3>Example: Overloading <code>+</code> and <code>__str__()</code> in <code>Book</code> Class</h3>
 
-<pre><code>class Book:
+<pre><code class="language-python">
+class Book:
     def __init__(self, pages):
         self.pages = pages
 
@@ -170,7 +183,8 @@ print(b1 + b2 * b3)  # Output: Total number of pages: 100100
 
 <h3>Example</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def m1(self):
         print('No-argument method')
 
@@ -192,7 +206,8 @@ t.m1()  # TypeError: m1() missing 2 required positional arguments: 'x' and 'y'
 
 <h4>Using Default Arguments</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def m1(self, x=None, y=None):
         if x is not None and y is not None:
             print('Two-argument method')
@@ -209,7 +224,8 @@ t.m1(10, 20)      # Output: Two-argument method
 
 <h4>Using Variable-Length Arguments</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def m1(self, *args):
         if len(args) == 0:
             print('No-argument method')
@@ -233,7 +249,8 @@ t.m1(10, 20, 30)        # Output: Method with 3 arguments
 
 <h3>Example</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def __init__(self):
         print('No-argument constructor')
 
@@ -256,7 +273,8 @@ t = Test(10, 20)    # Output: Two-argument constructor
 
 <h4>Using Default Arguments</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def __init__(self, x=None, y=None):
         if x is not None and y is not None:
             print('Two-argument constructor')
@@ -272,7 +290,8 @@ t3 = Test(10, 20)     # Output: Two-argument constructor
 
 <h4>Using Variable-Length Arguments</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def __init__(self, *args):
         if len(args) == 0:
             print('No-argument constructor')
@@ -295,8 +314,9 @@ t4 = Test(10, 20, 30)        # Output: Constructor with 3 arguments
 
 <h3>Example</h3>
 
-<pre><code>class Parent:
-    def property(self):
+<pre><code class="language-python">
+class Parent:
+    def p roperty(self):
         print('Cash + Gold + Land')
 
     def marry(self):
@@ -319,7 +339,8 @@ c.marry()     # Output: Katrina Kaif
 
 <h3>Example</h3>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     def __init__(self):
         print('Parent Constructor')
 
@@ -336,7 +357,8 @@ c = Child()  # Output: Child Constructor
 
 <p>You can call the parent class method from the child class using the <code>super()</code> function.</p>
 
-<pre><code>class Parent:
+<pre><code class="language-python">
+class Parent:
     def property(self):
         print('Cash + Gold + Land')
 
@@ -354,7 +376,8 @@ c.marry()
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Subbalakshmi
+<pre><code class="language-python">
+Subbalakshmi
 Katrina Kaif
 </code></pre>
 

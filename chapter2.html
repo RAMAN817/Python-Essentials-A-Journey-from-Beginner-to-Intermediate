@@ -2,9 +2,16 @@
 <html>
 <head>
     <title>Chapter 2: Operators and Expressions</title>
+        <!-- Include Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<!-- Include the Python language component -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <link rel="stylesheet" href="prism-vsc-dark-plus.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -24,7 +31,7 @@
 
 <p>Example:</p>
 
-<pre><code>a = 100
+<pre><code class="language-python" >a = 100
 b = 20
 print(a + b)   # Output: 120
 print(a * b)   # Output: 2000
@@ -36,7 +43,7 @@ print(a % b)   # Output: 0  # Remainder
 
 <p>The division operator <code>/</code> always returns a floating-point value. The floor division operator <code>//</code> returns the largest integer less than or equal to the division result.</p>
 
-<pre><code>a = 100
+<pre><code class="language-python">a = 100
 b = 20
 print(a / b)       # Output: 5.0 (Division always returns a float)
 print(10 // 2)     # Output: 5   (Floor division returns an int if both operands are int)
@@ -49,7 +56,7 @@ print(10.0 // 3)   # Output: 3.0
 
 <p>Concatenating strings and numbers requires explicit conversion:</p>
 
-<pre><code>print('roman' + str(10))  # Output: 'roman10'
+<pre><code class="language-python"> print('roman' + str(10))  # Output: 'roman10'
 </code></pre>
 
 <h2>Relational Operators</h2>
@@ -67,7 +74,7 @@ print(10.0 // 3)   # Output: 3.0
 
 <p>Examples with integers:</p>
 
-<pre><code>a = 10
+<pre><code class="language-python">a = 10
 b = 20
 print(a &gt; b)   # Output: False
 print(a &lt; b)   # Output: True
@@ -77,7 +84,7 @@ print(a &gt;= b)  # Output: False
 
 <p>Examples with strings (based on Unicode values):</p>
 
-<pre><code>s1 = 'roman'
+<pre><code class="language-python">s1 = 'roman'
 s2 = 'durga'
 print(s1 &gt; s2)  # Output: True
 
@@ -88,12 +95,12 @@ print(s3 &gt; s4)  # Output: False
 
 <p>Examples with Booleans:</p>
 
-<pre><code>print(True &gt; False)  # Output: True
+<pre><code class="language-python">print(True &gt; False)  # Output: True
 </code></pre>
 
 <p>Chained comparisons:</p>
 
-<pre><code>print(10 &lt; 20 &lt; 30)  # Output: True
+<pre><code class="language-python">print(10 &lt; 20 &lt; 30)  # Output: True
 print(10 &lt; 20 &lt; 30 &gt; 40)  # Output: False
 </code></pre>
 
@@ -108,7 +115,7 @@ print(10 &lt; 20 &lt; 30 &gt; 40)  # Output: False
 
 <p>Examples:</p>
 
-<pre><code>print(10 == 20)       # Output: False
+<pre><code class="language-python">print(10 == 20)       # Output: False
 print(10 != 20)       # Output: True
 print(10 == 10.0)     # Output: True
 print(1 == True)      # Output: True
@@ -121,7 +128,7 @@ print(1 == True)      # Output: True
 
 <p>Example:</p>
 
-<pre><code>l1 = [10, 20, 30, 40]
+<pre><code class="language-python">l1 = [10, 20, 30, 40]
 l2 = [10, 20, 30, 40]
 print(l1 is l2)   # Output: False (different objects)
 print(l1 == l2)   # Output: True  (same content)
@@ -142,14 +149,14 @@ print(l1 is l3)   # Output: True  (same object)
 
 <h3>Examples with Booleans:</h3>
 
-<pre><code>print(not True)       # Output: False
+<pre><code class="language-python">print(not True)       # Output: False
 print(True and False)  # Output: False
 print(True or False)   # Output: True
 </code></pre>
 
 <h3>User Authentication Example:</h3>
 
-<pre><code>username = input('Enter Username: ')
+<pre><code class="language-python">username = input('Enter Username: ')
 password = input('Enter Password: ')
 
 if username == 'durga' and password == 'sunny':
@@ -167,11 +174,11 @@ else:
     <li><strong>Non-zero numbers</strong> and <strong>non-empty objects</strong> are considered <code>True</code>.</li>
 </ul>
 
-<h4><code>and</code> Operator:</h4>
+<h4><code >and</code> Operator:</h4>
 
 <p>The result is the first operand if it is <code>False</code>; otherwise, it is the second operand.</p>
 
-<pre><code>print(0 and 10)            # Output: 0
+<pre><code class="language-python">print(0 and 10)            # Output: 0
 print(20 and 10)           # Output: 10
 print('roman' and 'son')   # Output: 'son'
 print('' and 'roman')      # Output: ''
@@ -181,7 +188,7 @@ print('' and 'roman')      # Output: ''
 
 <p>The result is the first operand if it is <code>True</code>; otherwise, it is the second operand.</p>
 
-<pre><code>print(10 or 20)   # Output: 10
+<pre><code class="language-python">print(10 or 20)   # Output: 10
 print(0 or 20)    # Output: 20
 </code></pre>
 
@@ -189,7 +196,7 @@ print(0 or 20)    # Output: 20
 
 <p>The result is always a Boolean value.</p>
 
-<pre><code>print(not 'roman')  # Output: False
+<pre><code class="language-python">print(not 'roman')  # Output: False
 print(not '')       # Output: True
 print(not 0)        # Output: True
 print(not 10)       # Output: False
@@ -210,7 +217,7 @@ print(not 10)       # Output: False
 
 <h3>Examples:</h3>
 
-<pre><code># Bitwise AND
+<pre><code class="language-python"># Bitwise AND
 print(5 &amp; 4)  # Output: 4
 
 # Calculation:
@@ -223,7 +230,7 @@ print(5 &amp; 4)  # Output: 4
 
 <p>The bitwise complement of an integer <code>n</code> is equal to <code>-(n+1)</code>.</p>
 
-<pre><code>print(~4)  # Output: -5
+<pre><code class="language-python">print(~4)  # Output: -5
 # Explanation:
 # ~4 = -(4 + 1) = -5
 </code></pre>
@@ -232,14 +239,14 @@ print(5 &amp; 4)  # Output: 4
 
 <p><strong>Left Shift (<code>&lt;&lt;</code>)</strong>: Shifts bits to the left, filling vacant bits with zeros.</p>
 
-<pre><code>print(10 &lt;&lt; 2)  # Output: 40
+<pre><code class="language-python">print(10 &lt;&lt; 2)  # Output: 40
 # 10 in binary: 0000...1010
 # After shifting: 0010...1000 (which is 40)
 </code></pre>
 
 <p><strong>Right Shift (<code>&gt;&gt;</code>)</strong>: Shifts bits to the right, filling vacant bits with zeros.</p>
 
-<pre><code>print(10 &gt;&gt; 2)  # Output: 2
+<pre><code class="language-python">print(10 &gt;&gt; 2)  # Output: 2
 # 10 in binary: 0000...1010
 # After shifting: 0000...0010 (which is 2)
 </code></pre>
@@ -270,7 +277,7 @@ print(5 &amp; 4)  # Output: 4
 
 <h3>Examples:</h3>
 
-<pre><code>x = 10
+<pre><code class="language-python">x = 10
 x += 20
 print(x)  # Output: 30
 
@@ -285,19 +292,19 @@ print(x)  # Output: 0
 
 <p>A ternary operator in Python allows for conditional assignment or return of a value. The syntax is:</p>
 
-<pre><code>variable = value_if_true if condition else value_if_false
+<pre><code class="language-python"> variable = value_if_true if condition else value_if_false
 </code></pre>
 
 <h3>Example:</h3>
 
-<pre><code>a, b = 10, 20
+<pre><code class="language-python">a, b = 10, 20
 x = 30 if a &lt; b else 40
 print(x)  # Output: 30
 </code></pre>
 
 <h3>Nesting Ternary Operators:</h3>
 
-<pre><code>a = int(input("Enter First Number: "))
+<pre><code class="language-python">a = int(input("Enter First Number: "))
 b = int(input("Enter Second Number: "))
 c = int(input("Enter Third Number: "))
 
@@ -307,10 +314,11 @@ print("Minimum Value:", minimum)
 
 <h3>Another Example:</h3>
 
-<pre><code>a = int(input("Enter First Number: "))
+<pre><code class="language-python">a = int(input("Enter First Number: "))
 b = int(input("Enter Second Number: "))
 
-print("Both numbers are equal" if a == b else "First Number is less than Second Number" if a &lt; b else "First Number is greater than Second Number")
+print("Both numbers are equal" if a == b else 
+"First Number is less than Second Number" if a &lt; b else "First Number is greater than Second Number")
 </code></pre>
 
 <h2>Special Operators</h2>
@@ -326,7 +334,7 @@ print("Both numbers are equal" if a == b else "First Number is less than Second 
 
 <h4>Examples:</h4>
 
-<pre><code>a = 10
+<pre><code class="language-python">a = 10
 b = 10
 print(a is b)  # Output: True
 
@@ -355,7 +363,7 @@ print(list1 == list2)     # Output: True  (same content)
 
 <h4>Examples:</h4>
 
-<pre><code>x = "Hello, learning Python is very easy!"
+<pre><code class="language-python">x = "Hello, learning Python is very easy!"
 print('h' in x)          # Output: True
 print('d' in x)          # Output: False
 print('d' not in x)      # Output: True
@@ -379,7 +387,7 @@ print("tunny" not in list1)  # Output: True
 
 <h3>Importing the math Module:</h3>
 
-<pre><code>import math
+<pre><code class="language-python">import math
 </code></pre>
 
 <h3>Common Functions:</h3>
@@ -405,7 +413,7 @@ print("tunny" not in list1)  # Output: True
 
 <h3>Example: Calculating the Area of a Circle</h3>
 
-<pre><code>from math import pi
+<pre><code class="language-python">from math import pi
 
 r = 16
 area = pi * r ** 2
@@ -419,7 +427,7 @@ print("Area of the circle is:", area)
 
 <p>In Python 3.x, <code>input()</code> reads input from the user and returns it as a string.</p>
 
-<pre><code>name = input("Enter your name: ")
+<pre><code class="language-python">name = input("Enter your name: ")
 print("Hello,", name)
 </code></pre>
 
@@ -427,7 +435,7 @@ print("Hello,", name)
 
 <p>Using list comprehension and <code>split()</code>:</p>
 
-<pre><code>a, b = [int(x) for x in input("Enter two numbers: ").split()]
+<pre><code class="language-python">a, b = [int(x) for x in input("Enter two numbers: ").split()]
 print("Product is:", a * b)
 </code></pre>
 
@@ -435,7 +443,7 @@ print("Product is:", a * b)
 
 <p>The <code>eval()</code> function evaluates the input string as a Python expression.</p>
 
-<pre><code>x = eval(input("Enter something: "))
+<pre><code class="language-python">x = eval(input("Enter something: "))
 print(type(x))
 </code></pre>
 
@@ -445,7 +453,7 @@ print(type(x))
 
 <h3>Example:</h3>
 
-<pre><code>import sys
+<pre><code class="language-python">import sys
 
 print("Number of arguments:", len(sys.argv))
 print("Argument List:", sys.argv)
@@ -453,7 +461,7 @@ print("Argument List:", sys.argv)
 
 <h3>Summing Command Line Arguments:</h3>
 
-<pre><code>import sys
+<pre><code class="language-python">import sys
 
 args = sys.argv[1:]
 total = 0
@@ -468,13 +476,13 @@ print("The sum:", total)
 
 <h3>Using <code>sep</code> Parameter:</h3>
 
-<pre><code>print('Python', 'is', 'fun', sep=' - ')
+<pre><code class="language-python">print('Python', 'is', 'fun', sep=' - ')
 # Output: Python - is - fun
 </code></pre>
 
 <h3>Using <code>end</code> Parameter:</h3>
 
-<pre><code>print("Hello", end=' ')
+<pre><code class="language-python">print("Hello", end=' ')
 print("World")
 # Output: Hello World
 </code></pre>
@@ -489,7 +497,7 @@ print("World")
     <li><code>%s</code>: String</li>
 </ul>
 
-<pre><code>a = 10
+<pre><code class="language-python">a = 10
 b = 20
 c = 30
 print("a value is %d" % a)
@@ -503,7 +511,7 @@ print("b value is %d and c value is %d" % (b, c))
 
 <p>Using the <code>format()</code> method:</p>
 
-<pre><code>name = "Durga"
+<pre><code class="language-python">name = "Durga"
 salary = 10000
 gf = "Sunny"
 
@@ -527,8 +535,8 @@ print("Hello {x}, your salary is {y} and your friend {z} is waiting.".format(x=n
             </li>
             
                 
-                <li class="page-item">
-                    <a class="page-link" href="chapter1.html">1</a>
+                <li class="page-item ">
+                    <a class = "page-link" href="chapter1.html">1</a>
                 </li>
                 
                 <li class="page-item active">

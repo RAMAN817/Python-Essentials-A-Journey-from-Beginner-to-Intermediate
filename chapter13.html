@@ -2,13 +2,20 @@
 <html>
 <head>
     <title>Chapter 13: Object-Oriented Programming in Python - Part Two</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Include Prism.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Include the Python language component -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    
+        <link rel="stylesheet" href="prism-vsc-dark-plus.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<h1>Chapter 13: Object-Oriented Programming in Python - Part Two</h1>
+<h1>Chapter 13: OOP- Part Two</h1>
 
 <h2>Introduction</h2>
 
@@ -38,7 +45,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 
 <h4>Example</h4>
 
-<pre><code>class Student:
+<pre><code class="language-python">class Student:
     def __init__(self, name, roll_no):
         self.name = name        # Instance variable
         self.roll_no = roll_no  # Instance variable
@@ -66,7 +73,8 @@ print(student2.name)    # Output: Bob
 
 <h4>Example</h4>
 
-<pre><code>class Student:
+<pre><code class="language-python">
+    class Student:
     school_name = 'DurgaSoft'  # Class variable
 
     def __init__(self, name, roll_no):
@@ -86,7 +94,8 @@ print(student1.school_name)  # Output: DurgaSoft
 
 <h4>Example</h4>
 
-<pre><code>class Calculator:
+<pre><code class="language-python">
+    class Calculator:
     def add(self, a, b):
         result = a + b  # Local variable
         print('Sum:', result)
@@ -111,7 +120,8 @@ calc.add(10, 20)  # Output: Sum: 30
 
 <h4>Example</h4>
 
-<pre><code>class Student:
+<pre><code class="language-python">
+    class Student:
     def __init__(self, name, roll_no):
         self.name = name
         self.roll_no = roll_no
@@ -126,7 +136,8 @@ student.get_student_info()
 
 <h4>Output</h4>
 
-<pre><code>Student Name: Alice
+<pre><code class="language-python">
+Student Name: Alice
 Student Roll No: 101
 </code></pre>
 
@@ -136,7 +147,8 @@ Student Roll No: 101
 
 <h4>Example</h4>
 
-<pre><code>class Student:
+<pre><code class="language-python">
+    class Student:
     school_name = 'Lambton'  # Class variable
 
     @classmethod
@@ -148,7 +160,8 @@ Student.get_school_name()
 
 <h4>Output</h4>
 
-<pre><code>School Name: Lambton
+<pre><code class="language-python">
+School Name: Lambton
 </code></pre>
 
 <h4>Explanation</h4>
@@ -161,7 +174,8 @@ Student.get_school_name()
 
 <h4>Proof of <code>cls</code> Referring to the Class Object</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     @classmethod
     def display_class_id(cls):
         print('ID of cls:', id(cls))
@@ -172,7 +186,8 @@ Test.display_class_id()
 
 <h4>Output</h4>
 
-<pre><code>ID of Test: 140255600765136
+<pre><code class="language-python">
+ID of Test: 140255600765136
 ID of cls: 140255600765136
 </code></pre>
 
@@ -184,7 +199,8 @@ ID of cls: 140255600765136
 
 <h4>Example</h4>
 
-<pre><code>class MathUtils:
+<pre><code class="language-python">
+    class MathUtils:
     @staticmethod
     def add(a, b):
         return a + b
@@ -207,7 +223,8 @@ print('Sum:', result)  # Output: Sum: 30
 
 <h3>1. Inside the Constructor Using <code>self</code></h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     def __init__(self):
         self.a = 10
         self.b = 20
@@ -220,7 +237,8 @@ print(t.__dict__)  # Output: {'a': 10, 'b': 20}
 
 <h3>2. Inside an Instance Method Using <code>self</code></h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     def __init__(self):
         self.a = 10
         self.b = 20
@@ -235,7 +253,8 @@ print(t.__dict__)  # Output: {'a': 10, 'b': 20, 'c': 30}
 
 <h3>3. Outside the Class Using the Object Reference</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     def __init__(self):
         self.a = 10
         self.b = 20
@@ -249,7 +268,8 @@ print(t.__dict__)  # Output: {'a': 10, 'b': 20, 'c': 30}
 
 <p>The number of instance variables can vary between objects.</p>
 
-<pre><code>t1 = Test()
+<pre><code class="language-python">
+t1 = Test()
 t1.d = 40
 print(t1.__dict__)  # Output: {'a': 10, 'b': 20, 'd': 40}
 
@@ -261,12 +281,14 @@ print(t2.__dict__)  # Output: {'a': 10, 'b': 20}
 
 <h3>Accessing Instance Variables</h3>
 
-<pre><code>print(t.a)  # Accessing instance variable 'a'
+<pre><code class="language-python">
+print(t.a)  # Accessing instance variable 'a'
 </code></pre>
 
 <h3>Updating Instance Variables</h3>
 
-<pre><code>t.a = 100  # Updating instance variable 'a'
+<pre><code class="language-python">
+t.a = 100  # Updating instance variable 'a'
 print(t.a)   # Output: 100
 </code></pre>
 
@@ -274,7 +296,8 @@ print(t.a)   # Output: 100
 
 <h4>Within the Class</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     def __init__(self):
         self.a = 10
         self.b = 20
@@ -289,7 +312,8 @@ print(t.__dict__)  # Output: {'a': 10}
 
 <h4>Outside the Class</h4>
 
-<pre><code>del t.a  # Deleting instance variable 'a'
+<pre><code class="language-python">
+del t.a  # Deleting instance variable 'a'
 print(t.__dict__)  # Output: {}
 </code></pre>
 
@@ -299,13 +323,15 @@ print(t.__dict__)  # Output: {}
 
 <h3>1. Inside the Class but Outside Any Methods</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     a = 10  # Static variable
 </code></pre>
 
 <h3>2. Inside the Constructor Using the Class Name</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     def __init__(self):
         Test.b = 20  # Static variable
 
@@ -315,7 +341,8 @@ print(Test.b)  # Output: 20
 
 <h3>3. Inside an Instance Method Using the Class Name</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     def set_c(self):
         Test.c = 30  # Static variable
 
@@ -326,7 +353,8 @@ print(Test.c)  # Output: 30
 
 <h3>4. Inside a Class Method Using <code>cls</code> or Class Name</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     @classmethod
     def set_d(cls):
         cls.d = 40     # Using cls
@@ -339,7 +367,8 @@ print(Test.e)  # Output: 50
 
 <h3>5. Inside a Static Method Using the Class Name</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     @staticmethod
     def set_f():
         Test.f = 60  # Static variable
@@ -350,7 +379,8 @@ print(Test.f)  # Output: 60
 
 <h3>6. Outside the Class Using the Class Name</h3>
 
-<pre><code>Test.g = 70
+<pre><code class="language-python">
+Test.g = 70
 print(Test.g)  # Output: 70
 </code></pre>
 
@@ -362,7 +392,8 @@ print(Test.g)  # Output: 70
 
 <h4>Using <code>self</code> or Class Name in the Constructor</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     a = 10
 
     def __init__(self):
@@ -372,7 +403,8 @@ print(Test.g)  # Output: 70
 
 <h4>Using <code>self</code> or Class Name in an Instance Method</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     a = 10
 
     def display_a(self):
@@ -382,7 +414,8 @@ print(Test.g)  # Output: 70
 
 <h4>Using <code>cls</code> or Class Name in a Class Method</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     a = 10
 
     @classmethod
@@ -393,7 +426,8 @@ print(Test.g)  # Output: 70
 
 <h3>Outside the Class</h3>
 
-<pre><code>t = Test()
+<pre><code class="language-python">
+t = Test()
 print(t.a)      # Access via object reference
 print(Test.a)   # Access via class name (recommended)
 </code></pre>
@@ -404,7 +438,8 @@ print(Test.a)   # Access via class name (recommended)
 
 <h3>Example</h3>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     a = 10
 
     @classmethod
@@ -449,7 +484,8 @@ print(Test.a)  # Output: 30
 
 <p>Static variables can be deleted using the <code>del</code> statement and the class name.</p>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     a = 10
 
 del Test.a  # Deleting static variable 'a'
@@ -464,7 +500,8 @@ del Test.a  # Deleting static variable 'a'
 
 <h4>Example</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+    class Test:
     @staticmethod
     def average(numbers):
         total = sum(numbers)          # Local variable
@@ -478,7 +515,7 @@ Test.average(numbers)
 
 <h4>Output</h4>
 
-<pre><code>The average is 30.0
+<pre><code class="language-python">The average is 30.0
 </code></pre>
 
 <p>In this example, <code>total</code>, <code>count</code>, and <code>result</code> are local variables used within the <code>average</code> method.</p>

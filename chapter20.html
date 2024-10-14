@@ -2,9 +2,16 @@
 <html>
 <head>
     <title>Chapter 20: Exception Handling in Python</title>
-    <link rel="stylesheset" href="style.css">
+       <!-- Include Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<!-- Include the Python language component -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <link rel="stylesheet" href="prism-vsc-dark-plus.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -29,7 +36,8 @@
 
 <h4>Example</h4>
 
-<pre><code># Missing parentheses in call to 'print'
+<pre><code class="language-python">
+ # Missing parentheses in call to 'print'
 print "Hello, World!"  # SyntaxError
 </code></pre>
 
@@ -39,14 +47,16 @@ print "Hello, World!"  # SyntaxError
 
 <h4>Example 1: Division by Zero</h4>
 
-<pre><code>a = int(input('Enter the first number: '))  # e.g., 10
+<pre><code class="language-python">
+a = int(input('Enter the first number: '))  # e.g., 10
 b = int(input('Enter the second number: '))  # e.g., 0
 print('The result is', a / b)  # ZeroDivisionError
 </code></pre>
 
 <h4>Example 2: File Not Found</h4>
 
-<pre><code>f = open('nonexistent_file.txt')
+<pre><code class="language-python">
+f = open('nonexistent_file.txt')
 print(f.read())  # FileNotFoundError
 </code></pre>
 
@@ -80,12 +90,14 @@ print(f.read())  # FileNotFoundError
 
 <h4>Example</h4>
 
-<pre><code>print(10 / 0)
+<pre><code class="language-python">
+print(10 / 0)
 </code></pre>
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Traceback (most recent call last):
+<pre><code  class="language-python">
+ Traceback (most recent call last):
   File "example.py", line 1, in &lt;module&gt;
     print(10 / 0)
 ZeroDivisionError: division by zero
@@ -97,7 +109,8 @@ ZeroDivisionError: division by zero
 
 <p>All exceptions in Python are instances of classes derived from the <code>BaseException</code> class. The hierarchy is as follows:</p>
 
-<pre><code>BaseException
+<pre><code class="language-python">
+BaseException
  +-- SystemExit
  +-- KeyboardInterrupt
  +-- GeneratorExit
@@ -120,7 +133,8 @@ ZeroDivisionError: division by zero
 
 <h3>Basic Syntax</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     # Risky code that might raise an exception
     pass
 except ExceptionType:
@@ -130,7 +144,8 @@ except ExceptionType:
 
 <h3>Example</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     result = 10 / 0
 except ZeroDivisionError:
     print('Cannot divide by zero')
@@ -138,7 +153,8 @@ except ZeroDivisionError:
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Cannot divide by zero
+<pre><code class="language-python">
+Cannot divide by zero
 </code></pre>
 
 <h2>Control Flow in <code>try</code>-<code>except</code></h2>
@@ -153,7 +169,8 @@ except ZeroDivisionError:
 
 <h3>Example</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     print('Statement 1')
     print(10 / 0)
     print('Statement 3')  # Skipped
@@ -164,7 +181,8 @@ print('Statement 4')
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Statement 1
+<pre><code class="language-python">
+Statement 1
 Exception occurred and handled
 Statement 4
 </code></pre>
@@ -175,7 +193,8 @@ Statement 4
 
 <h3>Example</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     result = 10 / 0
 except ZeroDivisionError as e:
     print('Exception Type:', type(e))
@@ -185,7 +204,8 @@ except ZeroDivisionError as e:
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Exception Type: &lt;class 'ZeroDivisionError'&gt;
+<pre><code class="language-python">
+Exception Type: &lt;class 'ZeroDivisionError'&gt;
 Exception Class Name: ZeroDivisionError
 Exception Message: division by zero
 </code></pre>
@@ -196,7 +216,8 @@ Exception Message: division by zero
 
 <p>You can specify multiple <code>except</code> blocks to handle different exceptions separately.</p>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     x = int(input('Enter a number: '))
     y = int(input('Enter another number: '))
     result = x / y
@@ -214,7 +235,8 @@ else:
 
 <p>If the handling code is the same for multiple exceptions, you can use a single <code>except</code> block with a tuple of exceptions.</p>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     x = int(input('Enter a number: '))
     y = int(input('Enter another number: '))
     result = x / y
@@ -228,7 +250,8 @@ else:
 
 <p>You can use a default <code>except</code> block to catch any exception that is not handled by previous <code>except</code> blocks. The default <code>except</code> block should be placed last.</p>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     # Risky code
     pass
 except SpecificException:
@@ -241,7 +264,8 @@ except:
 
 <h3>Example</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     x = int(input('Enter a number: '))
     y = int(input('Enter another number: '))
     result = x / y
@@ -257,7 +281,8 @@ except:
 
 <h3>Syntax</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     # Risky code
     pass
 except ExceptionType:
@@ -270,7 +295,8 @@ finally:
 
 <h3>Example</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     f = open('sample.txt', 'r')
     print(f.read())
 except FileNotFoundError:
@@ -290,7 +316,8 @@ finally:
 
 <h3>Example</h3>
 
-<pre><code>import os
+<pre><code class="language-python">
+import os
 
 try:
     print('try block')
@@ -303,7 +330,8 @@ finally:
 
 <p><strong>Output:</strong></p>
 
-<pre><code>try block
+<pre><code class="language-python">
+try block
 </code></pre>
 
 <p>The <code>finally</code> block is not executed because the program exits before reaching it.</p>
@@ -323,7 +351,8 @@ finally:
 
 <h3>Example</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     print('Outer try block')
     try:
         print('Inner try block')
@@ -340,7 +369,8 @@ finally:
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Outer try block
+<pre><code class="language-python">
+Outer try block
 Inner try block
 Inner except block: Division by zero
 Inner finally block
@@ -353,7 +383,8 @@ Outer finally block
 
 <h3>Syntax</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+ try:
     # Risky code
     pass
 except ExceptionType:
@@ -369,7 +400,8 @@ finally:
 
 <h3>Example</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     x = int(input('Enter a number: '))
     y = int(input('Enter another number: '))
     result = x / y
@@ -411,7 +443,8 @@ finally:
 
 <h3>Example</h3>
 
-<pre><code>class InvalidAgeException(Exception):
+<pre><code class="language-python" >
+class InvalidAgeException(Exception):
     def __init__(self, message):
         self.message = message
 </code></pre>
@@ -420,7 +453,8 @@ finally:
 
 <p>You can raise a custom exception using the <code>raise</code> keyword.</p>
 
-<pre><code>def check_age(age):
+<pre><code class="language-python">
+def check_age(age):
     if age &lt; 18:
         raise InvalidAgeException('Age must be at least 18')
     else:
@@ -435,7 +469,8 @@ except InvalidAgeException as e:
 
 <h3>Complete Example</h3>
 
-<pre><code>class TooYoungException(Exception):
+<pre><code class="language-python">
+class TooYoungException(Exception):
     def __init__(self, message):
         self.message = message
 

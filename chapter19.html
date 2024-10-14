@@ -2,11 +2,19 @@
 <html>
 <head>
     <title>Chapter 19: Abstraction and Encapsulation in Python</title>
-   <link rel="stylesheet" href="style.css">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+       <!-- Include Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<!-- Include the Python language component -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <link rel="stylesheet" href="prism-vsc-dark-plus.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  
 
 <h1>Chapter 19: Abstraction and Encapsulation in Python</h1>
 
@@ -26,7 +34,8 @@
 
 <p>In Python, you can declare an abstract method using the <code>@abstractmethod</code> decorator from the <code>abc</code> module.</p>
 
-<pre><code>from abc import ABC, abstractmethod
+<pre><code class="language-python">
+from abc import ABC, abstractmethod
 
 class Vehicle(ABC):
     @abstractmethod
@@ -56,7 +65,8 @@ class Vehicle(ABC):
 
 <p>To declare a class as abstract, it must inherit from the <code>ABC</code> class provided by the <code>abc</code> module.</p>
 
-<pre><code>from abc import ABC, abstractmethod
+<pre><code class="language-python">
+from abc import ABC, abstractmethod
 
 class Vehicle(ABC):
     @abstractmethod
@@ -83,7 +93,8 @@ class Vehicle(ABC):
 
 <p>Child classes that inherit from an abstract class must provide implementations for all abstract methods, or else they will also be considered abstract classes.</p>
 
-<pre><code>class Bus(Vehicle):
+<pre><code class="language-python">
+class Bus(Vehicle):
     def get_no_of_wheels(self):
         return 6
 
@@ -103,7 +114,8 @@ print('Auto has', auto.get_no_of_wheels(), 'wheels.')  # Output: Auto has 3 whee
 
 <p>You cannot create an instance of the <code>Vehicle</code> class because it is abstract:</p>
 
-<pre><code># This will raise an error
+<pre><code class="language-python">
+# This will raise an error
 vehicle = Vehicle()
 </code></pre>
 
@@ -118,7 +130,8 @@ vehicle = Vehicle()
 
 <p>Python does not have a formal concept of interfaces as in Java or C#. However, you can achieve similar functionality using abstract classes with only abstract methods.</p>
 
-<pre><code>from abc import ABC, abstractmethod
+<pre><code class="language-python">
+from abc import ABC, abstractmethod
 
 class Test(ABC):
     @abstractmethod
@@ -181,7 +194,8 @@ class Test(ABC):
 
 <p>By default, all members in a Python class are public. Public members can be accessed from anywhere, both inside and outside the class.</p>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def __init__(self):
         self.x = 10  # Public variable
 
@@ -199,7 +213,8 @@ t.m1()      # Calling public method
 
 <h4>Example</h4>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def __init__(self):
         self.__x = 10  # Private variable
 
@@ -220,7 +235,8 @@ t.__m1()       # AttributeError
 
 <p>Python performs name mangling on private members to prevent access from outside the class. The private member name is transformed into <code>_ClassName__member</code>. You can access a private member using name mangling (not recommended).</p>
 
-<pre><code>print(t._Test__x)  # Output: 10
+<pre><code class="language-python">
+print(t._Test__x)  # Output: 10
 t._Test__m1()         # Output: Private method
 </code></pre>
 
@@ -230,7 +246,8 @@ t._Test__m1()         # Output: Private method
 
 <p>A <strong>protected member</strong> is intended to be accessed within its class and by subclasses. In Python, you indicate a protected member by prefixing it with a single underscore <code>_</code>.</p>
 
-<pre><code>class Test:
+<pre><code class="language-python">
+class Test:
     def __init__(self):
         self._x = 10  # Protected variable
 
@@ -248,7 +265,8 @@ t.m2()    # Output: 10
 
 <p>While the convention suggests that protected members should not be accessed outside the class hierarchy, Python does not enforce this, and you can still access them directly.</p>
 
-<pre><code>print(t._x)  # Output: 10
+<pre><code class="language-python">
+print(t._x)  # Output: 10
 </code></pre>
 
 <p><strong>Note:</strong> Accessing protected members from outside the class hierarchy is considered bad practice.</p>
@@ -263,7 +281,8 @@ t.m2()    # Output: 10
 
 <h3>Example</h3>
 
-<pre><code>class Account:
+<pre><code class="language-python">
+class Account:
     def __init__(self, initial_balance):
         self.__balance = initial_balance  # Private variable
 
@@ -316,7 +335,8 @@ print(a.__balance)      # AttributeError
 
 <p>In Python, encapsulation is achieved through classes and access modifiers (using naming conventions).</p>
 
-<pre><code>class Student:
+<pre><code class="language-python">
+class Student:
     def __init__(self, name, roll_no, marks):
         self.__name = name         # Private variable
         self.__roll_no = roll_no   # Private variable

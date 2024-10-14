@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Python Blog</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h2, h3 {
+            margin-bottom: 20px;
+        }
+
+        /* Layout styles */
+        .header {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #000000;
+        }
+
+        .header h2 {
+            font-size: 2.5rem;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .leftcolumn {
+            width: 70%;
+        }
+
+        .rightcolumn {
+            width: 25%;
+            padding-left: 20px;
+        }
+
+        /* Topic links */
+        .topics {
+            margin-top: 20px;
+        }
+
+        .topic-link {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Cards */
+        .card {
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #000000;
+        }
+
+        /* Images */
+        .image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        /* Social icons */
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: auto;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid #000000;
+            margin-top: 20px;
+        }
+
+        /* Responsive layout */
+        @media screen and (max-width: 800px) {
+            .row {
+                flex-direction: column;
+            }
+
+            .leftcolumn,
+            .rightcolumn {
+                width: 100%;
+                padding: 0;
+            }
+
+            .rightcolumn {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>Python Essentials: A Journey from Beginner to Intermediate</h2>
+    </div>
+
+    <div class="row">
+        <!-- Left Column (Main content) -->
+        <div class="leftcolumn">
+            <h2>Topics That are covered:</h2>
+
+            <div class="topics">
+                <a href="chapter1.html" class="topic-link">Chapter 1: Data Types</a>
+                <a href="chapter2.html" class="topic-link">Chapter 2: Operators and Expressions</a>
+                <a href="chapter3.html" class="topic-link">Chapter 3: Flow Control</a>
+                <a href="chapter4.html" class="topic-link">Chapter 4: String Data Type</a>
+                <a href="chapter5.html" class="topic-link">Chapter 5: Lists</a>
+                <a href="chapter6.html" class="topic-link">Chapter 6: Tuples</a>
+                <a href="chapter7.html" class="topic-link">Chapter 7: Sets</a>
+                <a href="chapter8.html" class="topic-link">Chapter 8: Dictionaries</a>
+                <a href="chapter9.html" class="topic-link">Chapter 9: Functions in Python</a>
+                <a href="chapter10.html" class="topic-link">Chapter 10: Modules in Python</a>
+                <a href="chapter11.html" class="topic-link">Chapter 11: Python Packages</a>
+                <a href="chapter12.html" class="topic-link">Chapter 12: Object-Oriented Programming in Python - Part One</a>
+                <a href="chapter13.html" class="topic-link">Chapter 13: Object-Oriented Programming in Python - Part Two</a>
+                <a href="chapter14.html" class="topic-link">Chapter 14: Object-Oriented Programming in Python - Part Three</a>
+                <a href="chapter15.html" class="topic-link">Chapter 15: Object-Oriented Programming in Python - Part Four</a>
+                <a href="chapter16.html" class="topic-link">Chapter 16: Object-Oriented Programming in Python - Part Five</a>
+                <a href="chapter17.html" class="topic-link">Chapter 17: Object-Oriented Programming in Python - Part Six</a>
+                <a href="chapter18.html" class="topic-link">Chapter 18: Polymorphism in Python</a>
+                <a href="chapter19.html" class="topic-link">Chapter 19: Abstraction and Encapsulation in Python</a>
+                <a href="chapter20.html" class="topic-link">Chapter 20: Exception Handling in Python</a>
+                <a href="chapter21.html" class="topic-link">Chapter 21: Assertions in Python</a>
+                <a href="chapter22.html" claython</a>
+
+                
+            </div>
+        </div>
+
+        <!-- Right Column (About me, Resources, Follow Me) -->
+        <div class="rightcolumn">
+            <div class="card">
+                <h2> <a href="https://raman817.github.io/">About Me</a></h2>
+                <img src="assets/Untitled design (1).png" alt="profile_pic" class="image">
+                <p>Hi, I am Ramanson Thapa. I hope I did my job.</p>
+            </div>
+            <div class="card">
+                <h2>More Resources</h2>
+                <p>There are many free and best resources out there to learn about Python and further explore Machine Learning. Here are a few I follow:</p>
+                <ul>
+                    <li><a href="https://www.python.org/">Python Official Documentation</a></li>
+                    <li><a href="https://cs50.harvard.edu/x/2024/">CS50</a></li>
+                    <li><a href="https://cs50.harvard.edu/web/2020/weeks/0/">CS50 Web</a></li>
+                    <li><a href="https://www.durgasoftonline.com/courses/Full-Stack-Web-Development-by-using-Python-and-Django-60747ef80cf294232fd8c35e">DurgaSoft</a></li>
+                    <li><a href="https://www.coursera.org/specializations/machine-learning-introduction">Machine Learning Specializations</a></li>
+                    <li><a href="https://www.coursera.org/professional-certificates/google-it-automation">Google IT Automation with Python Professional Certificate</a></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h2>Follow Me</h2>
+                <div class="social-icons">
+                    <a href="https://github.com/RAMAN817" target="_blank">
+                        <img src="assets/github.png" alt="GitHub">
+                    </a>
+                    <a href="https://x.com/romanson2248" target="_blank">
+                        <img src="assets/twitter.png" alt="Twitter">
+                    </a>
+                    <a href="https://www.linkedin.com/in/ramanson-thapa-b363b4266/" target="_blank">
+                        <img src="assets/linkedin.png" alt="LinkedIn">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Python Blog. All rights reserved.</p>
+    </div>
+
+</body>
+</html>

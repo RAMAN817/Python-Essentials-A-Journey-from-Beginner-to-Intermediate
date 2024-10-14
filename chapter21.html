@@ -2,9 +2,16 @@
 <html>
 <head>
     <title>Chapter 21: Assertions in Python</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Include Prism.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Include the Python language component -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    
+        <link rel="stylesheet" href="prism-vsc-dark-plus.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -73,12 +80,14 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 
 <h4>Syntax</h4>
 
-<pre><code>assert &lt;condition&gt;
+<pre><code class="language-python">
+assert &lt;condition&gt;
 </code></pre>
 
 <h4>Example</h4>
 
-<pre><code>def divide(a, b):
+<pre><code class="language-python">
+def divide(a, b):
     assert b != 0
     return a / b
 
@@ -87,7 +96,8 @@ result = divide(10, 0)
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Traceback (most recent call last):
+<pre><code class="language-python">
+Traceback (most recent call last):
   File "example.py", line 5, in &lt;module&gt;
     result = divide(10, 0)
   File "example.py", line 2, in divide
@@ -101,12 +111,14 @@ AssertionError
 
 <h4>Syntax</h4>
 
-<pre><code>assert &lt;condition&gt;, &lt;error_message&gt;
+<pre><code class="language-python">
+assert &lt;condition&gt;, &lt;error_message&gt;
 </code></pre>
 
 <h4>Example</h4>
 
-<pre><code>def divide(a, b):
+<pre><code class="language-python">
+def divide(a, b):
     assert b != 0, 'Denominator cannot be zero'
     return a / b
 
@@ -115,7 +127,8 @@ result = divide(10, 0)
 
 <p><strong>Output:</strong></p>
 
-<pre><code>Traceback (most recent call last):
+<pre><code class="language-python">
+Traceback (most recent call last):
   File "example.py", line 5, in &lt;module&gt;
     result = divide(10, 0)
   File "example.py", line 2, in divide
@@ -136,7 +149,8 @@ AssertionError: Denominator cannot be zero
 
 <h3>Example 1: Validating Function Arguments</h3>
 
-<pre><code>def square_root(x):
+<pre><code class="language-python">
+def square_root(x):
     assert x &gt;= 0, 'Input must be non-negative'
     return x ** 0.5
 
@@ -146,7 +160,8 @@ print(square_root(-4))  # Raises AssertionError
 
 <h3>Example 2: Checking Data Integrity</h3>
 
-<pre><code>def process_data(data):
+<pre><code class="language-python">
+def process_data(data):
     assert isinstance(data, list), 'Data must be a list'
     assert len(data) &gt; 0, 'Data list cannot be empty'
     # Process the data
@@ -159,7 +174,8 @@ process_data('not a list')  # Raises AssertionError
 
 <h3>Example 3: Debugging Complex Conditions</h3>
 
-<pre><code>def compute_average(numbers):
+<pre><code class="language-python">
+ def compute_average(numbers):
     assert numbers, 'The numbers list should not be empty'
     average = sum(numbers) / len(numbers)
     assert 0 &lt;= average &lt;= 100, 'Average should be between 0 and 100'
@@ -177,7 +193,8 @@ print(compute_average([]))            # Raises AssertionError
 
 <p>To disable assertions, use the <code>-O</code> (capital letter O) option when running the Python script:</p>
 
-<pre><code>python -O script.py
+<pre><code class="language-python">
+python -O script.py
 </code></pre>
 
 <p>When assertions are disabled:</p>
@@ -191,7 +208,8 @@ print(compute_average([]))            # Raises AssertionError
 
 <p>Consider the following script <code>test.py</code>:</p>
 
-<pre><code># test.py
+<pre><code class="language-python">
+# test.py
 def func(x):
     assert x &gt; 0, 'x must be positive'
     return x * 2
@@ -202,12 +220,14 @@ print(func(-5))
 
 <h4>Running with Assertions Enabled</h4>
 
-<pre><code>python test.py
+<pre><code class="language-python">
+python test.py
 </code></pre>
 
 <p><strong>Output:</strong></p>
 
-<pre><code>20
+<pre><code class="language-python">
+20
 Traceback (most recent call last):
   File "test.py", line 7, in &lt;module&gt;
     print(func(-5))
@@ -218,12 +238,14 @@ AssertionError: x must be positive
 
 <h4>Running with Assertions Disabled</h4>
 
-<pre><code>python -O test.py
+<pre><code class="language-python">
+python -O test.py
 </code></pre>
 
 <p><strong>Output:</strong></p>
 
-<pre><code>20
+<pre><code class="language-python">
+20
 -10
 </code></pre>
 
@@ -273,7 +295,8 @@ AssertionError: x must be positive
 
 <p>Using exception handling to manage user input errors:</p>
 
-<pre><code>def get_integer():
+<pre><code class="language-python">
+def get_integer():
     try:
         value = int(input('Enter an integer: '))
     except ValueError:
@@ -289,7 +312,8 @@ if number is not None:
 
 <p>In contrast, using assertions to check internal assumptions:</p>
 
-<pre><code>def compute_factorial(n):
+<pre><code class="language-python">
+def compute_factorial(n):
     assert n &gt;= 0, 'n must be non-negative'
     if n == 0 or n == 1:
         return 1

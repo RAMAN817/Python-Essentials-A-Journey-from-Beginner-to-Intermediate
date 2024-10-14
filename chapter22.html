@@ -2,9 +2,16 @@
 <html>
 <head>
     <title>Chapter 22: File Handling in Python</title>
-   <link rel="stylesheet" href="style.css">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <!-- Include Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<!-- Include the Python language component -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <link rel="stylesheet" href="prism-vsc-dark-plus.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -53,7 +60,8 @@
 
 <h3>Syntax</h3>
 
-<pre><code>f = open(filename, mode)
+<pre><code class="language-python">
+f = open(filename, mode)
 </code></pre>
 
 <p>Where:</p>
@@ -114,7 +122,8 @@
 
 <p>After completing operations on a file, it is important to close it using the <code>close()</code> method. This releases any system resources associated with the file.</p>
 
-<pre><code>f.close()
+<pre><code class="language-python">
+f.close()
 </code></pre>
 
 <p>Failure to close a file can lead to memory leaks and other resource-related issues.</p>
@@ -123,7 +132,8 @@
 
 <p>When you open a file, Python returns a file object with various properties and methods:</p>
 
-<pre><code>f = open('example.txt', 'r')
+<pre><code class="language-python">
+f = open('example.txt', 'r')
 </code></pre>
 
 <h3>Attributes</h3>
@@ -149,7 +159,8 @@
 
 <p>The <code>write()</code> method writes a string to the file. You need to manually add newline characters (<code>\n</code>) if you want to write multiple lines.</p>
 
-<pre><code>f = open('example.txt', 'w')
+<pre><code class="language-python">
+f = open('example.txt', 'w')
 f.write('Hello, World!\n')
 f.write('This is a new line.\n')
 f.close()
@@ -159,7 +170,8 @@ f.close()
 
 <p>The <code>writelines()</code> method writes a list of strings to the file.</p>
 
-<pre><code>lines = ['First line\n', 'Second line\n', 'Third line\n']
+<pre><code class="language-python">
+lines = ['First line\n', 'Second line\n', 'Third line\n']
 f = open('example.txt', 'w')
 f.writelines(lines)
 f.close()
@@ -175,7 +187,8 @@ f.close()
 
 <h2>Example: Writing User Input to a File</h2>
 
-<pre><code># Collect user input
+<pre><code class="language-python">
+# Collect user input
 names = []
 x = input('Enter first name: ')
 y = input('Enter second name: ')
@@ -198,7 +211,8 @@ print('Names have been written to names.txt')
 
 <p>Reads the entire content of the file as a single string.</p>
 
-<pre><code>f = open('example.txt', 'r')
+<pre><code class="language-python">
+f = open('example.txt', 'r')
 content = f.read()
 print(content)
 f.close()
@@ -208,7 +222,8 @@ f.close()
 
 <p>Reads <code>n</code> characters from the file.</p>
 
-<pre><code>f = open('example.txt', 'r')
+<pre><code class="language-python">
+f = open('example.txt', 'r')
 content = f.read(10)  # Reads the first 10 characters
 print(content)
 f.close()
@@ -218,7 +233,8 @@ f.close()
 
 <p>Reads one line from the file.</p>
 
-<pre><code>f = open('example.txt', 'r')
+<pre><code class="language-python">
+f = open('example.txt', 'r')
 line = f.readline()
 print(line)
 f.close()
@@ -228,7 +244,8 @@ f.close()
 
 <p>Reads all the lines of the file and returns them as a list of strings.</p>
 
-<pre><code>f = open('example.txt', 'r')
+<pre><code class="language-python">
+f = open('example.txt', 'r')
 lines = f.readlines()
 for line in lines:
     print(line.strip())
@@ -237,7 +254,8 @@ f.close()
 
 <h2>Example: Reading a File Line by Line</h2>
 
-<pre><code>with open('example.txt', 'r') as f:
+<pre><code class="language-python">
+with open('example.txt', 'r') as f:
     for line in f:
         print(line.strip())
 </code></pre>
@@ -248,7 +266,8 @@ f.close()
 
 <h3>Example</h3>
 
-<pre><code>with open('example.txt', 'r') as f:
+<pre><code class="language-python">
+with open('example.txt', 'r') as f:
     content = f.read()
     print(content)
 # No need to call f.close()
@@ -260,14 +279,16 @@ f.close()
 
 <h3>Example: Reading a Binary File</h3>
 
-<pre><code>with open('image.jpg', 'rb') as f:
+<pre><code class="language-python">
+with open('image.jpg', 'rb') as f:
     binary_data = f.read()
     print('File size:', len(binary_data), 'bytes')
 </code></pre>
 
 <h3>Example: Writing to a Binary File</h3>
 
-<pre><code># Copy an image file
+<pre><code class="language-python">
+# Copy an image file
 with open('image.jpg', 'rb') as source_file:
     data = source_file.read()
 
@@ -283,7 +304,8 @@ print('Image has been copied to copy.jpg')
 
 <h3>Example</h3>
 
-<pre><code>try:
+<pre><code class="language-python">
+try:
     with open('nonexistent_file.txt', 'r') as f:
         content = f.read()
 except FileNotFoundError:
@@ -301,7 +323,8 @@ except FileNotFoundError:
 
 <h3>Example</h3>
 
-<pre><code>with open('example.txt', 'r') as f:
+<pre><code class="language-python">
+with open('example.txt', 'r') as f:
     print('Current position:', f.tell())
     f.seek(5)
     print('After seek:', f.tell())

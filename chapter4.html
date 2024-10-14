@@ -2,9 +2,16 @@
 <html>
 <head>
     <title>Chapter 4: String Data Type</title>
+      <!-- Include Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<!-- Include the Python language component -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <link rel="stylesheet" href="prism-vsc-dark-plus.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -16,7 +23,7 @@
 
 <p>A string in Python is a sequence of characters enclosed within single quotes <code>'</code> or double quotes <code>"</code>. Multi-line strings can be created using triple quotes:</p>
 
-<pre><code>multi_line_str = '''Roman
+<pre><code class="language-python">multi_line_str = '''Roman
 Son
 Thapa'''
 </code></pre>
@@ -27,7 +34,7 @@ Thapa'''
 
 <p>Python strings support both positive and negative indexing:</p>
 
-<pre><code>s = 'durga'
+<pre><code class="language-python">s = 'durga'
 # Indexing:
 #  D    U    R    G    A
 #  0    1    2    3    4   (Positive Index)
@@ -40,7 +47,7 @@ print(s[100]) # Raises IndexError
 
 <h4>Example: Display Characters with Positive and Negative Indices</h4>
 
-<pre><code>s = input('Enter a string: ')
+<pre><code class="language-python">s = input('Enter a string: ')
 i = 0
 for x in s:
     print('The character at +ve index {} and -ve index {} is: {}'.format(i, i - len(s), x))
@@ -51,7 +58,7 @@ for x in s:
 
 <p>Syntax:</p>
 
-<pre><code>s[begin:end:step]
+<pre><code class="language-python">s[begin:end:step]
 </code></pre>
 
 <ul>
@@ -64,7 +71,7 @@ for x in s:
 
 <h4>Examples:</h4>
 
-<pre><code>s = 'abcdefghijk'
+<pre><code class="language-python">s = 'abcdefghijk'
 print(s[2:7])    # Output: 'cdefg'
 print(s[:7])     # Output: 'abcdefg'
 print(s[2:])     # Output: 'cdefghijk'
@@ -92,14 +99,14 @@ print(s[::2])    # Output: 'acegik'
 
 <p>Combines two strings into one.</p>
 
-<pre><code>print('Hello' + ' World')  # Output: 'Hello World'
+<pre><code class="language-python">print('Hello' + ' World')  # Output: 'Hello World'
 </code></pre>
 
 <h3>Repetition (<code>*</code>)</h3>
 
 <p>Repeats a string multiple times.</p>
 
-<pre><code>print('Hello' * 3)  # Output: 'HelloHelloHello'
+<pre><code class="language-python">print('Hello' * 3)  # Output: 'HelloHelloHello'
 </code></pre>
 
 <h3>Membership Operators</h3>
@@ -109,7 +116,7 @@ print(s[::2])    # Output: 'acegik'
     <li><code>not in</code>: Returns <code>True</code> if a substring is not found in the string.</li>
 </ul>
 
-<pre><code>print('a' in 'durga')  # Output: True
+<pre><code class="language-python">print('a' in 'durga')  # Output: True
 
 s = input("Enter the main string: ")
 subs = input("Enter the substring to search: ")
@@ -125,7 +132,7 @@ else:
 
 <h4>Example:</h4>
 
-<pre><code>s1 = input("Enter first string: ")
+<pre><code class="language-python">s1 = input("Enter first string: ")
 s2 = input("Enter second string: ")
 
 if s1 == s2:
@@ -146,7 +153,7 @@ else:
     <li><code>strip()</code>: Removes both leading and trailing spaces.</li>
 </ul>
 
-<pre><code>city = input('Enter the name of the city: ').strip()
+<pre><code class="language-python">city = input('Enter the name of the city: ').strip()
 if city == 'Banepa':
     print('Gokul Baskota')
 elif city == 'Bhojpur':
@@ -161,7 +168,7 @@ else:
 
 <p>Searches for a substring from left to right and returns the index of the first occurrence. Returns <code>-1</code> if not found.</p>
 
-<pre><code>s = 'ABCBA'
+<pre><code class="language-python">s = 'ABCBA'
 print(s.find('B'))   # Output: 1
 print(s.find('Z'))   # Output: -1
 </code></pre>
@@ -170,14 +177,14 @@ print(s.find('Z'))   # Output: -1
 
 <p>Searches for a substring from right to left and returns the index of the first occurrence from the right. Returns <code>-1</code> if not found.</p>
 
-<pre><code>print(s.rfind('B'))  # Output: 3
+<pre><code class="language-python">print(s.rfind('B'))  # Output: 3
 </code></pre>
 
 <h3>3. <code>index()</code> Method</h3>
 
 <p>Similar to <code>find()</code> but raises a <code>ValueError</code> if the substring is not found.</p>
 
-<pre><code>print(s.index('B'))   # Output: 1
+<pre><code class="language-python">print(s.index('B'))   # Output: 1
 # print(s.index('Z'))  # Raises ValueError
 </code></pre>
 
@@ -185,12 +192,12 @@ print(s.find('Z'))   # Output: -1
 
 <p>Similar to <code>rfind()</code> but raises a <code>ValueError</code> if the substring is not found.</p>
 
-<pre><code>print(s.rindex('B'))  # Output: 3
+<pre><code class="language-python">print(s.rindex('B'))  # Output: 3
 </code></pre>
 
 <h4>Example: Email Validation Using <code>index()</code> Method</h4>
 
-<pre><code>email = input('Enter your email ID: ')
+<pre><code class="language-python">email = input('Enter your email ID: ')
 try:
     i = email.index('@')
     print('Valid email ID')
@@ -202,14 +209,14 @@ except ValueError:
 
 <p>Use the <code>count()</code> method to count occurrences of a substring:</p>
 
-<pre><code>s = 'ABCDABCD'
+<pre><code class="language-python">s = 'ABCDABCD'
 print(s.count('A'))     # Output: 2
 print(s.count('Z'))     # Output: 0
 </code></pre>
 
 <h4>Example: Find All Occurrences of a Substring</h4>
 
-<pre><code>s = 'ABCABCABCA'
+<pre><code class="language-python">s = 'ABCABCABCA'
 subs = input('Enter substring to search: ')
 i = s.find(subs)
 if i == -1:
@@ -225,14 +232,14 @@ else:
 
 <p>The <code>replace()</code> method replaces occurrences of a substring with another substring:</p>
 
-<pre><code>s = 'ABABABA'
+<pre><code class="language-python">s = 'ABABABA'
 s_new = s.replace('A', 'B')
 print(s_new)  # Output: 'BBBBBBB'
 </code></pre>
 
 <p>Note: Strings are immutable in Python. Methods like <code>replace()</code> create a new string.</p>
 
-<pre><code>s = 'ABABABAB'
+<pre><code class="language-python">s = 'ABABABAB'
 print('Before replacement:', id(s))
 s = s.replace('A', 'B')
 print('After replacement:', id(s))
@@ -244,7 +251,7 @@ print('After replacement:', id(s))
 
 <p>The <code>split()</code> method divides a string into a list of substrings based on a separator (default is space).</p>
 
-<pre><code>s = 'Durga Software Solutions'
+<pre><code class="language-python">s = 'Durga Software Solutions'
 lst = s.split()
 print(lst)  # Output: ['Durga', 'Software', 'Solutions']
 </code></pre>
@@ -253,7 +260,7 @@ print(lst)  # Output: ['Durga', 'Software', 'Solutions']
 
 <p>The <code>join()</code> method combines a list of strings into a single string with a specified separator.</p>
 
-<pre><code>lst = ['Roman', 'Son', 'Thapa']
+<pre><code class="language-python">lst = ['Roman', 'Son', 'Thapa']
 s = ''.join(lst)
 print(s)  # Output: 'RomanSonThapa'
 </code></pre>
@@ -268,7 +275,7 @@ print(s)  # Output: 'RomanSonThapa'
     <li><code>capitalize()</code>: Capitalizes the first character of the string.</li>
 </ul>
 
-<pre><code>s = 'Learning Python is very easy'
+<pre><code class="language-python">s = 'Learning Python is very easy'
 print(s.upper())       # Output: 'LEARNING PYTHON IS VERY EASY'
 print(s.lower())       # Output: 'learning python is very easy'
 print(s.swapcase())    # Output: 'lEARNING pYTHON IS VERY EASY'
@@ -278,7 +285,7 @@ print(s.capitalize())  # Output: 'Learning python is very easy'
 
 <h4>Example: Case-Insensitive String Comparison</h4>
 
-<pre><code>s1 = input('Enter first string: ').lower()
+<pre><code class="language-python">s1 = input('Enter first string: ').lower()
 s2 = input('Enter second string: ').lower()
 if s1 == s2:
     print('Yes, both are equal')
@@ -290,7 +297,7 @@ else:
 
 <p>Username is case-insensitive, but password is case-sensitive.</p>
 
-<pre><code>username = input('Enter username: ').lower()
+<pre><code class="language-python">username = input('Enter username: ').lower()
 password = input('Enter password: ')
 if username == 'durga' and password == 'anushka':
     print('Valid user')
@@ -300,7 +307,7 @@ else:
 
 <h4>Example: Convert First and Last Character to Uppercase</h4>
 
-<pre><code>s = input('Enter a string: ')
+<pre><code class="language-python">s = input('Enter a string: ')
 output = s[0].upper() + s[1:len(s)-1] + s[-1].upper()
 print('Output:', output)
 </code></pre>
@@ -312,7 +319,7 @@ print('Output:', output)
     <li><code>endswith(substring)</code>: Checks if the string ends with the specified substring.</li>
 </ul>
 
-<pre><code>s = 'Learning with Durgasoft is fun'
+<pre><code class="language-python">s = 'Learning with Durgasoft is fun'
 print(s.startswith('Learning'))  # Output: True
 print(s.endswith('fun'))         # Output: True
 print(s.endswith('boring'))      # Output: False
@@ -332,7 +339,7 @@ print(s.endswith('boring'))      # Output: False
 
 <h4>Examples:</h4>
 
-<pre><code>print('Durga786'.isalnum())    # Output: True
+<pre><code class="language-python">print('Durga786'.isalnum())    # Output: True
 print('durga786'.isalpha())    # Output: False
 print('durga'.isalpha())       # Output: True
 print('durga'.isdigit())       # Output: False
@@ -348,7 +355,7 @@ print('   '.isspace())         # Output: True
 
 <h4>Demo Program:</h4>
 
-<pre><code>char = input("Enter any character: ")
+<pre><code class="language-python">char = input("Enter any character: ")
 if char.isalnum():
     print("Alphanumeric character")
     if char.isalpha():

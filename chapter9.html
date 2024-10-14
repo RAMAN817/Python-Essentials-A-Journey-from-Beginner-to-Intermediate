@@ -2,9 +2,16 @@
 <html>
 <head>
     <title>Chapter 9: Functions in Python</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Include Prism.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Include the Python language component -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    
+        <link rel="stylesheet" href="prism-vsc-dark-plus.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -18,7 +25,8 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 
 <p>Consider the following code without functions:</p>
 
-<pre><code>a = 10
+<pre><code class="language-python">
+a = 10
 b = 20
 print('Sum:', a + b)
 print('Division:', a / b)
@@ -33,7 +41,8 @@ print('Multiplication:', a * b)
 
 <p>This code repeats the same set of operations for different values of <code>a</code> and <code>b</code>, leading to redundancy. Functions help eliminate such repetition:</p>
 
-<pre><code>def calculate(a, b):
+<pre><code class="language-python">
+def calculate(a, b):
     print('Sum:', a + b)
     print('Division:', a / b)
     print('Multiplication:', a * b)
@@ -62,7 +71,8 @@ calculate(2000, 1000)
 
 <p>Functions defined by the programmer to perform specific tasks.</p>
 
-<pre><code>def function_name(parameters):
+<pre><code class="language-python">
+def function_name(parameters):
     '''Documentation String'''
     Function Body
     return [expression]
@@ -72,7 +82,8 @@ calculate(2000, 1000)
 
 <h3>Example: Simple Function</h3>
 
-<pre><code>def wish():
+<pre><code class="language-python">
+def wish():
     print('Hello! Welcome to Python programming.')
 
 wish()
@@ -83,7 +94,8 @@ wish()
 
 <p>Functions can accept parameters to process data and return results.</p>
 
-<pre><code>def wish(name):
+<pre><code class="language-python">
+def wish(name):
     print('Hello,', name, 'Welcome!')
 
 wish('Alice')
@@ -94,7 +106,8 @@ wish('Bob')
 
 <p>The <code>return</code> statement is used to exit a function and return a value.</p>
 
-<pre><code>def add(a, b):
+<pre><code class="language-python">
+def add(a, b):
     return a + b
 
 result = add(10, 20)
@@ -105,7 +118,8 @@ print('The result is', result)
 
 <p>In Python, a function can return multiple values as a tuple.</p>
 
-<pre><code>def sum_subtract(a, b):
+<pre><code class="language-python">
+def sum_subtract(a, b):
     return a + b, a - b
 
 sum_result, subtract_result = sum_subtract(20, 10)
@@ -121,7 +135,8 @@ print('Subtract:', subtract_result)
 
 <p>Arguments passed to a function in the correct positional order.</p>
 
-<pre><code>def subtract(a, b):
+<pre><code class="language-python">
+def subtract(a, b):
     print(a - b)
 
 subtract(20, 10)  # Output: 10
@@ -132,7 +147,8 @@ subtract(10, 20)  # Output: -10
 
 <p>Arguments passed using the parameter names as keywords.</p>
 
-<pre><code>def greet(name, message):
+<pre><code class="language-python">
+def greet(name, message):
     print(message, name)
 
 greet(name='Alice', message='Hello')
@@ -143,7 +159,8 @@ greet(message='Hi', name='Bob')
 
 <p>Parameters that assume a default value if no argument is provided.</p>
 
-<pre><code>def wish(name='Guest'):
+<pre><code class="language-python">
+def wish(name='Guest'):
     print('Hello', name)
 
 wish()          # Output: Hello Guest
@@ -158,7 +175,8 @@ wish('Charlie') # Output: Hello Charlie
 
 <h4>Positional Variable-Length Arguments (<code>*args</code>)</h4>
 
-<pre><code>def sum_all(*numbers):
+<pre><code class="language-python">
+def sum_all(*numbers):
     total = 0
     for num in numbers:
         total += num
@@ -170,7 +188,8 @@ sum_all(5, 15)
 
 <h4>Keyword Variable-Length Arguments (<code>**kwargs</code>)</h4>
 
-<pre><code>def display_info(**kwargs):
+<pre><code class="language-python">
+def display_info(**kwargs):
     for key, value in kwargs.items():
         print(f"{key}: {value}")
 
@@ -179,7 +198,8 @@ display_info(name='Alice', age=30, city='New York')
 
 <h2>Using Both <code>*args</code> and <code>**kwargs</code></h2>
 
-<pre><code>def func(*args, **kwargs):
+<pre><code class="language-python">
+def func(*args, **kwargs):
     print('Positional arguments:', args)
     print('Keyword arguments:', kwargs)
 
@@ -205,7 +225,8 @@ print('Outside function:', a)
 
 <p>Variables defined inside a function and accessible only within that function.</p>
 
-<pre><code>def display():
+<pre><code class="language-python">
+def display():
     b = 20  # Local variable
     print('Inside function:', b)
 
@@ -217,8 +238,8 @@ display()
 
 <p>Used to declare that a variable inside a function is global.</p>
 
-<pre><code>a = 10
-
+<pre><code  class="language-python">
+a = 10
 def modify_global():
     global a
     a = 20
@@ -234,7 +255,8 @@ print('Outside function:', a)
 
 <h3>Example: Calculating Factorial</h3>
 
-<pre><code>def factorial(n):
+<pre><code class="language-python">
+def factorial(n):
     if n == 0:
         return 1
     else:
@@ -251,7 +273,8 @@ print(factorial(5))  # Output: 120
 
 <p>Lambda functions are small, anonymous functions defined using the <code>lambda</code> keyword.</p>
 
-<pre><code># Syntax: lambda arguments: expression
+<pre><code class="language-python">
+# Syntax: lambda arguments: expression
 
 square = lambda x: x * x
 print(square(5))  # Output: 25
@@ -273,7 +296,8 @@ print(square(5))  # Output: 25
 
 <p>Filters items in an iterable for which the function returns <code>True</code>.</p>
 
-<pre><code># Example: Filtering even numbers
+<pre><code class="language-python">
+# Example: Filtering even numbers
 numbers = [1, 2, 3, 4, 5, 6]
 
 even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
@@ -284,7 +308,8 @@ print(even_numbers)  # Output: [2, 4, 6]
 
 <p>Applies a function to all items in an iterable.</p>
 
-<pre><code># Example: Squaring numbers
+<pre><code class="language-python">
+# Example: Squaring numbers
 numbers = [1, 2, 3, 4, 5]
 
 squared_numbers = list(map(lambda x: x * x, numbers))
@@ -295,7 +320,8 @@ print(squared_numbers)  # Output: [1, 4, 9, 16, 25]
 
 <p>Applies a rolling computation to sequential pairs of values in an iterable.</p>
 
-<pre><code>from functools import reduce
+<pre><code class="language-python">
+from functools import reduce
 
 numbers = [1, 2, 3, 4, 5]
 
@@ -307,14 +333,16 @@ print(sum_of_numbers)  # Output: 15
 
 <h3>Example: Filtering Names Starting with 'A'</h3>
 
-<pre><code>names = ['Alice', 'Bob', 'Amanda', 'Charlie']
+<pre><code class="language-python">
+names = ['Alice', 'Bob', 'Amanda', 'Charlie']
 a_names = list(filter(lambda name: name.startswith('A'), names))
 print(a_names)  # Output: ['Alice', 'Amanda']
 </code></pre>
 
 <h3>Example: Mapping Names to Their Lengths</h3>
 
-<pre><code>names = ['Alice', 'Bob', 'Amanda', 'Charlie']
+<pre><code class="language-python">
+names = ['Alice', 'Bob', 'Amanda', 'Charlie']
 name_lengths = list(map(lambda name: len(name), names))
 print(name_lengths)  # Output: [5, 3, 6, 7]
 </code></pre>
