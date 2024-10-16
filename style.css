@@ -165,7 +165,6 @@ footer {
     padding: 8px 12px;
     border: 1px solid #000000;
     border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s; 
 }
 
 .pagination a:hover {
@@ -192,14 +191,6 @@ footer {
 
     .nav-links a {
         margin: 10px 0;
-    }
-     .pagination {
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items */
-    }
-
-    .pagination li {
-        margin: 5px 0; /* Margin for vertical spacing */
     }
 }
 
