@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chapter 2: Operators and Expressions</title>
+    <meta charset="UTF-8">
+    <title>Chapter 2: Operators and Expressions in Python</title>
+    <meta name="description" content="Learn about arithmetic, relational, logical, bitwise, assignment, and special operators in Python with examples and code snippets.">
+    <meta name="keywords" content="Python, Operators, Expressions, Arithmetic Operators, Relational Operators, Logical Operators, Bitwise Operators, Assignment Operators, Ternary Operator, Identity Operators, Membership Operators, math module, Input Output">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Include Prism.js JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <!-- Include the Python language component -->
@@ -11,10 +15,32 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "Understanding Python Operators and Expressions",
+          "description": "Master Python operators and expressions, including arithmetic, relational, logical, bitwise, assignment, and special operators.",
+          "author": {
+            "@type": "Person",
+            "name": "[Your Name]"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "[Your Site Name]",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://yourwebsite.com/logo.png"
+            }
+          },
+          "datePublished": "2023-10-01",
+          "image": "https://yourwebsite.com/images/python-operators.png"
+        }
+        </script>
+        
 </head>
 <body>
-
 <h1>Chapter 2: Operators and Expressions</h1>
 
 <h2>Arithmetic Operators</h2>
@@ -43,7 +69,8 @@ print(a % b)   # Output: 0  # Remainder
 
 <p>The division operator <code>/</code> always returns a floating-point value. The floor division operator <code>//</code> returns the largest integer less than or equal to the division result.</p>
 
-<pre><code class="language-python">a = 100
+<pre><code class="language-python">
+a = 100
 b = 20
 print(a / b)       # Output: 5.0 (Division always returns a float)
 print(10 // 2)     # Output: 5   (Floor division returns an int if both operands are int)

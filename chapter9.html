@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Chapter 9: Functions in Python</title>
-    <!-- Include Prism.js JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <!-- Include the Python language component -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <title>Understanding Functions in Python </title>
+        <meta name="description" content="Explore Python functions in depth, including definition, types, parameters, return values, recursion, and lambda functions. Learn how to use functions effectively in your Python programs.">
+        <meta name="keywords" content="Python functions, function parameters, recursion, lambda functions, higher-order functions, Python tutorial">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "Understanding Functions in Python",
+          "description": "Explore Python functions in depth, including definition, types, parameters, return values, recursion, and lambda functions.",
+          "author": {
+            "@type": "Person",
+            "name": "Ramanson Thapa"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "[Your Site Name]",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://yourwebsite.com/logo.png"
+            }
+          },
+          "datePublished": "2023-10-01",
+          "image": "https://yourwebsite.com/images/python-functions.png"
+        }
+        </script>
+    
+        <!-- CSS Stylesheets -->
         <link rel="stylesheet" href="prism-vsc-dark-plus.css">
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    
+        <!-- Prism.js JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+    </head>
+    
 <body>
+
 
 <h1>Chapter 9: Functions in Python</h1>
 
@@ -212,7 +242,8 @@ func(1, 2, 3, a=10, b=20)
 
 <p>Variables defined outside any function and accessible throughout the script.</p>
 
-<pre><code>a = 10  # Global variable
+<pre><code class = "language-python">
+a = 10  # Global variable
 
 def display():
     print('Inside function:', a)
