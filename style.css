@@ -159,18 +159,44 @@ footer {
     margin: 0 5px;
 }
 
-.pagination a {
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pagination li {
+    margin: 5px;
+}
+
+.pagination a,
+.pagination span {
     color: #000000;
     text-decoration: none;
     padding: 8px 12px;
     border: 1px solid #000000;
     border-radius: 4px;
+    display: inline-block;
+    min-width: 40px;
+    text-align: center;
 }
 
 .pagination a:hover {
     background-color: #f4f4f4;
 }
 
+.pagination .active a {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.pagination-ellipsis span {
+    border: none;
+}
 /* Responsive Layout */
 @media screen and (max-width: 600px) {
     .leftcolumn, .rightcolumn {
