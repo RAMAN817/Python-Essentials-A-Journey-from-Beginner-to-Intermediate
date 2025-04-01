@@ -14,7 +14,7 @@ Crash Course on Python
 Other online and offline materials
 
 
-Features
+Features:
  21 chapters covering key OOP and Python concepts
 
  Simple static website for easy access and navigation
